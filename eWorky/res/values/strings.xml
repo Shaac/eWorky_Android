@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="app_name">eWorky</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_index">eWorky</string>
+    <string name="title_search_results">Search Results</string>
+    <string name="title_search_map">Search in the map</string>
+    <string name="search">Search</string>
+    <string name="search_map">Map</string>
+    <string name="error">Error</string>
+    <string name="mapKey">09QlTgh9V4ecyLhJyozhroH9moKwBOXN1INRKHw</string>
+
+</resources>
