@@ -1,8 +1,11 @@
 package omnicentre.eworky;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import omnicentre.eworky.tools.ListItimizedOverlay;
+import omnicentre.eworky.tools.Place;
+import omnicentre.eworky.tools.TitleBar;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -13,20 +16,30 @@ import com.google.android.maps.OverlayItem;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 
 public class Map extends MapActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		TitleBar titleBar = new TitleBar(this);
 		setContentView(R.layout.main);
+		titleBar.setTitleBar(R.layout.title_layout);
 
 		Drawable drawable = this.getResources().getDrawable(R.drawable.ic_launcher);
 		ListItimizedOverlay itemizedOverlay = new ListItimizedOverlay(drawable);
-
-		GeoPoint geoPoint = new GeoPoint(-17595983, -149487411);
-		OverlayItem overlayitem = new OverlayItem(geoPoint, "Hello from", "Tahiti");
-		itemizedOverlay.addOverlayItem(overlayitem);
+		
+		ArrayList<Parcelable> placeList = (ArrayList<Parcelable>)
+				getIntent().getParcelableArrayListExtra("placeList");
+		
+		for (Parcelable p : placeList) {
+			Place place = (Place) p;
+			GeoPoint geoPoint = new GeoPoint((int)(place.getLatitude() * 1e6),
+					(int) (place.getLongitude() * 1e6));
+			OverlayItem overlayitem = new OverlayItem(geoPoint, "Hello from", "Tahiti");
+			itemizedOverlay.addOverlayItem(overlayitem);
+		}
 
 		MapView mapView = (MapView) this.findViewById(R.id.mapView);
 		List<Overlay> mapOverlays = mapView.getOverlays();

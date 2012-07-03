@@ -1,5 +1,7 @@
 package omnicentre.eworky.tools;
 
+import java.util.ArrayList;
+
 import omnicentre.eworky.Index;
 import omnicentre.eworky.Map;
 import omnicentre.eworky.R;
@@ -15,6 +17,7 @@ public class TitleBar {
 	
 	private Activity a;
 	private boolean titled;
+	private ArrayList<Place> placeList;
 	
 	public TitleBar(Activity activity) {
 		a = activity;
@@ -45,7 +48,12 @@ public class TitleBar {
 	private OnClickListener map_logoListener = new OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent(a, Map.class);
+			intent.putParcelableArrayListExtra("placeList", placeList);
 			a.startActivity(intent);
 		}
 	};
+	
+	public void setPlaceList(ArrayList<Place> placeList) {
+		this.placeList = placeList;
+	}
 }

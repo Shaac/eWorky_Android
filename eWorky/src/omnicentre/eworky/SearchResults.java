@@ -33,6 +33,8 @@ public class SearchResults extends ListActivity {
 				values[i] = p.getName();
 				i++;
 			}
+			
+			titleBar.setPlaceList(l);
 
 		} catch (Exception e) {
 			String[] values = new String[] {"error"};
