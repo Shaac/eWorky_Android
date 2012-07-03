@@ -15,7 +15,7 @@ public class PlaceDetails extends Activity {
 		TitleBar titleBar = new TitleBar(this);
 		setContentView(R.layout.place_details);
 		
-		Place p = new Place(getIntent().getExtras());
+		Place p = getIntent().getExtras().getParcelable("place");
 		TextView t = (TextView) findViewById(R.id.name);
 		t.setText(p.getName() + "\n" + p.getDescription());
 		

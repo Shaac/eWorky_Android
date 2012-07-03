@@ -47,7 +47,7 @@ public class SearchResults extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 
 		Intent intent = new Intent(this, PlaceDetails.class);
-		this.l.get(position).toExtras(intent);
+		intent.putExtra("place",  this.l.get(position));
 		startActivity(intent);
 	}
 }
