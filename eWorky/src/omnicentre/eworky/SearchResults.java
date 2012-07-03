@@ -17,7 +17,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
@@ -57,14 +56,11 @@ public class SearchResults extends ListActivity {
 			}
 		}
 
-		// We create the list to be displayed:
-		PlaceList values = new PlaceList(placeList);		
-
 		// We create the view:
 		TitleBar titleBar = new TitleBar(this);
 		titleBar.setPlaceList(placeList);
 		setListAdapter(new PlaceArrayAdapter(getApplicationContext(),
-				 values));
+				new PlaceList(placeList)));
 		getListView().setTextFilterEnabled(true);
 		titleBar.setTitleBar(R.layout.title_results);
 

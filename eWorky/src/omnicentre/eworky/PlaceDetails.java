@@ -1,15 +1,12 @@
 package omnicentre.eworky;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import omnicentre.eworky.tools.Place;
 import omnicentre.eworky.tools.TitleBar;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
