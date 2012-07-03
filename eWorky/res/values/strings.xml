@@ -14,5 +14,9 @@
     <string name="forward">forward</string>
     <string name="title_place_details">Place Details</string>
     <string name="research">Research</string>
+    <string name="errorEmptyQuery">Your must enter a query.</string>
+    <string name="errorBadJson">The answer from our server is invalid.</string>
+    <string name="errorIo">It appears that you have no Internet connection.</string>
+    <string name="errorClientProtocol">An error of protocol has occured.</string>
 
 </resources>

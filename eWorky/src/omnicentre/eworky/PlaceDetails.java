@@ -19,7 +19,7 @@ public class PlaceDetails extends Activity {
 		TextView t = (TextView) findViewById(R.id.name);
 		t.setText(p.getName() + "\n" + p.getDescription());
 		
-		titleBar.setTitleBar(R.layout.title_layout);
+		titleBar.setTitleBar(R.layout.title_index);
 
 	}
 

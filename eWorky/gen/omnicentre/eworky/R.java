@@ -44,7 +44,7 @@ public final class R {
         public static final int main=0x7f030002;
         public static final int place_details=0x7f030003;
         public static final int search_results=0x7f030004;
-        public static final int title_layout=0x7f030005;
+        public static final int title_index=0x7f030005;
         public static final int title_results=0x7f030006;
     }
     public static final class menu {
@@ -54,6 +54,10 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int back=0x7f06000a;
         public static final int error=0x7f060008;
+        public static final int errorBadJson=0x7f06000f;
+        public static final int errorClientProtocol=0x7f060011;
+        public static final int errorEmptyQuery=0x7f06000e;
+        public static final int errorIo=0x7f060010;
         public static final int forward=0x7f06000b;
         public static final int hello_world=0x7f060001;
         public static final int mapKey=0x7f060009;

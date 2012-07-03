@@ -24,6 +24,9 @@ public class TitleBar {
 		titled = a.requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 	}
 
+	/**
+	 * @param layout the title bar's layout
+	 */
 	public void setTitleBar(int layout){
 		if(titled){
 			a.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, layout);

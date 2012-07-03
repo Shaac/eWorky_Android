@@ -25,14 +25,14 @@ public class Map extends MapActivity {
 		super.onCreate(savedInstanceState);
 		TitleBar titleBar = new TitleBar(this);
 		setContentView(R.layout.main);
-		titleBar.setTitleBar(R.layout.title_layout);
+		titleBar.setTitleBar(R.layout.title_index);
 
 		Drawable drawable = this.getResources().getDrawable(R.drawable.ic_launcher);
 		ListItimizedOverlay itemizedOverlay = new ListItimizedOverlay(drawable);
 		
 		ArrayList<Parcelable> placeList = (ArrayList<Parcelable>)
 				getIntent().getParcelableArrayListExtra("placeList");
-		
+		// TODO placeList = null
 		for (Parcelable p : placeList) {
 			Place place = (Place) p;
 			GeoPoint geoPoint = new GeoPoint((int)(place.getLatitude() * 1e6),
