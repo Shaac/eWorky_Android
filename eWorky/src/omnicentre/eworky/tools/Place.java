@@ -90,6 +90,12 @@ public class Place implements Parcelable {
 	public String getType()        { return type; }
 	public String getUrl()         { return url; }
 	public double getRating()      { return rating; }
+	
+	public String getText() {
+		String s = "Name: " + name;
+		s += "\nDescription: " + description;
+		return s;
+	}
 
 	public int describeContents() {
 		return 0;

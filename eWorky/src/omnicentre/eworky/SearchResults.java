@@ -7,6 +7,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
 import omnicentre.eworky.tools.Place;
+import omnicentre.eworky.tools.PlaceArrayAdapter;
+import omnicentre.eworky.tools.PlaceList;
 import omnicentre.eworky.tools.TitleBar;
 
 import android.app.AlertDialog;
@@ -56,16 +58,13 @@ public class SearchResults extends ListActivity {
 		}
 
 		// We create the list to be displayed:
-		ArrayList<String> values = new ArrayList<String>();
-		if (isOk)
-			for (Place p : placeList)
-				values.add(p.getName());		
+		PlaceList values = new PlaceList(placeList);		
 
 		// We create the view:
 		TitleBar titleBar = new TitleBar(this);
 		titleBar.setPlaceList(placeList);
-		setListAdapter(new ArrayAdapter<String>(this,
-				R.layout.search_results, values));
+		setListAdapter(new PlaceArrayAdapter(getApplicationContext(),
+				 values));
 		getListView().setTextFilterEnabled(true);
 		titleBar.setTitleBar(R.layout.title_results);
 

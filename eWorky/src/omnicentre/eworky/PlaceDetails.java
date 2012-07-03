@@ -1,10 +1,17 @@
 package omnicentre.eworky;
 
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import omnicentre.eworky.tools.Place;
 import omnicentre.eworky.tools.TitleBar;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 
 public class PlaceDetails extends Activity {
 
@@ -16,8 +23,20 @@ public class PlaceDetails extends Activity {
 		setContentView(R.layout.place_details);
 		
 		Place p = getIntent().getExtras().getParcelable("place");
-		TextView t = (TextView) findViewById(R.id.name);
-		t.setText(p.getName() + "\n" + p.getDescription());
+		TextView t = (TextView) findViewById(R.id.content);
+		URL url;
+		Drawable d = null;
+		try {
+			url = new URL(p.getImage());
+			InputStream content = (InputStream)url.getContent();
+			d = Drawable.createFromStream(content , "src"); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//ImageView iv = (ImageView) findViewById(R.id.picture);
+		//iv.setImageDrawable(d);
+		t.setCompoundDrawablesWithIntrinsicBounds(null,d,null,null);
+		t.setText(p.getText());
 		
 		titleBar.setTitleBar(R.layout.title_index);
 
