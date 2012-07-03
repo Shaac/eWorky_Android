@@ -1,5 +1,18 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="custom_titlebar">
+		<item name="android:windowTitleStyle">@style/title_bar</item>
+		<item name="android:windowTitleSize">35dp</item>
+		<item name="android:windowTitleBackgroundStyle">@style/title_background</item>
+	</style>
+	<style name="title_bar">
+		<item name="android:singleLine">false</item>
+		<item name="android:textAppearance">@android:style/TextAppearance.WindowTitle</item>
+		<item name="android:shadowColor">#BB0000FF</item>
+		<item name="android:shadowRadius">2.75</item>
+	</style>
+	<style name="title_background">
+		<item name="android:background">@drawable/title_background</item>
+	</style>
 
 </resources>

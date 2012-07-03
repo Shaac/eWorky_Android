@@ -1,36 +1,53 @@
 package omnicentre.eworky;
 
-import omnicentre.eworky.tools.Http;
+import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import omnicentre.eworky.tools.Place;
+import omnicentre.eworky.tools.TitleBar;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class SearchResults extends ListActivity {
+	
+	private ArrayList<Place> l;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		TitleBar titleBar = new TitleBar(this);
 
 		try {
-			JSONObject json= new JSONObject(Http.getUrl("http://www.eworky.com/api/localisation/search?place=" + getIntent().getExtras().getString("query") + "&json=1"));
-			JSONArray jsonArray = json.getJSONArray("response");
-			String[] values = new String[jsonArray.length()];
+			l = Place.fromQuery(getIntent().getExtras().getString("query"));
+
+			String[] values = new String[l.size()];
 
 			setListAdapter(new ArrayAdapter<String>(this, R.layout.search_results,values));
 
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				values[i] = jsonObject.getString("name");
+			int i = 0;
+			for (Place p : l) {
+				values[i] = p.getName();
+				i++;
 			}
 
-
-			getListView().setTextFilterEnabled(true);
 		} catch (Exception e) {
-			setContentView(R.layout.error);
+			String[] values = new String[] {"error"};
+			setListAdapter(new ArrayAdapter<String>(this, R.layout.search_results,values));
 		}
+		getListView().setTextFilterEnabled(true);
+		titleBar.setTitleBar(R.layout.title_results);
+	}
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+
+		Intent intent = new Intent(this, PlaceDetails.class);
+		this.l.get(position).toExtras(intent);
+		startActivity(intent);
 	}
 }

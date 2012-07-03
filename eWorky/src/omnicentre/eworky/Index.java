@@ -1,5 +1,6 @@
 package omnicentre.eworky;
 
+import omnicentre.eworky.tools.TitleBar;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,12 +21,13 @@ public class Index extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		TitleBar titleBar = new TitleBar(this);
 		setContentView(R.layout.index);
+		titleBar.setTitleBar(R.layout.title_layout);
 
 		Button b = (Button) findViewById(R.id.search_button);
-		b.setOnClickListener(searchlistener);
-		Button b2 = (Button) findViewById(R.id.map_button);
-		b2.setOnClickListener(maplistener);
+		b.setOnClickListener(searchListener);
 	}
 
 	@Override
@@ -34,27 +36,13 @@ public class Index extends Activity {
 		return true;
 	}
 
-	private OnClickListener maplistener = new OnClickListener() {
-		
-		public void onClick(View v) {
-			
-			EditText search_bar = (EditText) findViewById(R.id.search_bar);
-			String query = search_bar.getText().toString();
-			
-			Intent intent = new Intent(Index.this, Map.class);
-			intent.putExtra("query", query);
-			startActivity(intent);
-		}
+	private OnClickListener searchListener = new OnClickListener() {
 
-	};
-	
-private OnClickListener searchlistener = new OnClickListener() {
-		
 		public void onClick(View v) {
-			
+
 			EditText search_bar = (EditText) findViewById(R.id.search_bar);
 			String query = search_bar.getText().toString();
-			
+
 			Intent intent = new Intent(Index.this, SearchResults.class);
 			intent.putExtra("query", query);
 			startActivity(intent);
