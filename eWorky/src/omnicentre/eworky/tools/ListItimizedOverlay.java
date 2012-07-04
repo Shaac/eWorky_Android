@@ -2,8 +2,13 @@ package omnicentre.eworky.tools;
 
 import java.util.ArrayList;
 
+import omnicentre.eworky.PlaceDetails;
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
@@ -14,6 +19,8 @@ import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 	private Context c;
+	private Activity a;
+	private ArrayList<Parcelable> p;
 
 	private ArrayList<OverlayItem> arrayListOverlayItem = new ArrayList<OverlayItem>();
 
@@ -35,10 +42,13 @@ public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		populate();
 	}
 
-	public ListItimizedOverlay(Drawable defaultMarker, MapView mapView)
+	public ListItimizedOverlay(Drawable defaultMarker, MapView mapView, Activity a,
+			ArrayList<Parcelable> p)
 	{
 		super(boundCenterBottom(defaultMarker), mapView);
 		c = mapView.getContext();
+		this.a = a;
+		this.p = p;
 	}
 
 	@Override
@@ -66,10 +76,11 @@ public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 				(maxLongitude + minLongitude) / 2);
 	}
 
-	protected boolean onBalloonTap(int index)
-	{
-		Toast.makeText(c, "onBalloonTap for overlay index " + index,
-				Toast.LENGTH_LONG).show();
+	@Override
+	protected boolean onBalloonTap(int index, OverlayItem item) {
+		Intent intent = new Intent(a, PlaceDetails.class);
+		intent.putExtra("place", (Place) p.get(index));
+		a.startActivity(intent);
 		return true;
 	}
 }
