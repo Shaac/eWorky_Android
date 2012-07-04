@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package omnicentre.eworky;
+package com.readystatesoftware.mapviewballoons;
 
 public final class R {
     public static final class anim {

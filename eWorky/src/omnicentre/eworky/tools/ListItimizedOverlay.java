@@ -2,13 +2,18 @@ package omnicentre.eworky.tools;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
+import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 
-public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem> {
+public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
+
+	private Context c;
 
 	private ArrayList<OverlayItem> arrayListOverlayItem = new ArrayList<OverlayItem>();
 
@@ -30,9 +35,10 @@ public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem> {
 		populate();
 	}
 
-	public ListItimizedOverlay(Drawable defaultMarker)
+	public ListItimizedOverlay(Drawable defaultMarker, MapView mapView)
 	{
-		super(boundCenterBottom(defaultMarker));
+		super(boundCenterBottom(defaultMarker), mapView);
+		c = mapView.getContext();
 	}
 
 	@Override
@@ -60,4 +66,10 @@ public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem> {
 				(maxLongitude + minLongitude) / 2);
 	}
 
+	protected boolean onBalloonTap(int index)
+	{
+		Toast.makeText(c, "onBalloonTap for overlay index " + index,
+				Toast.LENGTH_LONG).show();
+		return true;
+	}
 }

@@ -26,9 +26,11 @@ public class Map extends MapActivity {
 		TitleBar titleBar = new TitleBar(this);
 		setContentView(R.layout.main);
 		titleBar.setTitleBar(R.layout.title_index);
+		
+		MapView mapView = (MapView) this.findViewById(R.id.mapView);
 
 		Drawable drawable = this.getResources().getDrawable(R.drawable.ic_launcher);
-		ListItimizedOverlay itemizedOverlay = new ListItimizedOverlay(drawable);
+		ListItimizedOverlay itemizedOverlay = new ListItimizedOverlay(drawable, mapView);
 		
 		ArrayList<Parcelable> placeList = (ArrayList<Parcelable>)
 				getIntent().getParcelableArrayListExtra("placeList");
@@ -37,11 +39,12 @@ public class Map extends MapActivity {
 			Place place = (Place) p;
 			GeoPoint geoPoint = new GeoPoint((int)(place.getLatitude() * 1e6),
 					(int) (place.getLongitude() * 1e6));
-			OverlayItem overlayitem = new OverlayItem(geoPoint, "Hello from", "Tahiti");
+			OverlayItem overlayitem = new OverlayItem(geoPoint, place.getName(), "");
 			itemizedOverlay.addOverlayItem(overlayitem);
 		}
 
-		MapView mapView = (MapView) this.findViewById(R.id.mapView);
+		
+		mapView.setBuiltInZoomControls(true);
 		List<Overlay> mapOverlays = mapView.getOverlays();
 		mapOverlays.add(itemizedOverlay);
 
