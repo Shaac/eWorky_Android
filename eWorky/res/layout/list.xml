@@ -1,24 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp" >
- 
+    android:padding="2dp" >
+
     <ImageView
         android:id="@+id/picture"
         android:layout_width="80dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="5px"
-        android:layout_marginRight="20px"
-        android:layout_marginTop="5px" >
+        android:layout_marginRight="2dp"
+        android:contentDescription="@string/picture" >
     </ImageView>
- 
+
     <TextView
-        android:id="@+id/label"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/distance"
+        android:layout_toRightOf="@+id/picture"
+        android:ellipsize="end"
+        android:lines="1"
+        android:scrollHorizontally="true"
         android:text="@+id/label"
-        android:textSize="30px" >
+        android:textColor="#5DAFDE"
+        android:textSize="12dp"
+        android:textStyle="bold" >
     </TextView>
- 
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="#5DAFDE"
+        android:textSize="12dp"
+        android:textStyle="bold" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_toRightOf="@+id/picture"
+        android:text="@+id/label"
+        android:textColor="#FB8F1F"
+        android:textSize="10dp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_toRightOf="@+id/type"
+        android:ellipsize="end"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:text="@+id/label"
+        android:textSize="10dp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/address"
+        android:layout_toRightOf="@+id/picture"
+        android:maxLines="2"
+        android:text="@+id/label"
+        android:textColor="#000000"
+        android:textSize="10dp" >
+    </TextView>
+
+    <ImageView
+        android:id="@+id/wifi"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/description"
+        android:layout_marginRight="2dp"
+        android:layout_toRightOf="@+id/picture"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/wifi" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/wifi_euros"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/description"
+        android:layout_marginRight="2dp"
+        android:layout_toRightOf="@+id/wifi"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/wifi_euros" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/food"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/description"
+        android:layout_marginRight="2dp"
+        android:layout_toRightOf="@+id/wifi_euros"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/food" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/coffee"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/description"
+        android:layout_marginRight="2dp"
+        android:layout_toRightOf="@+id/food"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/coffee" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/parking"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/description"
+        android:layout_marginRight="2dp"
+        android:layout_toRightOf="@+id/coffee"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/parking" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/access"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/description"
+        android:layout_marginRight="2dp"
+        android:layout_toRightOf="@+id/parking"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/access" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/stars"
+        android:layout_width="80dp"
+        android:layout_height="15dp"
+        android:layout_below="@id/picture"
+        android:layout_marginRight="2dp"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/stars"
+        android:scaleType="fitStart" >
+    </ImageView>
+    
+    <ImageView
+        android:id="@+id/stars_blue"
+        android:layout_width="80dp"
+        android:layout_height="15dp"
+        android:layout_below="@id/picture"
+        android:layout_marginRight="2dp"
+        android:contentDescription="@string/picture"
+        android:src="@drawable/stars_blue"
+        android:scaleType="fitStart"
+        android:cropToPadding="true" >
+    </ImageView>
+
+</RelativeLayout>

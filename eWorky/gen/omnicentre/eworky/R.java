@@ -21,24 +21,45 @@ public final class R {
         public static final int padding_small=0x7f050000;
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int logo=0x7f020002;
-        public static final int maps=0x7f020003;
-        public static final int title_background=0x7f020004;
+        public static final int access=0x7f020000;
+        public static final int coffee=0x7f020001;
+        public static final int food=0x7f020002;
+        public static final int ic_action_search=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int logo=0x7f020005;
+        public static final int maps=0x7f020006;
+        public static final int parking=0x7f020007;
+        public static final int stars=0x7f020008;
+        public static final int stars_blue=0x7f020009;
+        public static final int title_background=0x7f02000a;
+        public static final int wifi=0x7f02000b;
+        public static final int wifi_euros=0x7f02000c;
     }
     public static final class id {
-        public static final int content=0x7f090006;
-        public static final int label=0x7f090004;
-        public static final int mapView=0x7f090005;
-        public static final int menu_settings=0x7f09000a;
+        public static final int access=0x7f09000f;
+        public static final int address=0x7f090008;
+        public static final int coffee=0x7f09000d;
+        public static final int content=0x7f090013;
+        public static final int description=0x7f090009;
+        public static final int distance=0x7f090005;
+        public static final int food=0x7f09000c;
+        public static final int label=0x7f090006;
+        public static final int mapView=0x7f090012;
+        public static final int menu_settings=0x7f090017;
+        public static final int name=0x7f090004;
+        public static final int parking=0x7f09000e;
         public static final int picture=0x7f090003;
-        public static final int reseach=0x7f090008;
+        public static final int reseach=0x7f090015;
         public static final int search_bar=0x7f090001;
         public static final int search_button=0x7f090002;
+        public static final int stars=0x7f090010;
+        public static final int stars_blue=0x7f090011;
         public static final int textView1=0x7f090000;
-        public static final int title_logo=0x7f090007;
-        public static final int title_map_logo=0x7f090009;
+        public static final int title_logo=0x7f090014;
+        public static final int title_map_logo=0x7f090016;
+        public static final int type=0x7f090007;
+        public static final int wifi=0x7f09000a;
+        public static final int wifi_euros=0x7f09000b;
     }
     public static final class layout {
         public static final int error=0x7f030000;
@@ -65,6 +86,7 @@ public final class R {
         public static final int hello_world=0x7f060001;
         public static final int mapKey=0x7f060009;
         public static final int menu_settings=0x7f060002;
+        public static final int picture=0x7f060012;
         public static final int research=0x7f06000d;
         public static final int search=0x7f060006;
         public static final int search_map=0x7f060007;

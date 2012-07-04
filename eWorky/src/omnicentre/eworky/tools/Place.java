@@ -1,6 +1,7 @@
 package omnicentre.eworky.tools;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
@@ -9,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -24,9 +26,11 @@ public class Place implements Parcelable {
 	private String type;
 	private String url;
 	private double rating;
-	//private String[] amneties;
+	private Amenities amenities;
 	//private comments
 	//private fans
+
+	private double distance;
 
 	public Place(JSONObject json) throws JSONException {
 
@@ -51,6 +55,25 @@ public class Place implements Parcelable {
 		catch (JSONException e) { url = ""; }
 		try                     { rating = json.getDouble("rating"); }
 		catch (JSONException e) { rating = (-1); }
+		try {
+			amenities = new Amenities(json.getString("amenities"));
+		} catch (JSONException e) {
+			amenities = new Amenities(); }
+
+		if (description == "null")
+			description = "";
+	}
+
+	public void computeDistance(double lat, double lng) {
+		Location locationA = new Location("point A");  
+		locationA.setLatitude(latitude);  
+		locationA.setLongitude(longitude);  
+
+		Location locationB = new Location("point B");  
+		locationB.setLatitude(lat);  
+		locationB.setLongitude(lng);  
+
+		distance =((double)Math.round(locationA.distanceTo(locationB)/10))/100;  
 	}
 
 	public static ArrayList<Place> parseList(JSONArray jsonArray) {
@@ -70,7 +93,7 @@ public class Place implements Parcelable {
 			throws ClientProtocolException, IOException, JSONException {
 
 		String url = "http://www.eworky.com/api/localisation/search?place=" +
-				query + "&json=1";
+				URLEncoder.encode(query, "UTF-8") + "&json=1";
 		String page = Http.getUrl(url);
 		JSONObject json= new JSONObject(page);
 		JSONArray jsonArray = json.getJSONArray("response");
@@ -90,7 +113,9 @@ public class Place implements Parcelable {
 	public String getType()        { return type; }
 	public String getUrl()         { return url; }
 	public double getRating()      { return rating; }
-	
+	public Amenities getAmenities(){ return amenities; }
+	public double getDistance()    { return distance; }
+
 	public String getText() {
 		String s = "Name: " + name;
 		s += "\nDescription: " + description;
@@ -113,6 +138,7 @@ public class Place implements Parcelable {
 		out.writeString(type);
 		out.writeString(url);
 		out.writeDouble(rating);
+		out.writeStringList(amenities.getAmenities());
 	}
 
 	public static final Parcelable.Creator<Place> CREATOR =
@@ -141,5 +167,8 @@ public class Place implements Parcelable {
 		type = in.readString();
 		url = in.readString();
 		rating = in.readDouble();
+		ArrayList<String> a = new ArrayList<String>();
+		in.readStringList(a);
+		amenities = new Amenities(a);
 	}
 }

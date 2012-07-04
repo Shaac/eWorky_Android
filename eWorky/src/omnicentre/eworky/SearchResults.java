@@ -2,6 +2,8 @@ package omnicentre.eworky;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
@@ -15,7 +17,10 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -44,6 +49,18 @@ public class SearchResults extends ListActivity {
 		else {
 			try {
 				placeList = Place.fromQuery(query);
+				Geocoder g = new Geocoder(this, Locale.getDefault());
+				try {
+					List<Address> addresses = g.getFromLocationName(query, 1);
+					if (addresses != null && addresses.size() > 0) {
+						double lattitude = addresses.get(0).getLatitude();
+						double longitude = addresses.get(0).getLongitude();
+						for (Place p : placeList)
+							p.computeDistance(lattitude, longitude);
+					}
+				} catch (IOException e1) {
+					Log.e("EWORKY",Log.getStackTraceString(e1));
+				}
 			} catch (ClientProtocolException e) {
 				error = getString(R.string.errorClientProtocol);
 				isOk = false;
