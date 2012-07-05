@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import omnicentre.eworky.R;
+import omnicentre.eworky.places.Place;
+import omnicentre.eworky.places.PlaceList;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;

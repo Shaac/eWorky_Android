@@ -3,13 +3,12 @@ package omnicentre.eworky.tools;
 import java.util.ArrayList;
 
 import omnicentre.eworky.PlaceDetails;
+import omnicentre.eworky.places.Place;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
-import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -18,7 +17,6 @@ import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 
 public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
-	private Context c;
 	private Activity a;
 	private ArrayList<Parcelable> p;
 
@@ -46,7 +44,6 @@ public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 			ArrayList<Parcelable> p)
 	{
 		super(boundCenterBottom(defaultMarker), mapView);
-		c = mapView.getContext();
 		this.a = a;
 		this.p = p;
 	}

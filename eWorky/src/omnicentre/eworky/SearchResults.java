@@ -8,9 +8,9 @@ import java.util.Locale;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
-import omnicentre.eworky.tools.Place;
+import omnicentre.eworky.places.Place;
+import omnicentre.eworky.places.PlaceList;
 import omnicentre.eworky.tools.PlaceArrayAdapter;
-import omnicentre.eworky.tools.PlaceList;
 import omnicentre.eworky.tools.TitleBar;
 
 import android.app.AlertDialog;

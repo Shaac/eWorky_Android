@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import omnicentre.eworky.Index;
 import omnicentre.eworky.Map;
 import omnicentre.eworky.R;
+import omnicentre.eworky.places.Place;
 
 import android.app.Activity;
 import android.content.Intent;

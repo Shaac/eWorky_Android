@@ -3,8 +3,8 @@ package omnicentre.eworky;
 import java.util.ArrayList;
 import java.util.List;
 
+import omnicentre.eworky.places.Place;
 import omnicentre.eworky.tools.ListItimizedOverlay;
-import omnicentre.eworky.tools.Place;
 import omnicentre.eworky.tools.TitleBar;
 
 import com.google.android.maps.GeoPoint;

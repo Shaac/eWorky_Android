@@ -3,7 +3,7 @@ package omnicentre.eworky;
 import java.io.InputStream;
 import java.net.URL;
 
-import omnicentre.eworky.tools.Place;
+import omnicentre.eworky.places.Place;
 import omnicentre.eworky.tools.TitleBar;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -33,7 +33,7 @@ public class PlaceDetails extends Activity {
 		//ImageView iv = (ImageView) findViewById(R.id.picture);
 		//iv.setImageDrawable(d);
 		t.setCompoundDrawablesWithIntrinsicBounds(null,d,null,null);
-		t.setText(p.getText());
+		t.setText(p.getDescription());
 		
 		titleBar.setTitleBar(R.layout.title_index);
 
