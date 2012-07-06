@@ -17,7 +17,7 @@ import android.os.Parcelable;
 
 /**
  * This class contains everything we need about places: all we have to know
- * and a lot of methods.
+ * and a lots of methods.
  *
  */
 public class Place implements Parcelable {
@@ -74,6 +74,9 @@ public class Place implements Parcelable {
 
         if (description.equals("null"))
             description = "";
+
+        if (image.equals(""))
+            image = "http://www.eworky.fr/Content/images/no_image.png";
     }
 
     /**
@@ -187,10 +190,10 @@ public class Place implements Parcelable {
         in.readStringList(a);
         amenities = new Amenities(a);
     }
-    
-    
+
+
     // To the end of the file they are only getters:
-    
+
     /**
      * Get the place's id.
      * @return the place's id.
@@ -222,7 +225,7 @@ public class Place implements Parcelable {
     public double getLongitude() {
         return longitude;
     }
-    
+
     /**
      * Get the place's description.
      * @return the place's description.
@@ -230,7 +233,7 @@ public class Place implements Parcelable {
     public String getDescription() {
         return description;
     }
-    
+
     /**
      * Get the place's image URL.
      * @return the place's image URL.
@@ -238,7 +241,7 @@ public class Place implements Parcelable {
     public String getImage() {
         return image;
     }
-    
+
     /**
      * Get the place's address.
      * @return the place's address.
@@ -246,7 +249,7 @@ public class Place implements Parcelable {
     public String getAddress() {
         return address;
     }
-    
+
     /**
      * Get the place's city.
      * @return the place's city.
@@ -254,7 +257,7 @@ public class Place implements Parcelable {
     public String getCity() {
         return city;
     }
-    
+
     /**
      * Get the place's type.
      * @return the place's type.
@@ -262,7 +265,7 @@ public class Place implements Parcelable {
     public String getType() {
         return type;
     }
-    
+
     /**
      * Get the place's URL in eWorky.
      * @return the place's URL in eWorky.
@@ -270,7 +273,7 @@ public class Place implements Parcelable {
     public String getUrl() {
         return url;
     }
-    
+
     /**
      * Get the place's rating.
      * @return the place's rating.
@@ -278,7 +281,7 @@ public class Place implements Parcelable {
     public double getRating() {
         return rating;
     }
-    
+
     /**
      * Get the place's amenities.
      * @return the place's amenities.
@@ -286,7 +289,7 @@ public class Place implements Parcelable {
     public Amenities getAmenities() {
         return amenities;
     }
-    
+
     /**
      * Get the place's distance to the search point.
      * @return the place's distance to the search point.

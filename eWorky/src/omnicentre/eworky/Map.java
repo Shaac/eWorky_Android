@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import omnicentre.eworky.places.Place;
-import omnicentre.eworky.tools.ListItimizedOverlay;
+import omnicentre.eworky.places.PlaceItimizedOverlay;
+import omnicentre.eworky.tools.PlaceOverlayItem;
 import omnicentre.eworky.tools.TitleBar;
 
-import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,14 +34,10 @@ public class Map extends MapActivity {
 		ArrayList<Parcelable> placeList = (ArrayList<Parcelable>)
 				getIntent().getParcelableArrayListExtra("placeList");
 		
-		ListItimizedOverlay itemizedOverlay = new ListItimizedOverlay(drawable, mapView, this, placeList);
+		PlaceItimizedOverlay itemizedOverlay = new PlaceItimizedOverlay(drawable, mapView, this);
 		// TODO placeList = null
 		for (Parcelable p : placeList) {
-			Place place = (Place) p;
-			GeoPoint geoPoint = new GeoPoint((int)(place.getLatitude() * 1e6),
-					(int) (place.getLongitude() * 1e6));
-			OverlayItem overlayitem = new OverlayItem(geoPoint, place.getName(),
-					place.getAddress());
+			PlaceOverlayItem overlayitem = new PlaceOverlayItem((Place) p);
 			itemizedOverlay.addOverlayItem(overlayitem);
 		}
 
@@ -58,8 +53,7 @@ public class Map extends MapActivity {
 	}
 
 	@Override
-	protected boolean isRouteDisplayed()
-	{
+	protected boolean isRouteDisplayed() {
 		return false;
 	}
 

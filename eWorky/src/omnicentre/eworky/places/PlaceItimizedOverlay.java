@@ -1,57 +1,50 @@
-package omnicentre.eworky.tools;
+package omnicentre.eworky.places;
 
 import java.util.ArrayList;
 
 import omnicentre.eworky.PlaceDetails;
-import omnicentre.eworky.places.Place;
+import omnicentre.eworky.tools.PlaceOverlayItem;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Parcelable;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
-import com.google.android.maps.OverlayItem;
 import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 
-public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
+public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayItem> {
 
 	private Activity a;
-	private ArrayList<Parcelable> p;
 
-	private ArrayList<OverlayItem> arrayListOverlayItem = new ArrayList<OverlayItem>();
+	private ArrayList<PlaceOverlayItem> list = new ArrayList<PlaceOverlayItem>();
 
 	@Override
-	protected OverlayItem createItem(int i)
-	{
-		return arrayListOverlayItem.get(i);
+	protected PlaceOverlayItem createItem(int i) {
+		return list.get(i);
 	}
 
 	@Override
-	public int size()
-	{
-		return arrayListOverlayItem.size();
+	public int size() {
+		return list.size();
 	}
 
-	public void addOverlayItem(OverlayItem overlay)
+	public void addOverlayItem(PlaceOverlayItem overlay)
 	{
-		arrayListOverlayItem.add(overlay);
+		list.add(overlay);
 		populate();
 	}
 
-	public ListItimizedOverlay(Drawable defaultMarker, MapView mapView, Activity a,
-			ArrayList<Parcelable> p)
+	public PlaceItimizedOverlay(Drawable defaultMarker, MapView mapView, Activity a)
 	{
 		super(boundCenterBottom(defaultMarker), mapView);
 		this.a = a;
-		this.p = p;
 	}
 
 	@Override
 	public GeoPoint getCenter() {
 
-		if (arrayListOverlayItem.size() == 0) {
+		if (list.size() == 0) {
 			return new GeoPoint(0, 0);
 		}
 
@@ -60,7 +53,7 @@ public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		int minLongitude = Integer.MAX_VALUE;
 		int maxLongitude = Integer.MIN_VALUE;
 
-		for (OverlayItem overlay : arrayListOverlayItem) {
+		for (PlaceOverlayItem overlay : list) {
 			int lat = overlay.getPoint().getLatitudeE6();
 			int lon = overlay.getPoint().getLongitudeE6();
 			maxLatitude = Math.max(lat, maxLatitude);
@@ -74,10 +67,17 @@ public class ListItimizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	}
 
 	@Override
-	protected boolean onBalloonTap(int index, OverlayItem item) {
+	protected boolean onBalloonTap(int index, PlaceOverlayItem item) {
 		Intent intent = new Intent(a, PlaceDetails.class);
-		intent.putExtra("place", (Place) p.get(index));
+		intent.putExtra("place", item.getPlace());
 		a.startActivity(intent);
 		return true;
 	}
+	
+	/*
+    @Override
+    protected BalloonOverlayView<PlaceOverlayItem> createBalloonOverlayView() {
+        return new PlaceOverlayView<PlaceOverlayItem>(getMapView().getContext(), getBalloonBottomOffset());
+    }
+    */
 }

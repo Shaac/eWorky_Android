@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/balloon_inner_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="2dp" >
@@ -138,28 +139,28 @@
         android:contentDescription="@string/picture"
         android:src="@drawable/access" >
     </ImageView>
-
-    <ImageView
-        android:id="@+id/stars"
-        android:layout_width="80dp"
-        android:layout_height="15dp"
-        android:layout_below="@id/picture"
-        android:layout_marginRight="2dp"
-        android:contentDescription="@string/picture"
-        android:src="@drawable/stars"
-        android:scaleType="fitStart" >
-    </ImageView>
     
     <ImageView
-        android:id="@+id/stars_blue"
-        android:layout_width="80dp"
-        android:layout_height="15dp"
+        android:id="@+id/stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/picture"
         android:layout_marginRight="2dp"
         android:contentDescription="@string/picture"
-        android:src="@drawable/stars_blue"
         android:scaleType="fitStart"
-        android:cropToPadding="true" >
+        android:src="@drawable/stars" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/stars_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/picture"
+        android:layout_marginRight="2dp"
+        android:contentDescription="@string/picture"
+        android:cropToPadding="true"
+        android:scaleType="matrix"
+        android:src="@drawable/stars_blue" >
     </ImageView>
 
 </RelativeLayout>

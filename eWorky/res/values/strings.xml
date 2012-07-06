@@ -19,5 +19,7 @@
     <string name="errorIo">It appears that you have no Internet connection.</string>
     <string name="errorClientProtocol">An error of protocol has occured.</string>
     <string name="picture">picture</string>
+    <string name="description">Description</string>
+    <string name="amenities">Amenities</string>
 
 </resources>

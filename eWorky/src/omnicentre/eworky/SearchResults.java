@@ -10,8 +10,8 @@ import org.json.JSONException;
 
 import omnicentre.eworky.places.Place;
 import omnicentre.eworky.places.PlaceList;
-import omnicentre.eworky.tools.PlaceArrayAdapter;
 import omnicentre.eworky.tools.TitleBar;
+import omnicentre.eworky.widgets.PlaceArrayAdapter;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -25,11 +25,14 @@ import android.view.View;
 import android.widget.ListView;
 
 /**
- * Display the results of the search in a list.
+ * Displays the results of the search in a list.
  *
  */
 public class SearchResults extends ListActivity {
 
+    /**
+     * The list of all the found places.
+     */
 	private ArrayList<Place> placeList;
 
 	@Override

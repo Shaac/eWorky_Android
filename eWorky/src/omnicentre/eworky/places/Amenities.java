@@ -28,7 +28,7 @@ public class Amenities extends ArrayList<String> {
 	public Amenities(ArrayList<String> list) {
 		if (list != null)
 			for (String s : list)
-				this.add(s);
+				this.add(s.replace("\\/", "/"));
 	}
 
 	/**
@@ -41,9 +41,20 @@ public class Amenities extends ArrayList<String> {
 		int i =0;
 		for (String s : strings) {
 			if (i % 2 == 1)
-				this.add(s);
+				this.add(s.replace("\\/", "/"));
 			i++;
 		}
+	}
+	
+	/**
+	 * Return the amenities as a text list.
+	 * @return a string with the list.
+	 */
+	public String toText() {
+	    String out = "";
+            for(String s : this)
+                out += " - " + s + "\n";
+        return out;
 	}
 
 	/**
@@ -75,7 +86,7 @@ public class Amenities extends ArrayList<String> {
 	 * @return true the place has a bar, false otherwise.
 	 */
 	public boolean hasCoffee() {
-		return this.contains("Café \\/ Bar");
+		return this.contains("Café / Bar");
 	}
 
 	/**

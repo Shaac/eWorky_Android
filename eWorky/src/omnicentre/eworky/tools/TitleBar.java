@@ -2,58 +2,71 @@ package omnicentre.eworky.tools;
 
 import java.util.ArrayList;
 
-import omnicentre.eworky.Index;
-import omnicentre.eworky.Map;
 import omnicentre.eworky.R;
 import omnicentre.eworky.places.Place;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+/**
+ * This class allows to display a custom title bar. The constructor should be
+ * called at the beginning of onCreate(), and the setTitleBar() after the
+ * layout is inflated.
+ *
+ */
 public class TitleBar {
 	
-	private Activity a;
-	private boolean titled;
+    /**
+     * The activity containing the title bar.
+     */
+	private Activity activity;
+	
+	/**
+	 * True if title bars are supported, false otherwise.
+	 */
+	private boolean supported;
+	
+	
 	private ArrayList<Place> placeList;
 	
+	/**
+	 * Initiate the title bar. This will request the feature to have the bar.
+	 * @param activity this activity where the title bar must be placed.
+	 */
 	public TitleBar(Activity activity) {
-		a = activity;
-		titled = a.requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		this.activity = activity;
+		supported = activity.requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 	}
 
 	/**
 	 * @param layout the title bar's layout
 	 */
 	public void setTitleBar(int layout){
-		if(titled){
-			a.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, layout);
+		if(supported){
+			activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, layout);
 			
-			ImageView logo = (ImageView) a.findViewById(R.id.title_logo);
+			ImageView logo = (ImageView) activity.findViewById(R.id.title_logo);
 			if (logo != null)
 				logo.setOnClickListener(logoListener);
 			
-			ImageView map_logo = (ImageView) a.findViewById(R.id.title_map_logo);
-			if (map_logo != null)
-				map_logo.setOnClickListener(map_logoListener);
+			ImageView map = (ImageView) activity.findViewById(R.id.title_map_logo);
+			if (map != null)
+				map.setOnClickListener(mapListener);
 		}
 	}
 
 	private OnClickListener logoListener = new OnClickListener() {
 		public void onClick(View v) {
-			Intent intent = new Intent(a, Index.class);
-			a.startActivity(intent);
+			Redirections.index(activity);
 		}
 	};
 	
-	private OnClickListener map_logoListener = new OnClickListener() {
+	private OnClickListener mapListener = new OnClickListener() {
 		public void onClick(View v) {
-			Intent intent = new Intent(a, Map.class);
-			intent.putParcelableArrayListExtra("placeList", placeList);
-			a.startActivity(intent);
+			Redirections.map(activity, placeList);
 		}
 	};
 	
