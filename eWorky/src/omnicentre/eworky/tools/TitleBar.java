@@ -51,6 +51,10 @@ public class TitleBar {
             ImageView logo = (ImageView) a.findViewById(R.id.title_logo);
             if (logo != null)
                 Redirections.setClickListenerToIndex(logo, a);
+            
+            ImageView list = (ImageView) a.findViewById(R.id.title_list_logo);
+            if (list != null)
+                Redirections.setClickListenerToPrevious(list, a);
         }
     }
 

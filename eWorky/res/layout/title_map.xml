@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-  	android:layout_width="match_parent"
-  	android:layout_height="match_parent"
-  	android:gravity="center_horizontal"
-  	android:orientation="horizontal">
-  	
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/title_layout" >
+
     <ImageView
-  	    android:id="@+id/title_logo"
-  	    android:layout_width="wrap_content"
-  	    android:layout_height="wrap_content"
-  	    android:src="@drawable/logo"
-  	    android:contentDescription="@string/app_name"/>
-    
-</LinearLayout>
+        android:id="@+id/title_logo"
+        style="@style/logo"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        style="@style/title_text"
+        android:layout_toRightOf="@+id/title_logo"
+        android:text="@string/map" />
+
+    <ImageView
+        android:id="@+id/title_list_logo"
+        style="@style/title_icon"
+        android:contentDescription="@string/search_results"
+        android:src="@drawable/list" />
+
+</RelativeLayout>

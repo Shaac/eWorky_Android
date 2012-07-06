@@ -3,6 +3,8 @@ package omnicentre.eworky.places;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import omnicentre.eworky.tools.Http;
 
@@ -11,6 +13,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -96,6 +101,26 @@ public class Place implements Parcelable {
         // We set the result in kilometers and keep two digits after the point:
         distance = ((double) Math.round(pointA.distanceTo(pointB) / 10)) / 100;
     }
+    
+    /**
+     * Compute the distance between a city and every place in a list.
+     * @param places the list of {@link Place}s.
+     * @param city the name of the distant city.
+     * @param context the context (for {@link Geocoder}).
+     */
+    public static void computeDistance(ArrayList<Place> places, String city,
+            Context context) {
+        Geocoder g = new Geocoder(context, Locale.getDefault());
+        try {
+            List<Address> addresses = g.getFromLocationName(city, 1);
+            if (addresses != null && addresses.size() > 0) {
+                double lattitude = addresses.get(0).getLatitude();
+                double longitude = addresses.get(0).getLongitude();
+                for (Place p : places)
+                    p.computeDistance(lattitude, longitude);
+            }
+        } catch (IOException e1) {}
+    }
 
     /**
      * Parse a JSON array into a list of Place objects.
@@ -158,6 +183,9 @@ public class Place implements Parcelable {
         out.writeStringList((ArrayList<String>) amenities);
     }
 
+    /**
+     * To recreate the object from a parcel.
+     */
     public static final Parcelable.Creator<Place> CREATOR =
             new Parcelable.Creator<Place>() {
 

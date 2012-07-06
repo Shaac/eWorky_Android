@@ -1,18 +1,44 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="custom_titlebar" parent="android:Theme.Light" >
-		<item name="android:windowTitleStyle">@style/title_bar</item>
-		<item name="android:windowTitleSize">35dp</item>
-		<item name="android:windowTitleBackgroundStyle">@style/title_background</item>
-	</style>
-	<style name="title_bar">
-		<item name="android:singleLine">false</item>
-		<item name="android:textAppearance">@android:style/TextAppearance.WindowTitle</item>
-		<item name="android:shadowColor">#BB0000FF</item>
-		<item name="android:shadowRadius">2.75</item>
-	</style>
-	<style name="title_background">
-		<item name="android:background">@drawable/title_background</item>
-	</style>
+    <style name="custom_titlebar" parent="android:Theme.Light">
+        <item name="android:windowTitleStyle">@style/title_bar</item>
+        <item name="android:windowTitleSize">35dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/title_background</item>
+    </style>
+
+    <style name="title_bar">
+        <item name="android:singleLine">false</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.WindowTitle</item>
+        <item name="android:shadowColor">#BB0000FF</item>
+        <item name="android:shadowRadius">2.75</item>
+    </style>
+
+    <style name="title_background">
+        <item name="android:background">@drawable/title_background</item>
+    </style>
+
+    <style name="title_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="title_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <style name="title_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="logo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/logo</item>
+    </style>
 
 </resources>

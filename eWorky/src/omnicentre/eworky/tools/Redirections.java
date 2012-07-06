@@ -130,4 +130,20 @@ public class Redirections {
             }
         });
     }
+    
+    /**
+     * Set an OnClickListener from the view that will finish the activity
+     * @param view the view which will have the listener.
+     * @param from the current activity.
+     */
+    public static void setClickListenerToPrevious(View view, Activity from) {
+
+        final Activity activity = from;
+        
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                activity.finish();
+            }
+        });
+    }
 }

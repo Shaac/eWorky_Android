@@ -21,5 +21,8 @@
     <string name="picture">picture</string>
     <string name="description">Description</string>
     <string name="amenities">Amenities</string>
+    <string name="search_results">Search results</string>
+    <string name="map">Map</string>
+    <string name="details">Details</string>
 
 </resources>

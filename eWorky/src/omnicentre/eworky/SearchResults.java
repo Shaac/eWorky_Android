@@ -2,25 +2,18 @@ package omnicentre.eworky;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
 import omnicentre.eworky.places.Place;
-import omnicentre.eworky.places.PlaceList;
+import omnicentre.eworky.tools.Dialogs;
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 import omnicentre.eworky.widgets.PlaceArrayAdapter;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -52,18 +45,7 @@ public class SearchResults extends ListActivity {
 		else {
 			try {
 				placeList = Place.fromQuery(query);
-				Geocoder g = new Geocoder(this, Locale.getDefault());
-				try {
-					List<Address> addresses = g.getFromLocationName(query, 1);
-					if (addresses != null && addresses.size() > 0) {
-						double lattitude = addresses.get(0).getLatitude();
-						double longitude = addresses.get(0).getLongitude();
-						for (Place p : placeList)
-							p.computeDistance(lattitude, longitude);
-					}
-				} catch (IOException e1) {
-					Log.e("EWORKY",Log.getStackTraceString(e1));
-				}
+				Place.computeDistance(placeList,query,getApplicationContext());
 			} catch (ClientProtocolException e) {
 				error = getString(R.string.errorClientProtocol);
 				isOk = false;
@@ -79,23 +61,13 @@ public class SearchResults extends ListActivity {
 		// We create the view:
 		TitleBar titleBar = new TitleBar(this);
 		setListAdapter(new PlaceArrayAdapter(getApplicationContext(),
-				new PlaceList(placeList)));
+		        placeList));
 		getListView().setTextFilterEnabled(true);
 		titleBar.setTitleBar(R.layout.title_results, placeList);
 
 		// If something went wrong we redirect to the main view:
-		if(!isOk) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("Error");
-			builder.setMessage(error);
-			builder.setPositiveButton("Ok",
-					new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
-					Redirections.index(SearchResults.this);
-				}
-			});
-			builder.create().show();
-		}
+		if(!isOk)
+		    Dialogs.newAlertToIndex("Error", error, this);
 	}
 
 	@Override

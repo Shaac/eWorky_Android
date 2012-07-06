@@ -32,8 +32,8 @@ public class PlaceArrayAdapter extends ArrayAdapter<String> {
      * @param context the context of the activity.
      * @param places the places list.
      */
-    public PlaceArrayAdapter(Context context, PlaceList places) {
-        super(context, R.layout.list, places.toStrings());
+    public PlaceArrayAdapter(Context context, ArrayList<Place> places) {
+        super(context, R.layout.list, (new PlaceList(places)).toStrings());
         this.context = context;
         this.places = places;
     }

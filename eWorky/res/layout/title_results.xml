@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    style="@style/title_layout" >
 
     <ImageView
         android:id="@+id/title_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/logo" />
+        style="@style/logo"
+        android:contentDescription="@string/app_name" />
 
     <TextView
-        android:id="@+id/reseach"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_toLeftOf="@+id/title_logo"
-        android:textColor="#000000"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
+        style="@style/title_text"
+        android:layout_toRightOf="@+id/title_logo"
+        android:text="@string/search_results" />
+
     <ImageView
         android:id="@+id/title_map_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/maps"
-        android:layout_alignParentRight="true" />
+        style="@style/title_icon"
+        android:contentDescription="@string/map"
+        android:src="@drawable/maps" />
 
 </RelativeLayout>
