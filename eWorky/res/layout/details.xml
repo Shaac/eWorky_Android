@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This layout is for the place details view. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -9,20 +10,13 @@
 
         <omnicentre.eworky.widgets.AspectRatioImageView
             android:id="@+id/picture"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:adjustViewBounds="true" />
+            style="@style/aspect_ratio_image_view" />
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/section"
             android:layout_below="@id/picture"
-            android:textColor="#5DAFDE"
-            android:text="@string/description"
-            android:textStyle="bold" />
+            android:text="@string/description" />
 
         <TextView
             android:id="@+id/content"
@@ -67,16 +61,16 @@
                 android:textColor="#FB8F1F" >
             </TextView>
         </RelativeLayout>
-        
+
         <TextView
             android:id="@+id/amenities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/content"
-            android:textColor="#5DAFDE"
             android:text="@string/amenities"
+            android:textColor="#5DAFDE"
             android:textStyle="bold" />
-        
+
         <TextView
             android:id="@+id/list"
             android:layout_width="wrap_content"

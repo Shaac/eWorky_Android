@@ -7,9 +7,9 @@
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:layout_centerHorizontal="true"
         android:ems="10"
-        android:layout_centerHorizontal="true" >
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
@@ -18,8 +18,8 @@
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search"
         android:layout_below="@id/search_bar"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/search" />
 
 </RelativeLayout>
