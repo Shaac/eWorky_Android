@@ -1,7 +1,6 @@
 package omnicentre.eworky;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import omnicentre.eworky.places.Place;
 import omnicentre.eworky.places.PlaceItimizedOverlay;
@@ -11,50 +10,54 @@ import omnicentre.eworky.tools.TitleBar;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 
+/**
+ * This activity displays a map.
+ *
+ */
 public class Map extends MapActivity {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		TitleBar titleBar = new TitleBar(this);
-		setContentView(R.layout.main);
-		titleBar.setTitleBar(R.layout.title_index);
-		
-		MapView mapView = (MapView) this.findViewById(R.id.mapView);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		Drawable drawable = this.getResources().getDrawable(R.drawable.ic_launcher);
-		
-		
-		ArrayList<Parcelable> placeList = (ArrayList<Parcelable>)
-				getIntent().getParcelableArrayListExtra("placeList");
-		
-		PlaceItimizedOverlay itemizedOverlay = new PlaceItimizedOverlay(drawable, mapView, this);
-		// TODO placeList = null
-		for (Parcelable p : placeList) {
-			PlaceOverlayItem overlayitem = new PlaceOverlayItem((Place) p);
-			itemizedOverlay.addOverlayItem(overlayitem);
-		}
+        // We set the view, with the title bar:
+        TitleBar.setContentView(this, R.layout.map, R.layout.title_map);
 
-		
-		mapView.setBuiltInZoomControls(true);
-		List<Overlay> mapOverlays = mapView.getOverlays();
-		mapOverlays.add(itemizedOverlay);
+        // We initiate the map parameters:
+        MapView mapView = (MapView) this.findViewById(R.id.mapView);
+        Drawable pin = this.getResources().getDrawable(R.drawable.ic_launcher);
+        PlaceItimizedOverlay itemizedOverlay = new
+                PlaceItimizedOverlay(pin, mapView, this); // displays the pins
+        mapView.setBuiltInZoomControls(true); // add some zoom buttons
 
-		MapController controller = mapView.getController();
-		controller.zoomToSpan(itemizedOverlay.getLatSpanE6(), itemizedOverlay.getLonSpanE6());
-		// use the newly defined getCenter method
-		controller.setCenter(itemizedOverlay.getCenter());
-	}
+        // We get the places list:
+        ArrayList<Parcelable> placeList = (ArrayList<Parcelable>)
+                getIntent().getParcelableArrayListExtra("placeList");
 
-	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
+        // We place the places:
+        if (placeList != null) {
+            for (Parcelable p : placeList) {
+                PlaceOverlayItem overlayitem = new PlaceOverlayItem((Place) p);
+                itemizedOverlay.addOverlayItem(overlayitem);
+            }
+            mapView.getOverlays().add(itemizedOverlay);
+        }
+
+        // We go to the right part of the map:
+        MapController controller = mapView.getController();
+        controller.setCenter(itemizedOverlay.getCenter());
+        controller.zoomToSpan(itemizedOverlay.getLatSpanE6(),
+                itemizedOverlay.getLonSpanE6());
+    }
+
+    @Override
+    protected boolean isRouteDisplayed() {
+        return false;
+    }
 
 }

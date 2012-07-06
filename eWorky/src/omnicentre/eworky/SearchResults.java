@@ -10,13 +10,13 @@ import org.json.JSONException;
 
 import omnicentre.eworky.places.Place;
 import omnicentre.eworky.places.PlaceList;
+import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 import omnicentre.eworky.widgets.PlaceArrayAdapter;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -78,11 +78,10 @@ public class SearchResults extends ListActivity {
 
 		// We create the view:
 		TitleBar titleBar = new TitleBar(this);
-		titleBar.setPlaceList(placeList);
 		setListAdapter(new PlaceArrayAdapter(getApplicationContext(),
 				new PlaceList(placeList)));
 		getListView().setTextFilterEnabled(true);
-		titleBar.setTitleBar(R.layout.title_results);
+		titleBar.setTitleBar(R.layout.title_results, placeList);
 
 		// If something went wrong we redirect to the main view:
 		if(!isOk) {
@@ -92,8 +91,7 @@ public class SearchResults extends ListActivity {
 			builder.setPositiveButton("Ok",
 					new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int id) {
-					Intent intent = new Intent(SearchResults.this,Index.class);
-					startActivity(intent);
+					Redirections.index(SearchResults.this);
 				}
 			});
 			builder.create().show();
@@ -105,8 +103,6 @@ public class SearchResults extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 
 		// If an item on the list is clicked, we go to its detail page:
-		Intent intent = new Intent(this, PlaceDetails.class);
-		intent.putExtra("place",  this.placeList.get(position));
-		startActivity(intent);
+		Redirections.placeDetails(this, placeList.get(position));
 	}
 }
