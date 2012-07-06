@@ -13,10 +13,21 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 
+/**
+ * This class is used to display the list of points on the map.
+ * It also contains the methods when the points are tapped.
+ *
+ */
 public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayItem> {
 
+    /**
+     * The map activity.
+     */
 	private Activity a;
 
+	/**
+	 * The list of points.
+	 */
 	private ArrayList<PlaceOverlayItem> list = new ArrayList<PlaceOverlayItem>();
 
 	@Override
@@ -29,16 +40,15 @@ public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayIte
 		return list.size();
 	}
 
-	public void addOverlayItem(PlaceOverlayItem overlay)
-	{
+	public void addOverlayItem(PlaceOverlayItem overlay) {
 		list.add(overlay);
 		populate();
 	}
 
-	public PlaceItimizedOverlay(Drawable defaultMarker, MapView mapView, Activity a)
-	{
+	public PlaceItimizedOverlay(Drawable defaultMarker, MapView mapView,
+	        Activity activity) {
 		super(boundCenterBottom(defaultMarker), mapView);
-		this.a = a;
+		this.a = activity;
 	}
 
 	@Override
@@ -74,6 +84,7 @@ public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayIte
 		return true;
 	}
 	
+	// This allows to customize the bubble:
 	/*
     @Override
     protected BalloonOverlayView<PlaceOverlayItem> createBalloonOverlayView() {

@@ -4,6 +4,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+/**
+ * An extension of an {@link ImageView} that keeps its ratio.
+ *
+ */
 public class AspectRatioImageView extends ImageView {
 
     public AspectRatioImageView(Context context) {

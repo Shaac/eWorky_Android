@@ -19,6 +19,8 @@ import com.google.android.maps.OverlayItem;
 import com.readystatesoftware.mapviewballoons.BalloonOverlayView;
 import com.readystatesoftware.mapviewballoons.R;
 
+// used if we want to customize the bubble in the map.
+
 public class PlaceOverlayView<Item extends OverlayItem>
         extends BalloonOverlayView<PlaceOverlayItem> {
     
