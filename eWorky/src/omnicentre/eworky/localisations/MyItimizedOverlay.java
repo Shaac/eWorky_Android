@@ -1,9 +1,9 @@
-package omnicentre.eworky.places;
+package omnicentre.eworky.localisations;
 
 import java.util.ArrayList;
 
-import omnicentre.eworky.PlaceDetails;
-import omnicentre.eworky.tools.PlaceOverlayItem;
+import omnicentre.eworky.LocalisationDetails;
+import omnicentre.eworky.tools.MyOverlayItem;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
  * It also contains the methods when the points are tapped.
  *
  */
-public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayItem> {
+public class MyItimizedOverlay extends BalloonItemizedOverlay<MyOverlayItem> {
 
     /**
      * The map activity.
@@ -28,10 +28,10 @@ public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayIte
 	/**
 	 * The list of points.
 	 */
-	private ArrayList<PlaceOverlayItem> list = new ArrayList<PlaceOverlayItem>();
+	private ArrayList<MyOverlayItem> list = new ArrayList<MyOverlayItem>();
 
 	@Override
-	protected PlaceOverlayItem createItem(int i) {
+	protected MyOverlayItem createItem(int i) {
 		return list.get(i);
 	}
 
@@ -40,12 +40,12 @@ public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayIte
 		return list.size();
 	}
 
-	public void addOverlayItem(PlaceOverlayItem overlay) {
+	public void addOverlayItem(MyOverlayItem overlay) {
 		list.add(overlay);
 		populate();
 	}
 
-	public PlaceItimizedOverlay(Drawable defaultMarker, MapView mapView,
+	public MyItimizedOverlay(Drawable defaultMarker, MapView mapView,
 	        Activity activity) {
 		super(boundCenterBottom(defaultMarker), mapView);
 		this.a = activity;
@@ -63,7 +63,7 @@ public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayIte
 		int minLongitude = Integer.MAX_VALUE;
 		int maxLongitude = Integer.MIN_VALUE;
 
-		for (PlaceOverlayItem overlay : list) {
+		for (MyOverlayItem overlay : list) {
 			int lat = overlay.getPoint().getLatitudeE6();
 			int lon = overlay.getPoint().getLongitudeE6();
 			maxLatitude = Math.max(lat, maxLatitude);
@@ -77,8 +77,8 @@ public class PlaceItimizedOverlay extends BalloonItemizedOverlay<PlaceOverlayIte
 	}
 
 	@Override
-	protected boolean onBalloonTap(int index, PlaceOverlayItem item) {
-		Intent intent = new Intent(a, PlaceDetails.class);
+	protected boolean onBalloonTap(int index, MyOverlayItem item) {
+		Intent intent = new Intent(a, LocalisationDetails.class);
 		intent.putExtra("place", item.getPlace());
 		a.startActivity(intent);
 		return true;

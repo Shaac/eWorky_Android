@@ -2,12 +2,12 @@ package omnicentre.eworky;
 
 import java.util.ArrayList;
 
-import omnicentre.eworky.places.Place;
-import omnicentre.eworky.places.PlaceLoader;
+import omnicentre.eworky.localisations.Localisation;
+import omnicentre.eworky.localisations.LocalisationsLoader;
 import omnicentre.eworky.tools.Dialogs;
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
-import omnicentre.eworky.widgets.PlaceArrayAdapter;
+import omnicentre.eworky.widgets.LocalisationArrayAdapter;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -24,7 +24,7 @@ public class SearchResults extends ListActivity {
     /**
      * The list of all the found places.
      */
-    private ArrayList<Place> placeList;
+    private ArrayList<Localisation> localisationsList;
     private TitleBar titleBar;
 
     @Override
@@ -37,7 +37,7 @@ public class SearchResults extends ListActivity {
         titleBar = new TitleBar(this);
         
         // We charge the data in an asynchronous task:
-        (new PlaceLoader(this, dialog)).execute();
+        (new LocalisationsLoader(this, dialog)).execute();
     }
 
     @Override
@@ -45,23 +45,24 @@ public class SearchResults extends ListActivity {
         super.onListItemClick(l, v, position, id);
 
         // If an item on the list is clicked, we go to its detail page:
-        Redirections.placeDetails(this, placeList.get(position));
+        Redirections.localisationDetails(this,localisationsList.get(position));
     }
 
     /**
      * This method displays the view. It has to be called once the data is
      * charged.
-     * @param placeList the locations list.
+     * @param localisationsList the localisations list.
      * @param isOk tells if something bad happened.
      * @param error an eventual error message.
      */
-    public void show(ArrayList<Place> placeList, boolean isOk, String error) {
+    public void show(ArrayList<Localisation> localisationsList, boolean isOk,
+            String error) {
         
-        this.placeList = placeList;
-        setListAdapter(new PlaceArrayAdapter(getApplicationContext(),
-                placeList));
+        this.localisationsList = localisationsList;
+        setListAdapter(new LocalisationArrayAdapter(getApplicationContext(),
+                localisationsList));
         getListView().setTextFilterEnabled(true);
-        titleBar.setTitleBar(R.layout.title_results, placeList);
+        titleBar.setTitleBar(R.layout.title_results, localisationsList);
 
         // If something went wrong we redirect to the main view:
         if(!isOk)

@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import omnicentre.eworky.R;
-import omnicentre.eworky.places.Place;
-import omnicentre.eworky.places.PlaceList;
+import omnicentre.eworky.localisations.Localisation;
+import omnicentre.eworky.localisations.PlaceList;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -22,17 +22,17 @@ import android.widget.TextView;
  * This class is used to display the layout of an item of the places list.
  *
  */
-public class PlaceArrayAdapter extends ArrayAdapter<String> {
+public class LocalisationArrayAdapter extends ArrayAdapter<String> {
     
     private final Context context;
-    private final ArrayList<Place> places;
+    private final ArrayList<Localisation> places;
 
     /**
      * Construct the {@link ArrayAdapter} for the places list.
      * @param context the context of the activity.
      * @param places the places list.
      */
-    public PlaceArrayAdapter(Context context, ArrayList<Place> places) {
+    public LocalisationArrayAdapter(Context context, ArrayList<Localisation> places) {
         super(context, R.layout.list, (new PlaceList(places)).toStrings());
         this.context = context;
         this.places = places;
@@ -42,7 +42,7 @@ public class PlaceArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        Place p = places.get(position);
+        Localisation p = places.get(position);
 
         View view = inflater.inflate(R.layout.list, parent, false);
 

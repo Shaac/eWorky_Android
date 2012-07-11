@@ -2,6 +2,7 @@ package omnicentre.eworky;
 
 import com.pixate.pxcomponentkit.view.PXTheme;
 
+import omnicentre.eworky.tools.API;
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 
@@ -29,5 +30,7 @@ public class Index extends Activity {
         
         // We decorate the button:
         PXTheme.themeButton(b, Color.parseColor("#5DAFDE"));
+        
+        API.getToken("sacha@eworky.com", "testtest");
     }
 }

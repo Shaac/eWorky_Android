@@ -3,7 +3,7 @@ package omnicentre.eworky.tools;
 import java.util.ArrayList;
 
 import omnicentre.eworky.R;
-import omnicentre.eworky.places.Place;
+import omnicentre.eworky.localisations.Localisation;
 
 import android.app.Activity;
 import android.view.Window;
@@ -64,7 +64,7 @@ public class TitleBar {
      * @param layout the title bar's layout.
      * @param placeList the places list for the map view.
      */
-    public void setTitleBar(int layout, ArrayList<Place> placeList) {
+    public void setTitleBar(int layout, ArrayList<Localisation> placeList) {
         setTitleBar(layout);
         if(supported){
             ImageView map = (ImageView) a.findViewById(R.id.title_map_logo);
@@ -97,11 +97,11 @@ public class TitleBar {
      * @param placeList the places list for the map views.
      */
     public static void setContentView(Activity activity, int layout,
-            int title_layout, ArrayList<Place> placeList) {
+            int title_layout, ArrayList<Localisation> placeList) {
         
         TitleBar titleBar = new TitleBar(activity);
         activity.setContentView(layout);
-        placeList = placeList == null ? new ArrayList<Place>() : placeList;
+        placeList = placeList == null ? new ArrayList<Localisation>() : placeList;
         titleBar.setTitleBar(title_layout, placeList);
     }
 }

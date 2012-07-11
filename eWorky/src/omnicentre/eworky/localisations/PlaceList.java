@@ -1,4 +1,4 @@
-package omnicentre.eworky.places;
+package omnicentre.eworky.localisations;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * its methods to convert into a  {@link ArrayList<String>}.
  *
  */
-public class PlaceList extends ArrayList<Place> {
+public class PlaceList extends ArrayList<Localisation> {
 
     private static final long serialVersionUID = -5818756543886625048L;
 
@@ -15,10 +15,10 @@ public class PlaceList extends ArrayList<Place> {
      * Create from an already existent {@link ArrayList<Place>}.
      * @param list the existing list.
      */
-    public PlaceList(ArrayList<Place> list) {
+    public PlaceList(ArrayList<Localisation> list) {
 		super();
 		if (list != null)
-			for (Place p : list)
+			for (Localisation p : list)
 				this.add(p);
 	}
 
@@ -28,7 +28,7 @@ public class PlaceList extends ArrayList<Place> {
      */
 	public ArrayList<String> toStrings () {
 		ArrayList<String> l = new ArrayList<String>();
-		for (Place p : this)
+		for (Localisation p : this)
 			l.add(p.getName());
 		return l;
 	}

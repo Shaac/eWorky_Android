@@ -22,7 +22,7 @@ import com.readystatesoftware.mapviewballoons.R;
 // used if we want to customize the bubble in the map.
 
 public class PlaceOverlayView<Item extends OverlayItem>
-        extends BalloonOverlayView<PlaceOverlayItem> {
+        extends BalloonOverlayView<MyOverlayItem> {
     
     private TextView name;
     private ImageView picture;
@@ -45,7 +45,7 @@ public class PlaceOverlayView<Item extends OverlayItem>
     }
 
     @Override
-    protected void setBalloonData(PlaceOverlayItem item, ViewGroup parent) {
+    protected void setBalloonData(MyOverlayItem item, ViewGroup parent) {
         
         // map our custom item data to fields
         name.setText(item.getTitle());

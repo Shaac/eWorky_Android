@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import omnicentre.eworky.Index;
 import omnicentre.eworky.Map;
-import omnicentre.eworky.PlaceDetails;
+import omnicentre.eworky.LocalisationDetails;
 import omnicentre.eworky.SearchResults;
-import omnicentre.eworky.places.Place;
+import omnicentre.eworky.localisations.Localisation;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -35,9 +36,9 @@ public class Redirections {
      * @param from the current activity.
      * @param placeList the places list to display on the map.
      */
-    public static void map(Activity from, ArrayList<Place> placeList) {
+    public static void map(Activity from, ArrayList<Localisation> placeList) {
         Intent intent = new Intent(from, Map.class);
-        intent.putParcelableArrayListExtra("placeList", placeList);
+        intent.putParcelableArrayListExtra("localisationsList", placeList);
         from.startActivity(intent);
     }
 
@@ -55,22 +56,25 @@ public class Redirections {
     /**
      * Redirects to the place details activity.
      * @param from the current activity.
-     * @param place the {@link Place} object we want to know about.
+     * @param localisation the {@link Localisation} object we want to know about.
      */
-    public static void placeDetails(Activity from, Place place) {
-        Intent intent = new Intent(from, PlaceDetails.class);
-        intent.putExtra("place",  place);
+    public static void localisationDetails(Activity from,
+            Localisation localisation) {
+        Intent intent = new Intent(from, LocalisationDetails.class);
+        intent.putExtra("localisation",  localisation);
         from.startActivity(intent);
     }
     
     /**
      * Redirects to the search results activity.
      * @param from the current activity.
-     * @param placeList the places list to display on the list.
+     * @param localisationsList the localisations list to display on the list.
      */
-    public static void searchResults(Activity from, ArrayList<Place>placeList){
+    public static void searchResults(Activity from,
+            ArrayList<Localisation> localisationsList){
         Intent intent = new Intent(from, SearchResults.class);
-        intent.putParcelableArrayListExtra("placeList", placeList);
+        intent.putParcelableArrayListExtra("localisationsList",
+                localisationsList);
         from.startActivity(intent);
     }
 
@@ -98,10 +102,10 @@ public class Redirections {
      * @param placeList the places list to display on the map.
      */
     public static void setClickListenerToMap(View view, Activity from,
-            ArrayList<Place> placeList) {
+            ArrayList<Localisation> placeList) {
 
         final Activity activity = from;
-        final ArrayList<Place> p = placeList;
+        final ArrayList<Localisation> p = placeList;
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 map(activity, p);
@@ -145,5 +149,27 @@ public class Redirections {
                 activity.finish();
             }
         });
+    }
+    
+    /**
+     * Get the localisation given in the extras of the intent.
+     * @param activity the current activity.
+     * @return the wanted localisation.
+     */
+    public static Localisation getLocalisation(Activity activity) {
+        return (Localisation)
+                activity.getIntent().getExtras().getParcelable("localisation");
+    }
+    
+    public static ArrayList<Localisation> getLocalisationsList (Activity
+            activity) {
+        ArrayList<Parcelable> l = (ArrayList<Parcelable>) activity.getIntent().
+                getParcelableArrayListExtra("localisationsList");
+        ArrayList<Localisation> ret = new ArrayList<Localisation>();
+        if (l != null) {
+            for (Parcelable p : l)
+                ret.add((Localisation) p);
+        }
+        return ret;
     }
 }

@@ -1,4 +1,4 @@
-package omnicentre.eworky.places;
+package omnicentre.eworky.localisations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,8 +6,8 @@ import java.util.List;
 
 
 /**
- * This class should contain the list of the amenities of a place.
- * It is meant to have its instances parameters of a {@link Place} object.
+ * This class should contain the list of the amenities of a localisation.
+ * It is meant to have its instances parameters of a {@link Localisation} object.
  *
  */
 public class Amenities extends ArrayList<String> {
@@ -58,48 +58,48 @@ public class Amenities extends ArrayList<String> {
 	}
 
 	/**
-	 * Tell if the place has some free WiFi.
-	 * @return true the place has some free WiFi, false otherwise. 
+	 * Tell if the localisation has some free WiFi.
+	 * @return true the localisation has some free WiFi, false otherwise. 
 	 */
 	public boolean hasFreeWifi() {
 		return this.contains("Wifi gratuit");
 	}
 
 	/**
-	 * Tell if the place has some WiFi, but not free.
-	 * @return true the place has some WiFi, false otherwise.
+	 * Tell if the localisation has some WiFi, but not free.
+	 * @return true the localisation has some WiFi, false otherwise.
 	 */
 	public boolean hasWifi() {
 		return this.contains("Wifi payant");
 	}
 
 	/**
-	 * Tell if it is possible to eat on this place.
-	 * @return true the place sells food, false otherwise.
+	 * Tell if it is possible to eat on this localisation.
+	 * @return true the localisation sells food, false otherwise.
 	 */
 	public boolean hasFood() {
 		return this.contains("Restauration");
 	}
 
 	/**
-	 * Tell if the place is a bar or a coffee shop.
-	 * @return true the place has a bar, false otherwise.
+	 * Tell if the localisation is a bar or a coffee shop.
+	 * @return true the localisation has a bar, false otherwise.
 	 */
 	public boolean hasCoffee() {
 		return this.contains("Café / Bar");
 	}
 
 	/**
-	 * Tell if the place has a parking.
-	 * @return true the place has a parking, false otherwise.
+	 * Tell if the localisation has a parking.
+	 * @return true the localisation has a parking, false otherwise.
 	 */
 	public boolean hasParking() {
 		return this.contains("Parking");
 	}
 
 	/**
-	 * Tell if the place's access has been improved for disabled people.
-	 * @return true the place has an improved access, false otherwise.
+	 * Tell if the localisation's access has been improved for disabled people.
+	 * @return true the localisation has an improved access, false otherwise.
 	 */
 	public boolean hasAccess() {
 		return this.contains("Accès handicapés");

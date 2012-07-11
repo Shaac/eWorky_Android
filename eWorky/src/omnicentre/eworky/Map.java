@@ -2,9 +2,10 @@ package omnicentre.eworky;
 
 import java.util.ArrayList;
 
-import omnicentre.eworky.places.Place;
-import omnicentre.eworky.places.PlaceItimizedOverlay;
-import omnicentre.eworky.tools.PlaceOverlayItem;
+import omnicentre.eworky.localisations.Localisation;
+import omnicentre.eworky.localisations.MyItimizedOverlay;
+import omnicentre.eworky.tools.MyOverlayItem;
+import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 
 import com.google.android.maps.MapActivity;
@@ -13,7 +14,6 @@ import com.google.android.maps.MapView;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 
 /**
  * This activity displays a map.
@@ -31,22 +31,18 @@ public class Map extends MapActivity {
         // We initiate the map parameters:
         MapView mapView = (MapView) this.findViewById(R.id.mapView);
         Drawable pin = this.getResources().getDrawable(R.drawable.ic_launcher);
-        PlaceItimizedOverlay itemizedOverlay = new
-                PlaceItimizedOverlay(pin, mapView, this); // displays the pins
+        MyItimizedOverlay itemizedOverlay = new
+                MyItimizedOverlay(pin, mapView, this); // displays the pins
         mapView.setBuiltInZoomControls(true); // add some zoom buttons
 
-        // We get the places list:
-        ArrayList<Parcelable> placeList = (ArrayList<Parcelable>)
-                getIntent().getParcelableArrayListExtra("placeList");
+        // We get the localisations list:
+        ArrayList<Localisation> localisationsList = 
+                Redirections.getLocalisationsList(this);
 
-        // We place the places:
-        if (placeList != null) {
-            for (Parcelable p : placeList) {
-                PlaceOverlayItem overlayitem = new PlaceOverlayItem((Place) p);
-                itemizedOverlay.addOverlayItem(overlayitem);
-            }
-            mapView.getOverlays().add(itemizedOverlay);
-        }
+        // We place the localisations:
+        for (Localisation l : localisationsList)
+            itemizedOverlay.addOverlayItem(new MyOverlayItem(l));
+        mapView.getOverlays().add(itemizedOverlay);
 
         // We go to the right part of the map:
         MapController controller = mapView.getController();

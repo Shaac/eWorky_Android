@@ -1,4 +1,4 @@
-package omnicentre.eworky.places;
+package omnicentre.eworky.localisations;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ import android.os.AsyncTask;
  * Run on background the request to the API and the parsing.
  *
  */
-public class PlaceLoader extends AsyncTask<Void, Void, ArrayList<Place>> {
+public class LocalisationsLoader extends AsyncTask<Void, Void, ArrayList<Localisation>> {
 
     private ProgressDialog progress;
     private SearchResults activity;
     private boolean isOk = true;
     private String error = "";
 
-    public PlaceLoader(SearchResults activity, ProgressDialog progress) {
+    public LocalisationsLoader(SearchResults activity, ProgressDialog progress) {
         this.progress = progress;
         this.activity = activity;
     }
@@ -32,9 +32,9 @@ public class PlaceLoader extends AsyncTask<Void, Void, ArrayList<Place>> {
         progress.show();
     }
 
-    public ArrayList<Place> doInBackground(Void... unused) {
+    public ArrayList<Localisation> doInBackground(Void... unused) {
         
-        ArrayList<Place> placeList = null;
+        ArrayList<Localisation> placeList = null;
 
         // We check if the query is valid:
         String query = activity.getIntent().getExtras().getString("query");
@@ -46,8 +46,8 @@ public class PlaceLoader extends AsyncTask<Void, Void, ArrayList<Place>> {
         // If it is, we parse the JSON:
         else {
             try {
-                placeList = Place.fromQuery(query);
-                Place.computeDistance(placeList,query,activity.getApplicationContext());
+                placeList = Localisation.fromQuery(query);
+                Localisation.computeDistance(placeList,query,activity.getApplicationContext());
             } catch (ClientProtocolException e) {
                 error = activity.getString(R.string.errorClientProtocol);
                 isOk = false;
@@ -62,7 +62,7 @@ public class PlaceLoader extends AsyncTask<Void, Void, ArrayList<Place>> {
         return placeList;
     }
 
-    public void onPostExecute(ArrayList<Place> placeList) {
+    public void onPostExecute(ArrayList<Localisation> placeList) {
         activity.show(placeList, isOk, error);
         progress.dismiss();
     }

@@ -1,4 +1,4 @@
-package omnicentre.eworky.places;
+package omnicentre.eworky.localisations;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -21,11 +21,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * This class contains everything we need about places: all we have to know
- * and a lots of methods.
+ * This class contains everything we need about localisations: all we have to
+ * know and a lots of methods.
  *
  */
-public class Place implements Parcelable {
+public class Localisation implements Parcelable {
 
     private int id;
     private String name;
@@ -45,11 +45,11 @@ public class Place implements Parcelable {
     private double distance;
 
     /**
-     * Create an {@link Place} object from the data in the JSON.
-     * @param json the JSON containing all the place's data.
+     * Create an {@link Localisation} object from the data in the JSON.
+     * @param json the JSON containing all the localisation's data.
      * @throws JSONException if we can not get id, name, latitude or longitude.
      */
-    public Place(JSONObject json) throws JSONException {
+    public Localisation(JSONObject json) throws JSONException {
 
         // These fields are mandatory and cause a failure of the function :
         id = json.getInt("id");
@@ -85,9 +85,9 @@ public class Place implements Parcelable {
     }
 
     /**
-     * Compute the distance between this place and an other.
-     * @param latitude the other place's latitude.
-     * @param longitude the other place's longitude.
+     * Compute the distance between this localisation and an other.
+     * @param latitude the other localisation's latitude.
+     * @param longitude the other localisation's longitude.
      */
     public void computeDistance(double latitude, double longitude) {
         Location pointA = new Location("A");  
@@ -103,37 +103,38 @@ public class Place implements Parcelable {
     }
     
     /**
-     * Compute the distance between a city and every place in a list.
-     * @param places the list of {@link Place}s.
+     * Compute the distance between a city and every localisaiton in a list.
+     * @param localisations the list of {@link Localisation}s.
      * @param city the name of the distant city.
      * @param context the context (for {@link Geocoder}).
      */
-    public static void computeDistance(ArrayList<Place> places, String city,
-            Context context) {
+    public static void computeDistance(ArrayList<Localisation> localisations,
+            String city, Context context) {
         Geocoder g = new Geocoder(context, Locale.getDefault());
         try {
             List<Address> addresses = g.getFromLocationName(city, 1);
             if (addresses != null && addresses.size() > 0) {
                 double lattitude = addresses.get(0).getLatitude();
                 double longitude = addresses.get(0).getLongitude();
-                for (Place p : places)
-                    p.computeDistance(lattitude, longitude);
+                for (Localisation l : localisations)
+                    l.computeDistance(lattitude, longitude);
             }
         } catch (IOException e1) {}
     }
 
     /**
-     * Parse a JSON array into a list of Place objects.
+     * Parse a JSON array into a list of {@link Localisation} objects.
      * @param jsonArray the JSON array to be parsed.
-     * @return an ArrayList of Place objects corresponding to the JSON data.
+     * @return an ArrayList of {@link Localisation} objects corresponding to
+     * the JSON data.
      */
-    public static ArrayList<Place> parseList(JSONArray jsonArray) {
+    public static ArrayList<Localisation> parseList(JSONArray jsonArray) {
 
-        ArrayList<Place> list = new ArrayList<Place> ();
+        ArrayList<Localisation> list = new ArrayList<Localisation> ();
 
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
-                list.add(new Place(jsonArray.getJSONObject(i)));
+                list.add(new Localisation(jsonArray.getJSONObject(i)));
             } catch (JSONException e) {}
         }
 
@@ -141,14 +142,15 @@ public class Place implements Parcelable {
     }
 
     /**
-     * Get a list of places from a query thanks to API.
+     * Get a list of localisations from a query thanks to API.
      * @param query the content of the search.
-     * @return an ArrayList of Place objects corresponding to the search.
+     * @return an ArrayList of {@link Localisation} objects corresponding to
+     * the search.
      * @throws ClientProtocolException in case of an HTTP error protocol.
      * @throws IOException if we can not get to the server.
      * @throws JSONException if the JSON from the server is invalid.
      */
-    public static ArrayList<Place> fromQuery(String query)
+    public static ArrayList<Localisation> fromQuery(String query)
             throws ClientProtocolException, IOException, JSONException {
 
         // We get the content of the API:
@@ -186,15 +188,15 @@ public class Place implements Parcelable {
     /**
      * To recreate the object from a parcel.
      */
-    public static final Parcelable.Creator<Place> CREATOR =
-            new Parcelable.Creator<Place>() {
+    public static final Parcelable.Creator<Localisation> CREATOR =
+            new Parcelable.Creator<Localisation>() {
 
-        public Place createFromParcel(Parcel source) {
-            return new Place(source);
+        public Localisation createFromParcel(Parcel source) {
+            return new Localisation(source);
         }
 
-        public Place[] newArray(int size) {
-            return new Place[size];
+        public Localisation[] newArray(int size) {
+            return new Localisation[size];
         }
     };
 
@@ -202,7 +204,7 @@ public class Place implements Parcelable {
      * Create the object from a parcel.
      * @param in the parcel.
      */
-    public Place(Parcel in) {
+    public Localisation(Parcel in) {
         id = in.readInt();
         name = in.readString();
         latitude = in.readDouble();

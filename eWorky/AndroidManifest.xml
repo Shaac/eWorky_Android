@@ -36,7 +36,7 @@
             android:label="@string/title_search_map" >
         </activity>
         <activity
-            android:name=".PlaceDetails"
+            android:name=".LocalisationDetails"
             android:label="@string/title_place_details" >
         </activity>
         
