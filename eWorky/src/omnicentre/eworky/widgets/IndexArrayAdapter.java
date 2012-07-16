@@ -49,7 +49,7 @@ public class IndexArrayAdapter extends ArrayAdapter<String> {
         case 0:
             name.setText("Autour de moi");
             description.setText("Cherche des lieux de travail autour de moi.");
-            Redirections.setClickListenerToIndex(view, activity);
+            Redirections.setClickListenerToSearchResults(view, activity, null);
             break;
         case 1:
             name.setText("Rechercher un lieu");

@@ -1,6 +1,7 @@
 package omnicentre.eworky.tools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import omnicentre.eworky.Index;
 import omnicentre.eworky.Map;
@@ -8,12 +9,12 @@ import omnicentre.eworky.LocalisationDetails;
 import omnicentre.eworky.Search;
 import omnicentre.eworky.SearchResults;
 import omnicentre.eworky.localisations.Localisation;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 
 /**
  * This class creates the intents to go from one view to another.
@@ -31,7 +32,7 @@ public class Redirections {
         Intent intent = new Intent(from, Index.class);
         from.startActivity(intent);
     }
-    
+
     /**
      * Redirects to the search activity.
      * @param from the current activity.
@@ -40,7 +41,7 @@ public class Redirections {
         Intent intent = new Intent(from, Search.class);
         from.startActivity(intent);
     }
-    
+
     /**
      * Redirects to the search criteria activity (just before search results).
      * @param from the current activity.
@@ -64,11 +65,12 @@ public class Redirections {
     /**
      * Redirects to the search results activity.
      * @param from the current activity.
-     * @param query the query for the search.
+     * @param params the parameters for the search.
      */
-    public static void searchResults(Activity from, String query) {
+    public static void searchResults(Activity from, HashMap<String, String> params) {
         Intent intent = new Intent(from, SearchResults.class);
-        intent.putExtra("query", query);
+        intent.putExtra("keys", params.keySet().toArray());
+        intent.putExtra("entries", params.entrySet().toArray());
         from.startActivity(intent);
     }
 
@@ -83,7 +85,7 @@ public class Redirections {
         intent.putExtra("localisation",  localisation);
         from.startActivity(intent);
     }
-    
+
     /**
      * Redirects to the search results activity.
      * @param from the current activity.
@@ -112,7 +114,7 @@ public class Redirections {
             }
         });
     }
-    
+
     /**
      * Set an OnClickListener from the view that will redirect to the search
      * activity.
@@ -153,23 +155,21 @@ public class Redirections {
      * results activity.
      * @param view the view which will have the listener.
      * @param from the current activity.
-     * @param search_bar_id the search {@link EditText} id.
+     * @param params the parameters for the search.
      */
     public static void setClickListenerToSearchResults(View view,
-            Activity from, int search_bar_id) {
+            Activity from, HashMap<String, String> params) {
 
         final Activity activity = from;
-        final int id = search_bar_id;
-        
+        final HashMap<String, String> p = params;
+
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                EditText search_bar = (EditText) activity.findViewById(id);
-                String query = search_bar.getText().toString();
-                searchResults(activity, query);
+                searchResults(activity, p);
             }
         });
     }
-    
+
     /**
      * Set an OnClickListener from the view that will finish the activity
      * @param view the view which will have the listener.
@@ -178,14 +178,14 @@ public class Redirections {
     public static void setClickListenerToPrevious(View view, Activity from) {
 
         final Activity activity = from;
-        
+
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 activity.finish();
             }
         });
     }
-    
+
     /**
      * Get the localisation given in the extras of the intent.
      * @param activity the current activity.
@@ -195,7 +195,7 @@ public class Redirections {
         return (Localisation)
                 activity.getIntent().getExtras().getParcelable("localisation");
     }
-    
+
     public static ArrayList<Localisation> getLocalisationsList (Activity
             activity) {
         ArrayList<Parcelable> l = (ArrayList<Parcelable>) activity.getIntent().

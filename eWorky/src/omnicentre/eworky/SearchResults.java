@@ -16,7 +16,7 @@ import android.view.View;
 import android.widget.ListView;
 
 /**
- * Displays the results of the search in a list.
+ * Makes the search and displays the results of the search in a list.
  *
  */
 public class SearchResults extends ListActivity {
@@ -25,6 +25,7 @@ public class SearchResults extends ListActivity {
      * The list of all the found places.
      */
     private ArrayList<Localisation> localisationsList;
+    
     private TitleBar titleBar;
 
     @Override
@@ -35,7 +36,7 @@ public class SearchResults extends ListActivity {
         ProgressDialog dialog = ProgressDialog.show(this, "", 
                 "Loading. Please wait...", true);
         titleBar = new TitleBar(this);
-        
+
         // We charge the data in an asynchronous task:
         (new LocalisationsLoader(this, dialog)).execute();
     }
@@ -57,7 +58,7 @@ public class SearchResults extends ListActivity {
      */
     public void show(ArrayList<Localisation> localisationsList, boolean isOk,
             String error) {
-        
+
         this.localisationsList = localisationsList;
         setListAdapter(new LocalisationArrayAdapter(getApplicationContext(),
                 localisationsList));

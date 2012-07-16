@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,8 +27,8 @@ public class Requests {
      * The API's URL.
      */
     private static final String host =
-            "http://10.0.2.2:15157/api/localisation/";
-    //"http://www.eworky.com/api/localisation/";
+            //"http://10.0.2.2:15157/api/localisation/";
+            "http://www.eworky.com/api/localisation/";
 
     /**
      * Calls a function of the API.
@@ -81,20 +82,20 @@ public class Requests {
 
     public static String comment(String login, String password, String post, int
             postLanguage, int rating, int id) {
-        
+
         HashMap<String, String> postArguments = new HashMap<String, String>();
         postArguments.put("Login", login);
         postArguments.put("Password", password);
         postArguments.put("Post", post);
         postArguments.put("PostLanguage", "" + postLanguage);
         postArguments.put("Rating", "" + rating);
-        
+
         HashMap<String, String> getArguments = new HashMap<String, String>();
         getArguments.put("id", "" + id);
-        
+
         return Requests.call("comment", postArguments, getArguments);
     }
-    
+
     /**
      * Ask for a connection to the server.
      * @param login the login.
@@ -104,16 +105,16 @@ public class Requests {
      */
     public static String connect(String login, String password)
             throws NoSuccessException {
-        
+
         // We construct the request:
         HashMap<String, String> postArguments = new HashMap<String, String>();
         postArguments.put("Login", login);
         postArguments.put("Password", password);
         HashMap<String, String> getArguments = new HashMap<String, String>();
-        
+
         // We make it:
         String json = Requests.call("connect", postArguments, getArguments);
-        
+
         // We parse it:
         Gson gson = new Gson();
         Type type = new TypeToken<ObjectResult<TokenJson>>() {}.getType();
@@ -121,21 +122,21 @@ public class Requests {
 
         return o.getResponse().getToken();
     }
-   
+
     public static String register(String firstName, String lastName, 
             String email, String phone) {
-        
+
         HashMap<String, String> postArguments = new HashMap<String, String>();
         postArguments.put("FirstName", firstName);
         postArguments.put("LastName", lastName);
         postArguments.put("Email", email);
         postArguments.put("PhoneNumber", phone);
-        
+
         HashMap<String, String> getArguments = new HashMap<String, String>();
-        
+
         return Requests.call("register", postArguments, getArguments);
     }
-    
+
     private static String joinArguments(HashMap<String, String> arguments) {
         StringBuilder s = new StringBuilder();
         if (arguments != null) {
@@ -149,5 +150,24 @@ public class Requests {
             }
         }
         return s.toString();
+    }
+    
+    public static List<LocalisationJson> search()
+            throws NoSuccessException {
+
+        // We construct the request:
+        HashMap<String, String> postArguments = new HashMap<String, String>();
+        HashMap<String, String> getArguments = new HashMap<String, String>();
+        getArguments.put("place", "paris");
+
+        // We make it:
+        String json = Requests.call("search", postArguments, getArguments);
+
+        // We parse it:
+        Gson gson = new Gson();
+        Type type = new TypeToken<ObjectResult<List<LocalisationJson>>>() {}.getType();
+        ObjectResult<List<LocalisationJson>> o = gson.fromJson(json, type);
+        
+        return o.getResponse();
     }
 }
