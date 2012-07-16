@@ -12,21 +12,19 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 /**
  * Run on background the request to the API and the parsing.
  *
  */
-public class LocalisationsLoader extends AsyncTask<Void, Void,ArrayList<LocalisationJson>> implements LocationListener {
+public class LocalisationsLoader
+extends AsyncTask<Void, Void, ArrayList<LocalisationJson>> {
 
     private ProgressDialog progress;
     private SearchResults activity;
-    private Location from;
     private HashMap<String, String> params;
     private ArrayList<LocalisationJson> placeList;
 
@@ -37,11 +35,11 @@ public class LocalisationsLoader extends AsyncTask<Void, Void,ArrayList<Localisa
 
     public void onPreExecute() {
         progress.show();
-     // We construct the query:
+        // We construct the query:
         Bundle extras = activity.getIntent().getExtras();
         String[] keys = extras.getStringArray("omnicentre.eworki.keys");
         String[] entries = extras.getStringArray("omnicentre.eworki.entries");
-        
+
         params = new HashMap<String, String>();
         if (keys != null)
             for (int i = 0 ; i < keys.length ; i++)
@@ -56,17 +54,14 @@ public class LocalisationsLoader extends AsyncTask<Void, Void,ArrayList<Localisa
             Location location = lManager.getLastKnownLocation(lManager.getBestProvider(c, true));
             params.put("latitude", "" + location.getLatitude());
             params.put("longitude", "" + location.getLongitude());
-            Log.e("LAT", "" + location.getLatitude());
-            Log.e("LNG", "" + location.getLongitude());
-        } else
-            Log.e("WAT", "");
+        }
     }
 
     public ArrayList<LocalisationJson> doInBackground(Void... unused) {
 
         placeList = new ArrayList<LocalisationJson>();
 
-        
+
 
         try {
             placeList = (ArrayList<LocalisationJson>) Requests.search(params);
@@ -80,18 +75,5 @@ public class LocalisationsLoader extends AsyncTask<Void, Void,ArrayList<Localisa
     public void onPostExecute(ArrayList<LocalisationJson> placeList) {
         activity.show(placeList, true, "");
         progress.dismiss();
-    }
-
-    public void onLocationChanged(Location location) {
-        from = location;
-    }
-
-    public void onProviderDisabled(String provider) {
-    }
-
-    public void onProviderEnabled(String provider) {
-    }
-
-    public void onStatusChanged(String provider, int status, Bundle extras) {
     }
 }
