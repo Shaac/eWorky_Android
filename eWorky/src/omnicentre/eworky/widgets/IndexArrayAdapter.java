@@ -1,5 +1,7 @@
 package omnicentre.eworky.widgets;
 
+import java.util.HashMap;
+
 import omnicentre.eworky.R;
 import omnicentre.eworky.tools.Redirections;
 
@@ -49,7 +51,7 @@ public class IndexArrayAdapter extends ArrayAdapter<String> {
         case 0:
             name.setText("Autour de moi");
             description.setText("Cherche des lieux de travail autour de moi.");
-            Redirections.setClickListenerToSearchResults(view, activity, null);
+            Redirections.setClickListenerToSearchResults(view, activity, new HashMap<String, String>());
             break;
         case 1:
             name.setText("Rechercher un lieu");

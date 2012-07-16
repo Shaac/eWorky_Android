@@ -2,6 +2,7 @@ package omnicentre.eworky;
 
 import java.util.ArrayList;
 
+import omnicentre.eworky.API.LocalisationJson;
 import omnicentre.eworky.localisations.Localisation;
 import omnicentre.eworky.localisations.LocalisationsLoader;
 import omnicentre.eworky.tools.Dialogs;
@@ -56,14 +57,14 @@ public class SearchResults extends ListActivity {
      * @param isOk tells if something bad happened.
      * @param error an eventual error message.
      */
-    public void show(ArrayList<Localisation> localisationsList, boolean isOk,
+    public void show(ArrayList<LocalisationJson> localisationsList, boolean isOk,
             String error) {
 
-        this.localisationsList = localisationsList;
+        //this.localisationsList = localisationsList;
         setListAdapter(new LocalisationArrayAdapter(getApplicationContext(),
                 localisationsList));
         getListView().setTextFilterEnabled(true);
-        titleBar.setTitleBar(R.layout.title_results, localisationsList);
+        titleBar.setTitleBar(R.layout.title_results);//, localisationsList);
 
         // If something went wrong we redirect to the main view:
         if(!isOk)

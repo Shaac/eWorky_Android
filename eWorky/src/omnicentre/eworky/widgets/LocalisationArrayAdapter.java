@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import omnicentre.eworky.R;
-import omnicentre.eworky.localisations.Localisation;
-import omnicentre.eworky.localisations.PlaceList;
+import omnicentre.eworky.API.LocalisationJson;
+import omnicentre.eworky.localisations.Amenities;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -25,15 +25,15 @@ import android.widget.TextView;
 public class LocalisationArrayAdapter extends ArrayAdapter<String> {
     
     private final Context context;
-    private final ArrayList<Localisation> places;
+    private final ArrayList<LocalisationJson> places;
 
     /**
      * Construct the {@link ArrayAdapter} for the places list.
      * @param context the context of the activity.
      * @param places the places list.
      */
-    public LocalisationArrayAdapter(Context context, ArrayList<Localisation> places) {
-        super(context, R.layout.list, (new PlaceList(places)).toStrings());
+    public LocalisationArrayAdapter(Context context, ArrayList<LocalisationJson> places) {
+        super(context, R.layout.list, new String[places.size()]);
         this.context = context;
         this.places = places;
     }
@@ -42,7 +42,7 @@ public class LocalisationArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        Localisation p = places.get(position);
+        LocalisationJson p = places.get(position);
 
         View view = inflater.inflate(R.layout.list, parent, false);
 
@@ -58,28 +58,30 @@ public class LocalisationArrayAdapter extends ArrayAdapter<String> {
         String add = (p.getType().length() > 0 ? " - ":"") + p.getAddress();
         add += (p.getCity().length() > 0 ? " - ":"") + p.getCity();
         address.setText(add);
+        
+        Amenities a = new Amenities((ArrayList<String>) p.getAmenities());
 
-        if (!p.getAmenities().hasFreeWifi())
+        if (!a.hasFreeWifi())
             ((ImageView) view.findViewById(R.id.wifi)).setVisibility(View.GONE);
 
-        if (!p.getAmenities().hasWifi())
+        if (!a.hasWifi())
             ((ImageView) view.findViewById(R.id.wifi_euros)).setVisibility(View.GONE);
 
-        if (!p.getAmenities().hasFood())
+        if (!a.hasFood())
             ((ImageView) view.findViewById(R.id.food)).setVisibility(View.GONE);
 
-        if (!p.getAmenities().hasCoffee())
+        if (!a.hasCoffee())
             ((ImageView) view.findViewById(R.id.coffee)).setVisibility(View.GONE);
 
-        if (!p.getAmenities().hasParking())
+        if (!a.hasParking())
             ((ImageView) view.findViewById(R.id.parking)).setVisibility(View.GONE);
 
-        if (!p.getAmenities().hasAccess())
+        if (!a.hasAccess())
             ((ImageView) view.findViewById(R.id.access)).setVisibility(View.GONE);
         URL url;
         Drawable d = null;
         try {
-            url = new URL(p.getImage());
+            url = new URL(p.getImageThumb());
             InputStream content = (InputStream)url.getContent();
             d = Drawable.createFromStream(content , "src"); 
         } catch (Exception e) {

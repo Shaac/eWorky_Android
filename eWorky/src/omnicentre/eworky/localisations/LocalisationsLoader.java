@@ -1,13 +1,11 @@
 package omnicentre.eworky.localisations;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import omnicentre.eworky.R;
 import omnicentre.eworky.SearchResults;
-
-import org.apache.http.client.ClientProtocolException;
-import org.json.JSONException;
+import omnicentre.eworky.API.LocalisationJson;
+import omnicentre.eworky.API.NoSuccessException;
+import omnicentre.eworky.API.Requests;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -16,7 +14,7 @@ import android.os.AsyncTask;
  * Run on background the request to the API and the parsing.
  *
  */
-public class LocalisationsLoader extends AsyncTask<Void, Void, ArrayList<Localisation>> {
+public class LocalisationsLoader extends AsyncTask<Void, Void, ArrayList<LocalisationJson>> {
 
     private ProgressDialog progress;
     private SearchResults activity;
@@ -32,38 +30,23 @@ public class LocalisationsLoader extends AsyncTask<Void, Void, ArrayList<Localis
         progress.show();
     }
 
-    public ArrayList<Localisation> doInBackground(Void... unused) {
+    public ArrayList<LocalisationJson> doInBackground(Void... unused) {
         
-        ArrayList<Localisation> placeList = null;
+        ArrayList<LocalisationJson> placeList = null;
 
         // We check if the query is valid:
-        String query = activity.getIntent().getExtras().getString("query");
-        if (query == null || query.length() == 0) {
-            isOk = false;
-            error = activity.getString(R.string.errorEmptyQuery);
-        }
-
-        // If it is, we parse the JSON:
-        else {
-            try {
-                placeList = Localisation.fromQuery(query);
-                Localisation.computeDistance(placeList,query,activity.getApplicationContext());
-            } catch (ClientProtocolException e) {
-                error = activity.getString(R.string.errorClientProtocol);
-                isOk = false;
-            } catch (IOException e) {
-                error = activity.getString(R.string.errorIo);
-                isOk = false;
-            } catch (JSONException e) {
-                error = activity.getString(R.string.errorBadJson);
-                isOk = false;
-            }
+        String[] keys = activity.getIntent().getExtras().getStringArray("keys");
+        try {
+            placeList = (ArrayList<LocalisationJson>) Requests.search();
+        } catch (NoSuccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return placeList;
     }
 
-    public void onPostExecute(ArrayList<Localisation> placeList) {
-        activity.show(placeList, isOk, error);
+    public void onPostExecute(ArrayList<LocalisationJson> placeList) {
+        activity.show(placeList, true, "");
         progress.dismiss();
     }
 }
