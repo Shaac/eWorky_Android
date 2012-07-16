@@ -25,7 +25,7 @@ public class SearchResults extends ListActivity {
     /**
      * The list of all the found places.
      */
-    private ArrayList<Localisation> localisationsList;
+    private ArrayList<Localisation> localisationsList = new ArrayList<Localisation>();
     
     private TitleBar titleBar;
 

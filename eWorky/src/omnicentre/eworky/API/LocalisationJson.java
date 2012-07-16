@@ -93,4 +93,26 @@ public class LocalisationJson {
     public List<String> getAmenities() {
         return amenities;
     }
+
+
+    public PricesJson getPrices() {
+        return prices;
+    }
+
+
+    public List<OfferJson> getOffers() {
+        return offers;
+    }
+
+    public OpeningTimesJson getOpeningTimes() {
+        return openingTimes;
+    }
+
+    public List<CommentJson> getComments() {
+        return comments;
+    }
+
+    public List<MemberJson> getFans() {
+        return fans;
+    }
 }

@@ -152,13 +152,12 @@ public class Requests {
         return s.toString();
     }
     
-    public static List<LocalisationJson> search()
+    public static List<LocalisationJson> search(HashMap<String, String> params)
             throws NoSuccessException {
 
         // We construct the request:
         HashMap<String, String> postArguments = new HashMap<String, String>();
-        HashMap<String, String> getArguments = new HashMap<String, String>();
-        getArguments.put("place", "paris");
+        HashMap<String, String> getArguments = params;
 
         // We make it:
         String json = Requests.call("search", postArguments, getArguments);

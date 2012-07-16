@@ -58,7 +58,8 @@ public class Redirections {
      */
     public static void map(Activity from, ArrayList<Localisation> placeList) {
         Intent intent = new Intent(from, Map.class);
-        intent.putParcelableArrayListExtra("localisationsList", placeList);
+        intent.putParcelableArrayListExtra(
+                "omnicentre.eworki.localisationsList", placeList);
         from.startActivity(intent);
     }
 
@@ -69,8 +70,8 @@ public class Redirections {
      */
     public static void searchResults(Activity from, HashMap<String, String> params) {
         Intent intent = new Intent(from, SearchResults.class);
-        intent.putExtra("keys", params.keySet().toArray());
-        intent.putExtra("entries", params.entrySet().toArray());
+        intent.putExtra("omnicentre.eworki.keys", params.keySet().toArray());
+        intent.putExtra("omnicentre.eworki.entries", params.entrySet().toArray());
         from.startActivity(intent);
     }
 
@@ -82,7 +83,7 @@ public class Redirections {
     public static void localisationDetails(Activity from,
             Localisation localisation) {
         Intent intent = new Intent(from, LocalisationDetails.class);
-        intent.putExtra("localisation",  localisation);
+        intent.putExtra("omnicentre.eworki.localisation",  localisation);
         from.startActivity(intent);
     }
 
@@ -94,7 +95,7 @@ public class Redirections {
     public static void searchResults(Activity from,
             ArrayList<Localisation> localisationsList){
         Intent intent = new Intent(from, SearchResults.class);
-        intent.putParcelableArrayListExtra("localisationsList",
+        intent.putParcelableArrayListExtra("omnicentre.eworki.localisationsList",
                 localisationsList);
         from.startActivity(intent);
     }
@@ -193,13 +194,13 @@ public class Redirections {
      */
     public static Localisation getLocalisation(Activity activity) {
         return (Localisation)
-                activity.getIntent().getExtras().getParcelable("localisation");
+                activity.getIntent().getExtras().getParcelable("omnicentre.eworki.localisation");
     }
 
     public static ArrayList<Localisation> getLocalisationsList (Activity
             activity) {
         ArrayList<Parcelable> l = (ArrayList<Parcelable>) activity.getIntent().
-                getParcelableArrayListExtra("localisationsList");
+                getParcelableArrayListExtra("omnicentre.eworki.localisationsList");
         ArrayList<Localisation> ret = new ArrayList<Localisation>();
         if (l != null) {
             for (Parcelable p : l)
