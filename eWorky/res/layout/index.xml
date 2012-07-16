@@ -3,23 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/search_bar"
+    <ListView
+        android:id="@+id/mainList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="text" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/search_bar"
-        android:layout_centerHorizontal="true"
-        android:text="@string/search" />
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </RelativeLayout>

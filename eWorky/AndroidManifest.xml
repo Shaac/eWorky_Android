@@ -6,18 +6,17 @@
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="15" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/custom_titlebar" >
-        
         <uses-library android:name="com.google.android.maps" />
-        
+
         <activity
             android:name=".Index"
             android:label="@string/title_index" >
@@ -39,8 +38,14 @@
             android:name=".LocalisationDetails"
             android:label="@string/title_place_details" >
         </activity>
-        
-        
+        <activity
+            android:name=".Search"
+            android:label="@string/title_search" >
+        </activity>
+        <activity
+            android:name=".SearchCriteria"
+            android:label="@string/title_search_criteria" >
+        </activity>
     </application>
 
 </manifest>

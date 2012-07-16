@@ -7,10 +7,9 @@
         style="@style/logo"
         android:contentDescription="@string/app_name" />
     
-    <ImageView
-        android:id="@+id/ic_info"
-        style="@style/title_icon"
-        android:contentDescription="@string/ic_info"
-        android:src="@drawable/ic_info" />
+    <TextView
+        android:id="@+id/title_text"
+        style="@style/title_text"
+        android:layout_toRightOf="@+id/title_logo" />
 
 </RelativeLayout>

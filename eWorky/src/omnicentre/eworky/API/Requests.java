@@ -1,14 +1,18 @@
-package omnicentre.eworky.tools;
+package omnicentre.eworky.API;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.util.Log;
 
@@ -16,7 +20,7 @@ import android.util.Log;
  * This class handles API actions.
  *
  */
-public class API {
+public class Requests {
 
     /**
      * The API's URL.
@@ -65,7 +69,7 @@ public class API {
             }
             wr.close();
             rd.close();
-            Log.w("EWORKY", out);
+            Log.w("EWORKY", out);            
 
             connection.disconnect();
             return out;
@@ -88,18 +92,48 @@ public class API {
         HashMap<String, String> getArguments = new HashMap<String, String>();
         getArguments.put("id", "" + id);
         
-        return API.call("comment", postArguments, getArguments);
+        return Requests.call("comment", postArguments, getArguments);
     }
     
-    public static String getToken(String login, String password) {
+    /**
+     * Ask for a connection to the server.
+     * @param login the login.
+     * @param password the password.
+     * @return the token.
+     * @throws NoSuccessException in case of an invalid request.
+     */
+    public static String connect(String login, String password)
+            throws NoSuccessException {
         
+        // We construct the request:
         HashMap<String, String> postArguments = new HashMap<String, String>();
         postArguments.put("Login", login);
         postArguments.put("Password", password);
+        HashMap<String, String> getArguments = new HashMap<String, String>();
+        
+        // We make it:
+        String json = Requests.call("connect", postArguments, getArguments);
+        
+        // We parse it:
+        Gson gson = new Gson();
+        Type type = new TypeToken<ObjectResult<TokenJson>>() {}.getType();
+        ObjectResult<TokenJson> o = gson.fromJson(json, type);
+
+        return o.getResponse().getToken();
+    }
+   
+    public static String register(String firstName, String lastName, 
+            String email, String phone) {
+        
+        HashMap<String, String> postArguments = new HashMap<String, String>();
+        postArguments.put("FirstName", firstName);
+        postArguments.put("LastName", lastName);
+        postArguments.put("Email", email);
+        postArguments.put("PhoneNumber", phone);
         
         HashMap<String, String> getArguments = new HashMap<String, String>();
         
-        return API.call("getToken", postArguments, getArguments);
+        return Requests.call("register", postArguments, getArguments);
     }
     
     private static String joinArguments(HashMap<String, String> arguments) {
@@ -116,7 +150,4 @@ public class API {
         }
         return s.toString();
     }
-    
-    
-
 }

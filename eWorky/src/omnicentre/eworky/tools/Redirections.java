@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import omnicentre.eworky.Index;
 import omnicentre.eworky.Map;
 import omnicentre.eworky.LocalisationDetails;
+import omnicentre.eworky.Search;
 import omnicentre.eworky.SearchResults;
 import omnicentre.eworky.localisations.Localisation;
 import android.app.Activity;
@@ -28,6 +29,24 @@ public class Redirections {
      */
     public static void index(Activity from) {
         Intent intent = new Intent(from, Index.class);
+        from.startActivity(intent);
+    }
+    
+    /**
+     * Redirects to the search activity.
+     * @param from the current activity.
+     */
+    public static void search(Activity from) {
+        Intent intent = new Intent(from, Search.class);
+        from.startActivity(intent);
+    }
+    
+    /**
+     * Redirects to the search criteria activity (just before search results).
+     * @param from the current activity.
+     */
+    public static void search_criteria(Activity from) {
+        Intent intent = new Intent(from, Search.class);
         from.startActivity(intent);
     }
 
@@ -90,6 +109,22 @@ public class Redirections {
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 index(activity);
+            }
+        });
+    }
+    
+    /**
+     * Set an OnClickListener from the view that will redirect to the search
+     * activity.
+     * @param view the view which will have the listener.
+     * @param from the current activity.
+     */
+    public static void setClickListenerToSearch(View view, Activity from) {
+
+        final Activity activity = from;
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                search(activity);
             }
         });
     }

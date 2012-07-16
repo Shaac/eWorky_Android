@@ -1,15 +1,11 @@
 package omnicentre.eworky;
 
-import com.pixate.pxcomponentkit.view.PXTheme;
-
-import omnicentre.eworky.tools.API;
-import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
+import omnicentre.eworky.widgets.IndexArrayAdapter;
 
 import android.os.Bundle;
+import android.widget.ListView;
 import android.app.Activity;
-import android.graphics.Color;
-import android.widget.Button;
 
 /**
  * The first activity of the application.
@@ -24,13 +20,8 @@ public class Index extends Activity {
         // We set the view, with the title bar:
         TitleBar.setContentView(this, R.layout.index, R.layout.title_index);
 
-        // We listen to the search button:
-        Button b = (Button) findViewById(R.id.search_button);
-        Redirections.setClickListenerToSearchResults(b, this, R.id.search_bar);
-        
-        // We decorate the button:
-        PXTheme.themeButton(b, Color.parseColor("#5DAFDE"));
-        
-        API.getToken("sacha@eworky.com", "testtest");
+        // We display the menu list:
+        ListView list = (ListView)findViewById(R.id.mainList);  
+        list.setAdapter(new IndexArrayAdapter(this));
     }
 }
