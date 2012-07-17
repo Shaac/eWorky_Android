@@ -27,5 +27,7 @@
     <string name="ic_info">information</string>
     <string name="title_search">Search</string>
     <string name="title_search_criteria">Search criteria</string>
+    <string name="my_spaces">My spaces</string>
+    <string name="my_account">My account</string>
 
 </resources>

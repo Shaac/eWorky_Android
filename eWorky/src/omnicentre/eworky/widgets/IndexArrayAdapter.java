@@ -48,10 +48,12 @@ public class IndexArrayAdapter extends ArrayAdapter<String> {
         TextView name = (TextView) view.findViewById(R.id.name);
         TextView description = (TextView) view.findViewById(R.id.description);
         switch(position) {
+        // TODO: put those strings in res directory.
         case 0:
             name.setText("Autour de moi");
             description.setText("Cherche des lieux de travail autour de moi.");
-            Redirections.setClickListenerToSearchResults(view, activity, new HashMap<String, String>());
+            Redirections.setClickListenerToSearchResults(view, activity,
+                    new HashMap<String, String>());
             break;
         case 1:
             name.setText("Rechercher un lieu");

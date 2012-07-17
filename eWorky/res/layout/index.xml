@@ -9,4 +9,19 @@
         android:layout_height="wrap_content" >
     </ListView>
 
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <TextView
+            style="@style/footer"
+            android:text="@string/my_spaces" />
+
+        <TextView
+            style="@style/footer"
+            android:text="@string/my_account" />
+    </LinearLayout>
+
 </RelativeLayout>
