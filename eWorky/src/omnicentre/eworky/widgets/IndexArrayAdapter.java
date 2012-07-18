@@ -28,7 +28,7 @@ public class IndexArrayAdapter extends ArrayAdapter<String> {
    
     /**
      * Construct the {@link ArrayAdapter} for the menu and set listeners.
-     * @param context the context of the activity.
+     * @param activity the activity.
      */
     public IndexArrayAdapter(Activity activity) {
         super(activity.getApplicationContext(), R.layout.index_list,
@@ -58,12 +58,12 @@ public class IndexArrayAdapter extends ArrayAdapter<String> {
         case 1:
             name.setText("Rechercher un lieu");
             description.setText("Entrez un endroit spécifique où chercher.");
-            Redirections.setClickListenerToSearch(view, activity);
+            Redirections.setClickListenerToSearch(view, activity, false);
             break;
         case 2:
             name.setText("Rechecher un nom");
             description.setText("Cherche des lieux de travail par leur nom.");
-            Redirections.setClickListenerToSearch(view, activity);
+            Redirections.setClickListenerToSearch(view, activity, true);
         }
 
         return view;

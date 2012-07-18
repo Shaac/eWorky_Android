@@ -10,7 +10,6 @@ import omnicentre.eworky.tools.TitleBar;
 import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Color;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -25,7 +24,8 @@ public class Search extends Activity {
         super.onCreate(savedInstanceState);
 
         // We set the view, with the title bar:
-        TitleBar.setContentView(this, R.layout.search, R.layout.title_search);
+        int layout = Redirections.getWithName(this) ? R.layout.search_aux : R.layout.search;
+        TitleBar.setContentView(this, layout, R.layout.title_search);
 
         // We listen to the search button:
         Button b = (Button) findViewById(R.id.search_button);
@@ -37,9 +37,14 @@ public class Search extends Activity {
     
     public HashMap<String, String> getParams() {
         EditText search_bar = (EditText) findViewById(R.id.search_main);
+        EditText aux = (EditText) findViewById(R.id.search_aux);
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("place", search_bar.getText().toString());
-        Log.w("Txt", search_bar.getText().toString());
+        if (aux == null)
+            params.put("place", search_bar.getText().toString());
+        else {
+            params.put("name", search_bar.getText().toString());
+            params.put("place", aux.getText().toString());
+        }
         return params;
     }
 }

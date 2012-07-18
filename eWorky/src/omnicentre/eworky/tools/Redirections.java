@@ -37,9 +37,11 @@ public class Redirections {
     /**
      * Redirects to the search activity.
      * @param from the current activity.
+     * @param withName whether or not we want a search bar for the name.
      */
-    public static void search(Activity from) {
+    public static void search(Activity from, boolean withName) {
         Intent intent = new Intent(from, Search.class);
+        intent.putExtra("omnicentre.eworki.withName", withName);
         from.startActivity(intent);
     }
 
@@ -118,13 +120,16 @@ public class Redirections {
      * activity.
      * @param view the view which will have the listener.
      * @param from the current activity.
+     * @param withName whether or not we want a search bar for the name.
      */
-    public static void setClickListenerToSearch(View view, Activity from) {
+    public static void setClickListenerToSearch(View view, Activity from,
+            boolean withName) {
 
         final Activity activity = from;
+        final boolean b = withName;
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                search(activity);
+                search(activity, b);
             }
         });
     }
@@ -239,5 +244,9 @@ public class Redirections {
             params = (HashMap <String, String>) o;
 
         return params;
+    }
+    
+    public static boolean getWithName(Activity activity) {
+        return activity.getIntent().getExtras().getBoolean("omnicentre.eworki.withName");
     }
 }
