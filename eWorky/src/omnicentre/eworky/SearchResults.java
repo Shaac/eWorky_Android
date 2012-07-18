@@ -10,45 +10,52 @@ import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 import omnicentre.eworky.widgets.LocalisationArrayAdapter;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
  * Makes the search and displays the results of the search in a list.
  *
  */
-public class SearchResults extends ListActivity {
+public class SearchResults extends Activity {
 
     /**
      * The list of all the found places.
      */
     private ArrayList<Localisation> localisationsList = new ArrayList<Localisation>();
-    
-    private TitleBar titleBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        TitleBar.setContentView(this, R.layout.search_results, R.layout.title_results);
+
         // We create a loading dialog:
         ProgressDialog dialog = ProgressDialog.show(this, "", 
                 "Loading. Please wait...", true);
-        titleBar = new TitleBar(this);
+
+
 
         // We charge the data in an asynchronous task:
         (new LocalisationsLoader(this, dialog)).execute();
     }
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+    private OnItemClickListener listener = new OnItemClickListener () {
 
-        // If an item on the list is clicked, we go to its detail page:
-        Redirections.localisationDetails(this,localisationsList.get(position));
-    }
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                long arg3) {
+            Redirections.localisationDetails(SearchResults.this,
+                    localisationsList.get(position));
+
+        }
+
+    };
 
     /**
      * This method displays the view. It has to be called once the data is
@@ -61,13 +68,15 @@ public class SearchResults extends ListActivity {
             String error) {
 
         //this.localisationsList = localisationsList;
-        setListAdapter(new LocalisationArrayAdapter(getApplicationContext(),
+        ListView listView = (ListView) findViewById(R.id.list);
+        listView.setOnItemClickListener(listener);
+        listView.setAdapter(new LocalisationArrayAdapter(getApplicationContext(),
                 localisationsList));
-        getListView().setTextFilterEnabled(true);
-        titleBar.setTitleBar(R.layout.title_results);//, localisationsList);
+        listView.setTextFilterEnabled(true);
+        //titleBar.setTitleBar(R.layout.title_results);//, localisationsList);
 
         // If something went wrong we redirect to the main view:
-        if(! error.isEmpty())
+        if(error.length() > 0)
             Dialogs.newAlertToIndex("Error", error, this);
     }
 }

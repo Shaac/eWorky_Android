@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:textSize="20sp" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-</TextView>
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/sort"
+            style="@style/footer"
+            android:text="@string/sort" />
+
+        <TextView
+            android:id="@+id/criteria"
+            style="@style/footer"
+            android:text="@string/criteria" />
+
+        <TextView
+            android:id="@+id/kilometers"
+            style="@style/footer" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/footer" >
+    </ListView>
+
+</RelativeLayout>
