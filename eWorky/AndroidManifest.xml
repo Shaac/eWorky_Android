@@ -43,7 +43,7 @@
             android:label="@string/title_search" >
         </activity>
         <activity
-            android:name=".SearchCriteria"
+            android:name=".SearchOfferType"
             android:label="@string/title_search_criteria" >
         </activity>
     </application>

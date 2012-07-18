@@ -104,7 +104,7 @@ public final class R {
         public static final int map=0x7f030005;
         public static final int search=0x7f030006;
         public static final int search_aux=0x7f030007;
-        public static final int search_criteria=0x7f030008;
+        public static final int search_offer_type=0x7f030008;
         public static final int search_results=0x7f030009;
         public static final int title_details=0x7f03000a;
         public static final int title_index=0x7f03000b;

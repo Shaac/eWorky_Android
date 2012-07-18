@@ -7,7 +7,7 @@ import omnicentre.eworky.Index;
 import omnicentre.eworky.Map;
 import omnicentre.eworky.LocalisationDetails;
 import omnicentre.eworky.Search;
-import omnicentre.eworky.SearchCriteria;
+import omnicentre.eworky.SearchOfferType;
 import omnicentre.eworky.SearchResults;
 import omnicentre.eworky.localisations.Localisation;
 
@@ -57,8 +57,8 @@ public class Redirections {
         from.startActivity(intent);
     }
 
-    public static void searchCriteria(Activity from, HashMap<String, String> params) {
-        Intent intent = new Intent(from, SearchCriteria.class);
+    public static void searchOfferType(Activity from, HashMap<String, String> params) {
+        Intent intent = new Intent(from, SearchOfferType.class);
         intent.putExtra("omnicentre.eworki.hashMap", params);
         from.startActivity(intent);
     }
@@ -153,7 +153,7 @@ public class Redirections {
         });
     }
 
-    public static void setClickListenerToSearchCriteria(View view,
+    public static void setClickListenerToSearchOfferType(View view,
             Activity from, HashMap<String, String> params) {
 
         final Activity activity = from;
@@ -161,7 +161,7 @@ public class Redirections {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchCriteria(activity, p);
+                searchOfferType(activity, p);
             }
         });
 
@@ -173,7 +173,7 @@ public class Redirections {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchCriteria(activity, activity.getParams());
+                searchOfferType(activity, activity.getParams());
             }
         });
     }
@@ -186,9 +186,9 @@ public class Redirections {
      * @param params the parameters for the search.
      */
     public static void setClickListenerToSearchResults(View view,
-            SearchCriteria from) {
+            SearchOfferType from) {
 
-        final SearchCriteria activity = from;
+        final SearchOfferType activity = from;
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {

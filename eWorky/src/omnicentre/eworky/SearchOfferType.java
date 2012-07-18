@@ -16,14 +16,14 @@ import android.widget.CheckBox;
  * This activity displays the buttons in order to choose which offer we want.
  *
  */
-public class SearchCriteria extends Activity {
+public class SearchOfferType extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // We set the view, with the title bar:
-        TitleBar.setContentView(this, R.layout.search_criteria, R.layout.title_search);
+        TitleBar.setContentView(this, R.layout.search_offer_type, R.layout.title_search);
 
         Button b = (Button) findViewById(R.id.button);
         Redirections.setClickListenerToSearchResults(b, this);
