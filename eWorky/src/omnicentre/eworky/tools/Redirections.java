@@ -161,6 +161,17 @@ public class Redirections {
         });
 
     }
+    
+    public static void setClickListenerToSearchCriteria(View view,
+            Search from) {
+        final Search activity = from;
+
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                searchCriteria(activity, activity.getParams());
+            }
+        });
+    }
 
     /**
      * Set an OnClickListener from the view that will redirect to the search

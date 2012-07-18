@@ -79,8 +79,8 @@ public final class R {
         public static final int name=0x7f050009;
         public static final int parking=0x7f050016;
         public static final int picture=0x7f050006;
-        public static final int search_bar=0x7f05001b;
         public static final int search_button=0x7f05001c;
+        public static final int search_main=0x7f05001b;
         public static final int stars=0x7f050018;
         public static final int stars_blue=0x7f050019;
         public static final int title_list_logo=0x7f050023;

@@ -36,10 +36,10 @@ extends AsyncTask<Void, Void, ArrayList<LocalisationJson>> {
     }
 
     public void onPreExecute() {
-        
+
         // We display the progress dialog:
         progress.show();
-        
+
         // We construct the query:
         params = Redirections.getHashMap(activity);
     }
@@ -66,9 +66,15 @@ extends AsyncTask<Void, Void, ArrayList<LocalisationJson>> {
                 }
             } else
                 error = activity.getResources().getString(R.string.errorGPS);;
+        } else {
+            try {
+                localisationsList = (ArrayList<LocalisationJson>)
+                        Requests.search(params);
+            } catch (NoSuccessException e) {
+                error = e.getError();
+            }
         }
 
-        
         return localisationsList;
     }
 
