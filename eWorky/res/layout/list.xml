@@ -52,22 +52,11 @@
         android:textSize="10dp" >
     </TextView>
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/address"
-        android:layout_toRightOf="@+id/picture"
-        android:maxLines="2"
-        android:textColor="#000000"
-        android:textSize="10dp" >
-    </TextView>
-
     <ImageView
         android:id="@+id/wifi"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@id/description"
+        android:layout_below="@id/type"
         android:layout_marginRight="2dp"
         android:layout_toRightOf="@+id/picture"
         android:contentDescription="@string/picture"
@@ -78,7 +67,7 @@
         android:id="@+id/wifi_euros"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@id/description"
+        android:layout_below="@id/type"
         android:layout_marginRight="2dp"
         android:layout_toRightOf="@+id/wifi"
         android:contentDescription="@string/picture"
@@ -89,7 +78,7 @@
         android:id="@+id/food"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@id/description"
+        android:layout_below="@id/type"
         android:layout_marginRight="2dp"
         android:layout_toRightOf="@+id/wifi_euros"
         android:contentDescription="@string/picture"
@@ -100,7 +89,7 @@
         android:id="@+id/coffee"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@id/description"
+        android:layout_below="@id/type"
         android:layout_marginRight="2dp"
         android:layout_toRightOf="@+id/food"
         android:contentDescription="@string/picture"
@@ -111,7 +100,7 @@
         android:id="@+id/parking"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@id/description"
+        android:layout_below="@id/type"
         android:layout_marginRight="2dp"
         android:layout_toRightOf="@+id/coffee"
         android:contentDescription="@string/picture"
@@ -122,34 +111,38 @@
         android:id="@+id/access"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@id/description"
+        android:layout_below="@id/type"
         android:layout_marginRight="2dp"
         android:layout_toRightOf="@+id/parking"
         android:contentDescription="@string/picture"
         android:src="@drawable/access" >
     </ImageView>
 
-    <ImageView
-        android:id="@+id/stars"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/picture"
-        android:layout_marginRight="2dp"
-        android:contentDescription="@string/picture"
-        android:scaleType="fitStart"
-        android:src="@drawable/stars" >
-    </ImageView>
+        android:layout_alignBottom="@+id/picture" >
 
-    <ImageView
-        android:id="@+id/stars_blue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/picture"
-        android:layout_marginRight="2dp"
-        android:contentDescription="@string/picture"
-        android:cropToPadding="true"
-        android:scaleType="matrix"
-        android:src="@drawable/stars_blue" >
-    </ImageView>
+        <ImageView
+            android:id="@+id/stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/picture"
+            android:scaleType="matrix"
+            android:src="@drawable/stars" >
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/stars_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:contentDescription="@string/picture"
+            android:cropToPadding="true"
+            android:scaleType="matrix"
+            android:src="@drawable/stars_blue" >
+        </ImageView>
+    </RelativeLayout>
 
 </RelativeLayout>

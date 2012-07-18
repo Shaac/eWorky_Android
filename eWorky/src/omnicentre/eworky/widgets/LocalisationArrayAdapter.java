@@ -49,8 +49,6 @@ public class LocalisationArrayAdapter extends ArrayAdapter<String> {
 
         ((TextView) view.findViewById(R.id.name)).setText(p.getName());
         ((TextView) view.findViewById(R.id.type)).setText(p.getType());
-        ((TextView) view.findViewById(R.id.description)).setText(
-                p.getDescription());
         ((TextView) view.findViewById(R.id.distance)).setText(p.getDistance()
                 + " km");
         ImageView imageView = (ImageView) view.findViewById(R.id.picture);
