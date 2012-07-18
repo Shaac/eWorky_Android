@@ -18,7 +18,7 @@
     <string name="errorBadJson">The answer from our server is invalid.</string>
     <string name="errorIo">It appears that you have no Internet connection.</string>
     <string name="errorClientProtocol">An error of protocol has occured.</string>
-    <string name="picture">picture</string>
+    <string name="errorGPS">GPS is not activated</string><string name="picture">picture</string>
     <string name="description">Description</string>
     <string name="amenities">Amenities</string>
     <string name="search_results">Search results</string>
@@ -29,5 +29,6 @@
     <string name="title_search_criteria">Search criteria</string>
     <string name="my_spaces">My spaces</string>
     <string name="my_account">My account</string>
+    
 
 </resources>

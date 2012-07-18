@@ -3,10 +3,12 @@ package omnicentre.eworky.localisations;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import omnicentre.eworky.R;
 import omnicentre.eworky.SearchResults;
 import omnicentre.eworky.API.LocalisationJson;
 import omnicentre.eworky.API.NoSuccessException;
 import omnicentre.eworky.API.Requests;
+import omnicentre.eworky.tools.Redirections;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +16,6 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 
 /**
  * Run on background the request to the API and the parsing.
@@ -26,54 +27,53 @@ extends AsyncTask<Void, Void, ArrayList<LocalisationJson>> {
     private ProgressDialog progress;
     private SearchResults activity;
     private HashMap<String, String> params;
-    private ArrayList<LocalisationJson> placeList;
+    private ArrayList<LocalisationJson> localisationsList;
+    private String error;
 
-    public LocalisationsLoader(SearchResults activity, ProgressDialog progress) {
+    public LocalisationsLoader(SearchResults activity,ProgressDialog progress){
         this.progress = progress;
         this.activity = activity;
     }
 
     public void onPreExecute() {
+        
+        // We display the progress dialog:
         progress.show();
+        
         // We construct the query:
-        Bundle extras = activity.getIntent().getExtras();
-        String[] keys = extras.getStringArray("omnicentre.eworki.keys");
-        String[] entries = extras.getStringArray("omnicentre.eworki.entries");
-
-        params = new HashMap<String, String>();
-        if (keys != null)
-            for (int i = 0 ; i < keys.length ; i++)
-                params.put(keys[i], entries[i]);
-
-        if (params.isEmpty()) {
-            LocationManager lManager = (LocationManager)
-                    activity.getSystemService(Context.LOCATION_SERVICE);
-
-            Criteria c = new Criteria();
-            //c.setAccuracy(Criteria.ACCURACY_HIGH); 
-            Location location = lManager.getLastKnownLocation(lManager.getBestProvider(c, true));
-            params.put("latitude", "" + location.getLatitude());
-            params.put("longitude", "" + location.getLongitude());
-        }
+        params = Redirections.getHashMap(activity);
     }
 
     public ArrayList<LocalisationJson> doInBackground(Void... unused) {
 
-        placeList = new ArrayList<LocalisationJson>();
+        localisationsList = new ArrayList<LocalisationJson>();
+        error = "";
 
-
-
-        try {
-            placeList = (ArrayList<LocalisationJson>) Requests.search(params);
-        } catch (NoSuccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if (! params.containsKey("name") && ! params.containsKey("place")) {
+            // We have to get GPS location:
+            LocationManager lManager = (LocationManager)
+                    activity.getSystemService(Context.LOCATION_SERVICE); 
+            Location location = lManager.getLastKnownLocation(
+                    lManager.getBestProvider(new Criteria(), true));
+            if (location != null) {
+                params.put("latitude", "" + location.getLatitude());
+                params.put("longitude", "" + location.getLongitude());
+                try {
+                    localisationsList = (ArrayList<LocalisationJson>)
+                            Requests.search(params);
+                } catch (NoSuccessException e) {
+                    error = e.getError();
+                }
+            } else
+                error = activity.getResources().getString(R.string.errorGPS);;
         }
-        return placeList;
+
+        
+        return localisationsList;
     }
 
     public void onPostExecute(ArrayList<LocalisationJson> placeList) {
-        activity.show(placeList, true, "");
+        activity.show(placeList, error);
         progress.dismiss();
     }
 }

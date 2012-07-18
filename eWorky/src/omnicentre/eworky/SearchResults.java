@@ -57,7 +57,7 @@ public class SearchResults extends ListActivity {
      * @param isOk tells if something bad happened.
      * @param error an eventual error message.
      */
-    public void show(ArrayList<LocalisationJson> localisationsList, boolean isOk,
+    public void show(ArrayList<LocalisationJson> localisationsList,
             String error) {
 
         //this.localisationsList = localisationsList;
@@ -67,7 +67,7 @@ public class SearchResults extends ListActivity {
         titleBar.setTitleBar(R.layout.title_results);//, localisationsList);
 
         // If something went wrong we redirect to the main view:
-        if(!isOk)
+        if(! error.isEmpty())
             Dialogs.newAlertToIndex("Error", error, this);
     }
 }

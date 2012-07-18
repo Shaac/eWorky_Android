@@ -10,6 +10,7 @@
     <TextView
         android:id="@+id/title_text"
         style="@style/title_text"
-        android:layout_toRightOf="@+id/title_logo" />
+        android:layout_toRightOf="@+id/title_logo"
+        android:text="@string/search" />
 
 </RelativeLayout>

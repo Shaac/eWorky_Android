@@ -26,7 +26,7 @@ public class Search extends Activity {
 
         // We listen to the search button:
         Button b = (Button) findViewById(R.id.search_button);
-        Redirections.setClickListenerToSearchResults(b, this, null);
+        //Redirections.setClickListenerToSearchResults(b, this, null);
         
         EditText search_bar = (EditText) findViewById(R.id.search_bar);
         String query = search_bar.getText().toString();

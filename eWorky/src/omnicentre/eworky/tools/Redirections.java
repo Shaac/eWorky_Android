@@ -7,6 +7,7 @@ import omnicentre.eworky.Index;
 import omnicentre.eworky.Map;
 import omnicentre.eworky.LocalisationDetails;
 import omnicentre.eworky.Search;
+import omnicentre.eworky.SearchCriteria;
 import omnicentre.eworky.SearchResults;
 import omnicentre.eworky.localisations.Localisation;
 
@@ -43,15 +44,6 @@ public class Redirections {
     }
 
     /**
-     * Redirects to the search criteria activity (just before search results).
-     * @param from the current activity.
-     */
-    public static void search_criteria(Activity from) {
-        Intent intent = new Intent(from, Search.class);
-        from.startActivity(intent);
-    }
-
-    /**
      * Redirects to the map activity.
      * @param from the current activity.
      * @param placeList the places list to display on the map.
@@ -63,6 +55,12 @@ public class Redirections {
         from.startActivity(intent);
     }
 
+    public static void searchCriteria(Activity from, HashMap<String, String> params) {
+        Intent intent = new Intent(from, SearchCriteria.class);
+        intent.putExtra("omnicentre.eworki.hashMap", params);
+        from.startActivity(intent);
+    }
+
     /**
      * Redirects to the search results activity.
      * @param from the current activity.
@@ -70,8 +68,7 @@ public class Redirections {
      */
     public static void searchResults(Activity from, HashMap<String, String> params) {
         Intent intent = new Intent(from, SearchResults.class);
-        intent.putExtra("omnicentre.eworki.keys", params.keySet().toArray());
-        intent.putExtra("omnicentre.eworki.entries", params.entrySet().toArray());
+        intent.putExtra("omnicentre.eworki.hashMap", params);
         from.startActivity(intent);
     }
 
@@ -151,6 +148,20 @@ public class Redirections {
         });
     }
 
+    public static void setClickListenerToSearchCriteria(View view,
+            Activity from, HashMap<String, String> params) {
+
+        final Activity activity = from;
+        final HashMap<String, String> p = params;
+
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                searchCriteria(activity, p);
+            }
+        });
+
+    }
+
     /**
      * Set an OnClickListener from the view that will redirect to the search
      * results activity.
@@ -159,14 +170,13 @@ public class Redirections {
      * @param params the parameters for the search.
      */
     public static void setClickListenerToSearchResults(View view,
-            Activity from, HashMap<String, String> params) {
+            SearchCriteria from) {
 
-        final Activity activity = from;
-        final HashMap<String, String> p = params;
+        final SearchCriteria activity = from;
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchResults(activity, p);
+                searchResults(activity, activity.getParams());
             }
         });
     }
@@ -207,5 +217,16 @@ public class Redirections {
                 ret.add((Localisation) p);
         }
         return ret;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static HashMap<String, String> getHashMap(Activity activity) {
+        Object o = activity.getIntent().getExtras().get("omnicentre.eworki.hashMap");
+
+        HashMap <String, String> params = new HashMap<String, String>();
+        if (o != null)       
+            params = (HashMap <String, String>) o;
+
+        return params;
     }
 }
