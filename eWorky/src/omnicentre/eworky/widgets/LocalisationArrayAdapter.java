@@ -19,67 +19,75 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * This class is used to display the layout of an item of the places list.
+ * This class is used to display the layout of an item of the locations list.
  *
  */
-public class LocalisationArrayAdapter extends ArrayAdapter<String> {
-    
+public class LocalisationArrayAdapter extends ArrayAdapter<LocalisationJson> {
+
+    /**
+     * The application's context.
+     */
     private final Context context;
-    private final ArrayList<LocalisationJson> places;
 
     /**
      * Construct the {@link ArrayAdapter} for the places list.
      * @param context the context of the activity.
-     * @param places the places list.
+     * @param localisations the places list.
      */
-    public LocalisationArrayAdapter(Context context, ArrayList<LocalisationJson> places) {
-        super(context, R.layout.list, new String[places.size()]);
+    public LocalisationArrayAdapter(Context context,
+            ArrayList<LocalisationJson> localisations) {
+        super(context, R.layout.list, localisations);
         this.context = context;
-        this.places = places;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        // We inflate the view:
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        LocalisationJson p = places.get(position);
-
         View view = inflater.inflate(R.layout.list, parent, false);
 
-
-        ((TextView) view.findViewById(R.id.name)).setText(p.getName());
-        ((TextView) view.findViewById(R.id.type)).setText(p.getType());
-        ((TextView) view.findViewById(R.id.distance)).setText(p.getDistance()
+        // We write the texts:
+        LocalisationJson l = this.getItem(position);
+        ((TextView) view.findViewById(R.id.name)).setText(l.getName());
+        ((TextView) view.findViewById(R.id.type)).setText(l.getType());
+        ((TextView) view.findViewById(R.id.distance)).setText(l.getDistance()
                 + " km");
+        ((TextView) view.findViewById(R.id.address)).setText(
+                " - " + l.getCity() + " (" + l.getPostalCode() + ")");
+
+        // We choose whether we show the prices or the amenities:
+        boolean b = l.getOffers().isEmpty();
+        Amenities a = new Amenities((ArrayList<String>) l.getAmenities());
+
+        if (!b || !a.hasFreeWifi())
+            ((ImageView) view.findViewById(R.id.wifi)).setVisibility(
+                    View.GONE);
+
+        if (!b || !a.hasWifi())
+            ((ImageView) view.findViewById(R.id.wifi_euros)).setVisibility(
+                    View.GONE);
+
+        if (!b || !a.hasFood())
+            ((ImageView) view.findViewById(R.id.food)).setVisibility(
+                    View.GONE);
+
+        if (!b || !a.hasCoffee())
+            ((ImageView) view.findViewById(R.id.coffee)).setVisibility(
+                    View.GONE);
+
+        if (!b || !a.hasParking())
+            ((ImageView) view.findViewById(R.id.parking)).setVisibility(
+                    View.GONE);
+
+        if (!b || !a.hasAccess())
+            ((ImageView) view.findViewById(R.id.access)).setVisibility(
+                    View.GONE);
+
         ImageView imageView = (ImageView) view.findViewById(R.id.picture);
-        TextView address = (TextView) view.findViewById(R.id.address);
-        String add = (p.getType().length() > 0 ? " - ":"") + p.getAddress();
-        add += (p.getCity().length() > 0 ? " - ":"") + p.getCity();
-        address.setText(add);
-        
-        Amenities a = new Amenities((ArrayList<String>) p.getAmenities());
-
-        if (!a.hasFreeWifi())
-            ((ImageView) view.findViewById(R.id.wifi)).setVisibility(View.GONE);
-
-        if (!a.hasWifi())
-            ((ImageView) view.findViewById(R.id.wifi_euros)).setVisibility(View.GONE);
-
-        if (!a.hasFood())
-            ((ImageView) view.findViewById(R.id.food)).setVisibility(View.GONE);
-
-        if (!a.hasCoffee())
-            ((ImageView) view.findViewById(R.id.coffee)).setVisibility(View.GONE);
-
-        if (!a.hasParking())
-            ((ImageView) view.findViewById(R.id.parking)).setVisibility(View.GONE);
-
-        if (!a.hasAccess())
-            ((ImageView) view.findViewById(R.id.access)).setVisibility(View.GONE);
-        URL url;
         Drawable d = null;
         try {
-            url = new URL(p.getImageThumb());
+            URL url = new URL(l.getImageThumb());
             InputStream content = (InputStream)url.getContent();
             d = Drawable.createFromStream(content , "src"); 
         } catch (Exception e) {
@@ -88,9 +96,19 @@ public class LocalisationArrayAdapter extends ArrayAdapter<String> {
 
         imageView.setImageDrawable(d);
 
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) (16 * p.getRating()), 30);
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.picture);
-        ((ImageView) view.findViewById(R.id.stars_blue)).setLayoutParams(layoutParams);
+        // We display the stars:
+        if (l.getRating() > 0) {
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.
+                    LayoutParams((int)(16 * l.getRating()), 30);
+            layoutParams.addRule(RelativeLayout.BELOW, R.id.picture);
+            ((ImageView) view.findViewById(R.id.stars_blue)).setLayoutParams(
+                    layoutParams);
+        } else {
+            ((ImageView) view.findViewById(R.id.stars_blue)).setVisibility(
+                    View.GONE);
+            ((ImageView) view.findViewById(R.id.stars)).setVisibility(
+                    View.GONE);
+        }
 
         return view;
     }

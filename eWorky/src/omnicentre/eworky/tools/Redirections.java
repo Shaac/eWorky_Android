@@ -1,7 +1,6 @@
 package omnicentre.eworky.tools;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import omnicentre.eworky.Index;
 import omnicentre.eworky.Map;
@@ -57,9 +56,9 @@ public class Redirections {
         from.startActivity(intent);
     }
 
-    public static void searchOfferType(Activity from, HashMap<String, String> params) {
+    public static void searchOfferType(Activity from, SearchCriteria criteria) {
         Intent intent = new Intent(from, SearchOfferType.class);
-        intent.putExtra("omnicentre.eworki.hashMap", params);
+        intent.putExtra("omnicentre.eworki.criteria", criteria);
         from.startActivity(intent);
     }
 
@@ -68,9 +67,9 @@ public class Redirections {
      * @param from the current activity.
      * @param params the parameters for the search.
      */
-    public static void searchResults(Activity from, HashMap<String, String> params) {
+    public static void searchResults(Activity from, SearchCriteria criteria) {
         Intent intent = new Intent(from, SearchResults.class);
-        intent.putExtra("omnicentre.eworki.hashMap", params);
+        intent.putExtra("omnicentre.eworki.criteria", criteria);
         from.startActivity(intent);
     }
 
@@ -154,26 +153,26 @@ public class Redirections {
     }
 
     public static void setClickListenerToSearchOfferType(View view,
-            Activity from, HashMap<String, String> params) {
+            Activity from, SearchCriteria criteria) {
 
         final Activity activity = from;
-        final HashMap<String, String> p = params;
+        final SearchCriteria c = criteria;
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchOfferType(activity, p);
+                searchOfferType(activity, c);
             }
         });
 
     }
-    
+
     public static void setClickListenerToSearchCriteria(View view,
             Search from) {
         final Search activity = from;
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchOfferType(activity, activity.getParams());
+                searchOfferType(activity, activity.getCriteria());
             }
         });
     }
@@ -192,7 +191,7 @@ public class Redirections {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchResults(activity, activity.getParams());
+                searchResults(activity, activity.getCriteria());
             }
         });
     }
@@ -235,17 +234,17 @@ public class Redirections {
         return ret;
     }
 
-    @SuppressWarnings("unchecked")
-    public static HashMap<String, String> getHashMap(Activity activity) {
-        Object o = activity.getIntent().getExtras().get("omnicentre.eworki.hashMap");
+    public static SearchCriteria getCriteria(Activity activity) {
+        Parcelable p = activity.getIntent().getExtras().getParcelable(
+                "omnicentre.eworki.criteria");
 
-        HashMap <String, String> params = new HashMap<String, String>();
-        if (o != null)       
-            params = (HashMap <String, String>) o;
+        SearchCriteria criteria = new SearchCriteria();
+        if (p != null)       
+            criteria = (SearchCriteria) p;
 
-        return params;
+        return criteria;
     }
-    
+
     public static boolean getWithName(Activity activity) {
         return activity.getIntent().getExtras().getBoolean("omnicentre.eworki.withName");
     }

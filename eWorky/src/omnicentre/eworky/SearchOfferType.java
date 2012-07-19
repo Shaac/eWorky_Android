@@ -1,14 +1,13 @@
 package omnicentre.eworky;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import omnicentre.eworky.tools.Redirections;
+import omnicentre.eworky.tools.SearchCriteria;
 import omnicentre.eworky.tools.TitleBar;
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 
@@ -35,26 +34,26 @@ public class SearchOfferType extends Activity {
      * by the parameters from the previous activities.
      * @return the parameters.
      */
-    public HashMap<String, String> getParams() {
+    public SearchCriteria getCriteria() {
         
         // We get the previous list of parameters, which may contain the name
         // of the searched location, or its place:
-        HashMap<String, String> params = Redirections.getHashMap(this);
-        
+        SearchCriteria criteria = Redirections.getCriteria(this);
+
         // We look at the check boxes:
-        List<String> list = new ArrayList<String>();
+        List<Integer> list = new ArrayList<Integer>();
         if (((CheckBox) findViewById(R.id.wifi)).isChecked())
-            list.add("0");
+            list.add(0);
         if (((CheckBox) findViewById(R.id.meeting)).isChecked())
-            list.add("4");
+            list.add(4);
         if (((CheckBox) findViewById(R.id.desktop)).isChecked()) {
-            list.add("2");
-            list.add("3");
+            list.add(2);
+            list.add(3);
         }
         
         // We construct the new parameter:
         if (! list.isEmpty())
-            params.put("offerType","[" + TextUtils.join(", ", list) + "]");
-        return params;
+            criteria.setOfferType(list);
+        return criteria;
     }
 }

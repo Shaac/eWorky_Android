@@ -12,6 +12,8 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 
+import omnicentre.eworky.tools.SearchCriteria;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -152,12 +154,14 @@ public class Requests {
         return s.toString();
     }
     
-    public static List<LocalisationJson> search(HashMap<String, String> params)
+    public static List<LocalisationJson> search(SearchCriteria criteria)
             throws NoSuccessException {
+        
+        // TODO internet deconnexion
 
         // We construct the request:
         HashMap<String, String> postArguments = new HashMap<String, String>();
-        HashMap<String, String> getArguments = params;
+        HashMap<String, String> getArguments = criteria.getParams();
 
         // We make it:
         String json = Requests.call("search", postArguments, getArguments);

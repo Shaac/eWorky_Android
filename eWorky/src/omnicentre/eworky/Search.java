@@ -1,10 +1,9 @@
 package omnicentre.eworky;
 
-import java.util.HashMap;
-
 import com.pixate.pxcomponentkit.view.PXTheme;
 
 import omnicentre.eworky.tools.Redirections;
+import omnicentre.eworky.tools.SearchCriteria;
 import omnicentre.eworky.tools.TitleBar;
 
 import android.os.Bundle;
@@ -35,16 +34,16 @@ public class Search extends Activity {
         PXTheme.themeButton(b, Color.parseColor("#5DAFDE"));
     }
     
-    public HashMap<String, String> getParams() {
+    public SearchCriteria getCriteria() {
         EditText search_bar = (EditText) findViewById(R.id.search_main);
         EditText aux = (EditText) findViewById(R.id.search_aux);
-        HashMap<String, String> params = new HashMap<String, String>();
+        SearchCriteria criteria = new SearchCriteria();
         if (aux == null)
-            params.put("place", search_bar.getText().toString());
+            criteria.setPlace(search_bar.getText().toString());
         else {
-            params.put("name", search_bar.getText().toString());
-            params.put("place", aux.getText().toString());
+            criteria.setName(search_bar.getText().toString());
+            criteria.setPlace(aux.getText().toString());
         }
-        return params;
+        return criteria;
     }
 }

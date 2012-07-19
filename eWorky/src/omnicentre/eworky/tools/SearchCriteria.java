@@ -1,7 +1,9 @@
 package omnicentre.eworky.tools;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,10 +15,10 @@ public class SearchCriteria implements Parcelable {
     private double latitude = 10000;
     private double longitude = 10000;
     private double boundary = -1;
-    private int[] offerType = null;
+    private List<Integer> offerType = null;
     private int orderBy = -1;
-    private int[] types = null;
-    private int[] features = null;
+    private List<Integer> types = null;
+    private List<Integer> features = null;
     private int maxCount = -1;
 
     public SearchCriteria() {
@@ -24,9 +26,9 @@ public class SearchCriteria implements Parcelable {
 
     public HashMap<String, String> getParams() {
         HashMap<String, String> params = new HashMap<String, String>();
-        if (place != null)
+        if (place != null && place != "")
             params.put("place", place);
-        if (name != null)
+        if (name != null && name != "")
             params.put("name", name);
         if (latitude != 10000)
             params.put("latitude", String.valueOf(latitude));
@@ -34,14 +36,14 @@ public class SearchCriteria implements Parcelable {
             params.put("longitude", String.valueOf(longitude));
         if (boundary != -1)
             params.put("boundary", String.valueOf(boundary));
-        if (offerType != null)
-            params.put("offerType",Arrays.toString(offerType).replace(" ",""));
+        if (offerType != null && !offerType.isEmpty())
+            params.put("offerType",Arrays.toString(offerType.toArray()).replace(" ",""));
         if (orderBy != -1)
             params.put("orderBy", String.valueOf(orderBy));
-        if (types != null)
-            params.put("types", Arrays.toString(types).replace(" ", ""));
-        if (features != null)
-            params.put("features", Arrays.toString(features).replace(" ", ""));
+        if (types != null && !types.isEmpty())
+            params.put("types", Arrays.toString(types.toArray()).replace(" ", ""));
+        if (features != null && !features.isEmpty())
+            params.put("features", Arrays.toString(features.toArray()).replace(" ", ""));
         if (maxCount != -1)
             params.put("maxCount", String.valueOf(maxCount));
         return params;
@@ -58,10 +60,10 @@ public class SearchCriteria implements Parcelable {
         out.writeDouble(latitude);
         out.writeDouble(longitude);
         out.writeDouble(boundary);
-        out.writeIntArray(offerType);
+        out.writeList(offerType);
         out.writeInt(orderBy);
-        out.writeIntArray(types);
-        out.writeIntArray(features);
+        out.writeList(types);
+        out.writeList(features);
         out.writeInt(maxCount);
     }
 
@@ -82,10 +84,10 @@ public class SearchCriteria implements Parcelable {
         latitude = in.readDouble();
         longitude = in.readDouble();
         boundary = in.readDouble();
-        in.readIntArray(offerType);
-        orderBy = in.readInt();
-        in.readIntArray(types);
-        in.readIntArray(features);
+        in.readList(offerType, null);
+        types = new ArrayList<Integer>();
+        in.readList(types, null);
+        in.readList(features, null);
         maxCount = in.readInt();
     }
 
@@ -129,11 +131,11 @@ public class SearchCriteria implements Parcelable {
         this.boundary = boundary;
     }
 
-    public int[] getOfferType() {
+    public List<Integer> getOfferType() {
         return offerType;
     }
 
-    public void setOfferType(int[] offerType) {
+    public void setOfferType(List<Integer> offerType) {
         this.offerType = offerType;
     }
 
@@ -145,19 +147,19 @@ public class SearchCriteria implements Parcelable {
         this.orderBy = orderBy;
     }
 
-    public int[] getTypes() {
+    public List<Integer> getTypes() {
         return types;
     }
 
-    public void setTypes(int[] types) {
+    public void setTypes(List<Integer> types) {
         this.types = types;
     }
 
-    public int[] getFeatures() {
+    public List<Integer> getFeatures() {
         return features;
     }
 
-    public void setFeatures(int[] features) {
+    public void setFeatures(List<Integer> features) {
         this.features = features;
     }
 
