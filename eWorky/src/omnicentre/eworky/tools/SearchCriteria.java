@@ -44,7 +44,7 @@ public class SearchCriteria implements Parcelable {
             params.put("types", Arrays.toString(types.toArray()).replace(" ", ""));
         if (features != null && !features.isEmpty())
             params.put("features", Arrays.toString(features.toArray()).replace(" ", ""));
-        if (maxCount != -1)
+        if (maxCount > 0)
             params.put("maxCount", String.valueOf(maxCount));
         return params;
     }
@@ -84,9 +84,12 @@ public class SearchCriteria implements Parcelable {
         latitude = in.readDouble();
         longitude = in.readDouble();
         boundary = in.readDouble();
+        offerType = new ArrayList<Integer>();
         in.readList(offerType, null);
         types = new ArrayList<Integer>();
+        types = new ArrayList<Integer>();
         in.readList(types, null);
+        features = new ArrayList<Integer>();
         in.readList(features, null);
         maxCount = in.readInt();
     }

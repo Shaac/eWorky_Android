@@ -38,12 +38,12 @@ public class Map extends MapActivity {
         // We get the localisations list:
         ArrayList<Localisation> localisationsList = 
                 Redirections.getLocalisationsList(this);
-
+/*
         // We place the localisations:
         for (Localisation l : localisationsList)
             itemizedOverlay.addOverlayItem(new MyOverlayItem(l));
         mapView.getOverlays().add(itemizedOverlay);
-
+*/
         // We go to the right part of the map:
         MapController controller = mapView.getController();
         controller.setCenter(itemizedOverlay.getCenter());

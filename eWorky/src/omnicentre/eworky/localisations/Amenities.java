@@ -25,7 +25,7 @@ public class Amenities extends ArrayList<String> {
 	 * Instantiate from an existing list.
 	 * @param list the existing list.
 	 */
-	public Amenities(ArrayList<String> list) {
+	public Amenities(List<String> list) {
 		if (list != null)
 			for (String s : list)
 				this.add(s.replace("\\/", "/"));

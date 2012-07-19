@@ -1,5 +1,9 @@
 package omnicentre.eworky;
 
+import omnicentre.eworky.API.LocalisationJson;
+import omnicentre.eworky.API.NoSuccessException;
+import omnicentre.eworky.API.Requests;
+import omnicentre.eworky.localisations.Amenities;
 import omnicentre.eworky.localisations.Localisation;
 import omnicentre.eworky.tools.Http;
 import omnicentre.eworky.tools.Redirections;
@@ -22,7 +26,13 @@ public class LocalisationDetails extends Activity {
         super.onCreate(savedInstanceState);
 
         // We get the place's data:
-        Localisation l = Redirections.getLocalisation(this);
+        LocalisationJson l = new LocalisationJson();
+        try {
+            l = Requests.details(Redirections.getLocalisationId(this));
+        } catch (NoSuccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         // We set the view, with the title bar:
         TitleBar.setContentView(this, R.layout.details, R.layout.title_details);
@@ -33,7 +43,7 @@ public class LocalisationDetails extends Activity {
         ((TextView) findViewById(R.id.type)).setText(l.getType());
         ((TextView) findViewById(R.id.city)).setText(l.getCity());
         ((TextView) findViewById(R.id.content)).setText(l.getDescription());
-        ((TextView)findViewById(R.id.list)).setText(l.getAmenities().toText());
+        ((TextView)findViewById(R.id.list)).setText((new Amenities(l.getAmenities())).toText());
 
         Drawable image = Http.getImage(l.getImage());
         if (image != null)

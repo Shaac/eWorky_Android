@@ -76,12 +76,11 @@ public class Redirections {
     /**
      * Redirects to the place details activity.
      * @param from the current activity.
-     * @param localisation the {@link Localisation} object we want to know about.
+     * @param id the id of the localisation.
      */
-    public static void localisationDetails(Activity from,
-            Localisation localisation) {
+    public static void localisationDetails(Activity from, int id) {
         Intent intent = new Intent(from, LocalisationDetails.class);
-        intent.putExtra("omnicentre.eworki.localisation",  localisation);
+        intent.putExtra("omnicentre.eworki.id",  id);
         from.startActivity(intent);
     }
 
@@ -214,9 +213,8 @@ public class Redirections {
      * @param activity the current activity.
      * @return the wanted localisation.
      */
-    public static Localisation getLocalisation(Activity activity) {
-        return (Localisation)
-                activity.getIntent().getExtras().getParcelable("omnicentre.eworki.localisation");
+    public static int getLocalisationId(Activity activity) {
+        return activity.getIntent().getExtras().getInt("omnicentre.eworki.id");
     }
 
     public static ArrayList<Localisation> getLocalisationsList (Activity

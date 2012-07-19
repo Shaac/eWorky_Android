@@ -30,6 +30,7 @@ public class Requests {
      */
     private static final String host =
             //"http://10.0.2.2:15157/api/localisation/";
+            //"http://taff.coworky.com/api/localisation/";
             "http://www.eworky.com/api/localisation/";
 
     /**
@@ -72,7 +73,8 @@ public class Requests {
             }
             wr.close();
             rd.close();
-            Log.w("EWORKY", out);            
+            Log.w("request", request);
+            Log.w("out", out);
 
             connection.disconnect();
             return out;
@@ -153,10 +155,10 @@ public class Requests {
         }
         return s.toString();
     }
-    
+
     public static List<LocalisationJson> search(SearchCriteria criteria)
             throws NoSuccessException {
-        
+
         // TODO internet deconnexion
 
         // We construct the request:
@@ -170,7 +172,25 @@ public class Requests {
         Gson gson = new Gson();
         Type type = new TypeToken<ObjectResult<List<LocalisationJson>>>() {}.getType();
         ObjectResult<List<LocalisationJson>> o = gson.fromJson(json, type);
+
+        return o.getResponse();
+    }
+
+
+    public static LocalisationJson details(int id) throws NoSuccessException {
+
+        // We construct the request:
+        HashMap<String, String> postArguments = new HashMap<String, String>();
+        HashMap<String, String> getArguments = new HashMap<String, String>();
+        getArguments.put("id", String.valueOf(id));
+
+        // We make it:
+        String json = Requests.call("details", postArguments, getArguments);
         
+        Gson gson = new Gson();
+        Type type = new TypeToken<ObjectResult<LocalisationJson>>() {}.getType();
+        ObjectResult<LocalisationJson> o = gson.fromJson(json, type);
+
         return o.getResponse();
     }
 }

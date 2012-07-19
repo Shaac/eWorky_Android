@@ -7,20 +7,20 @@ package omnicentre.eworky.API;
  * @param <T> the class used to parse the JSON in the "response" field.
  */
 public class ObjectResult<T> {
-    
+
     /**
      * The "meta" field.
      */
     private MetaJson meta;
-    
+
     /**
      * The "response" field.
      */
     private T response;
-    
+
     public ObjectResult() {
     }
-    
+
     /**
      * Get the response.
      * @return the response.

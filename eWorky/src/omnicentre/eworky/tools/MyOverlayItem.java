@@ -1,23 +1,23 @@
 package omnicentre.eworky.tools;
 
-import omnicentre.eworky.localisations.Localisation;
+import omnicentre.eworky.API.LocalisationJson;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
 
 /**
- * An extension of {@link OverlayItem} that also has a {@link Localisation} object.
+ * An extension of {@link OverlayItem} that also has a {@link LocalisationJson} object.
  *
  */
 public class MyOverlayItem extends OverlayItem {
     
-    private Localisation place;
+    private LocalisationJson place;
 
     /**
      * Create a new OverlyItem.
-     * @param place the {@link Localisation} object corresponding.
+     * @param place the {@link LocalisationJson} object corresponding.
      */
-    public MyOverlayItem(Localisation place) {
+    public MyOverlayItem(LocalisationJson place) {
         super(new GeoPoint((int)(place.getLatitude() * 1e6),
                 (int) (place.getLongitude() * 1e6)), place.getName(),
                 place.getAddress());
@@ -25,10 +25,10 @@ public class MyOverlayItem extends OverlayItem {
     }
 
     /**
-     * Get the {@link Localisation} object.
-     * @return the {@link Localisation} object
+     * Get the {@link LocalisationJson} object.
+     * @return the {@link LocalisationJson} object
      */
-    public Localisation getPlace() {
+    public LocalisationJson getPlace() {
         return place;
     }
 

@@ -36,11 +36,9 @@
             android:layout_height="wrap_content" >
         </ListView>
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
             <com.google.android.maps.MapView
                 android:id="@+id/mapView"
@@ -49,7 +47,7 @@
                 android:apiKey="@string/mapKey"
                 android:clickable="true"
                 android:enabled="true" />
-        </LinearLayout>
+        </FrameLayout>
     </ViewSwitcher>
 
 </RelativeLayout>
