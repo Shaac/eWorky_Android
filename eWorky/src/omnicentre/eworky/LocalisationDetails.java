@@ -1,7 +1,5 @@
 package omnicentre.eworky;
 
-import java.util.ArrayList;
-
 import omnicentre.eworky.localisations.Localisation;
 import omnicentre.eworky.tools.Http;
 import omnicentre.eworky.tools.Redirections;
@@ -25,12 +23,9 @@ public class LocalisationDetails extends Activity {
 
         // We get the place's data:
         Localisation l = Redirections.getLocalisation(this);
-        ArrayList<Localisation> oneElementList = new ArrayList<Localisation>();
-        oneElementList.add(l);
 
         // We set the view, with the title bar:
-        TitleBar.setContentView(this, R.layout.details, R.layout.title_details,
-                oneElementList);
+        TitleBar.setContentView(this, R.layout.details, R.layout.title_details);
         
         // We fill the fields:
         ((TextView) findViewById(R.id.name)).setText(l.getName());

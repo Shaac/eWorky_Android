@@ -2,6 +2,8 @@ package omnicentre.eworky;
 
 import java.util.ArrayList;
 
+import com.google.android.maps.MapActivity;
+
 import omnicentre.eworky.API.LocalisationJson;
 import omnicentre.eworky.localisations.Localisation;
 import omnicentre.eworky.localisations.LocalisationsLoader;
@@ -10,7 +12,6 @@ import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 import omnicentre.eworky.widgets.LocalisationArrayAdapter;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ import android.widget.ListView;
  * Makes the search and displays the results of the search in a list.
  *
  */
-public class SearchResults extends Activity {
+public class SearchResults extends MapActivity {
 
     /**
      * The list of all the found places.
@@ -78,5 +79,10 @@ public class SearchResults extends Activity {
         // If something went wrong we redirect to the main view:
         if(error.length() > 0)
             Dialogs.newAlertToIndex("Error", error, this);
+    }
+    
+    @Override
+    protected boolean isRouteDisplayed() {
+        return false;
     }
 }

@@ -3,8 +3,8 @@ package omnicentre.eworky.tools;
 import java.util.ArrayList;
 
 import omnicentre.eworky.Index;
-import omnicentre.eworky.Map;
 import omnicentre.eworky.LocalisationDetails;
+import omnicentre.eworky.R;
 import omnicentre.eworky.Search;
 import omnicentre.eworky.SearchOfferType;
 import omnicentre.eworky.SearchResults;
@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ViewSwitcher;
 
 /**
  * This class creates the intents to go from one view to another.
@@ -47,13 +48,12 @@ public class Redirections {
     /**
      * Redirects to the map activity.
      * @param from the current activity.
-     * @param placeList the places list to display on the map.
      */
-    public static void map(Activity from, ArrayList<Localisation> placeList) {
-        Intent intent = new Intent(from, Map.class);
-        intent.putParcelableArrayListExtra(
-                "omnicentre.eworki.localisationsList", placeList);
-        from.startActivity(intent);
+    public static void map(Activity from) {
+        ViewSwitcher switcher =
+                (ViewSwitcher) from.findViewById(R.id.switcher);
+        if (switcher != null)
+            switcher.showNext();
     }
 
     public static void searchOfferType(Activity from, SearchCriteria criteria) {
@@ -138,16 +138,13 @@ public class Redirections {
      * activity.
      * @param view the view which will have the listener.
      * @param from the current activity.
-     * @param placeList the places list to display on the map.
      */
-    public static void setClickListenerToMap(View view, Activity from,
-            ArrayList<Localisation> placeList) {
+    public static void setClickListenerToMap(View view, Activity from) {
 
         final Activity activity = from;
-        final ArrayList<Localisation> p = placeList;
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                map(activity, p);
+                map(activity);
             }
         });
     }

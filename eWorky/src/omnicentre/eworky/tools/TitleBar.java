@@ -1,9 +1,6 @@
 package omnicentre.eworky.tools;
 
-import java.util.ArrayList;
-
 import omnicentre.eworky.R;
-import omnicentre.eworky.localisations.Localisation;
 
 import android.app.Activity;
 import android.view.Window;
@@ -55,21 +52,10 @@ public class TitleBar {
             ImageView list = (ImageView) a.findViewById(R.id.title_list_logo);
             if (list != null)
                 Redirections.setClickListenerToPrevious(list, a);
-        }
-    }
-
-    /**
-     * Set the title bar with a map button.
-     * This view must have been inflated first.
-     * @param layout the title bar's layout.
-     * @param placeList the places list for the map view.
-     */
-    public void setTitleBar(int layout, ArrayList<Localisation> placeList) {
-        setTitleBar(layout);
-        if(supported){
+            
             ImageView map = (ImageView) a.findViewById(R.id.title_map_logo);
             if (map != null)
-                Redirections.setClickListenerToMap(map, a, placeList);
+                Redirections.setClickListenerToMap(map, a);
         }
     }
     
@@ -86,22 +72,5 @@ public class TitleBar {
         TitleBar titleBar = new TitleBar(activity);
         activity.setContentView(layout);
         titleBar.setTitleBar(title_layout);
-    }
-    
-    /**
-     * Calls the setContentView() method of the activity and place the title
-     * bar.
-     * @param activity this activity where the title bar must be placed.
-     * @param layout the activity's layout.
-     * @param title_layout the title bar's layout.
-     * @param placeList the places list for the map views.
-     */
-    public static void setContentView(Activity activity, int layout,
-            int title_layout, ArrayList<Localisation> placeList) {
-        
-        TitleBar titleBar = new TitleBar(activity);
-        activity.setContentView(layout);
-        placeList = placeList == null ? new ArrayList<Localisation>() : placeList;
-        titleBar.setTitleBar(title_layout, placeList);
     }
 }
