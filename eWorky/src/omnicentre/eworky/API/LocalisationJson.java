@@ -18,8 +18,9 @@ public class LocalisationJson {
     private String address;
     private String postalCode;
     private String city;
-    private String type;
     private double distance;
+    private String type;
+    private boolean isFree;
     private String url;
     private double rating;
     private List<String> amenities;
@@ -28,7 +29,7 @@ public class LocalisationJson {
     private OpeningTimesJson openingTimes;
     private List<CommentJson> comments;
     private List<MemberJson> fans;
-    
+
     public LocalisationJson() {
     }
 
@@ -36,7 +37,7 @@ public class LocalisationJson {
     public int getId() {
         return id;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -74,12 +75,16 @@ public class LocalisationJson {
         return type;
     }
 
+    public double getDistance() {
+        return distance;
+    }
+
     public String getCity() {
         return city;
     }
 
-    public double getDistance() {
-        return distance;
+    public boolean isFree() {
+        return isFree;
     }
 
     public String getUrl() {
