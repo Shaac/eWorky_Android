@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 /**
@@ -242,5 +243,15 @@ public class Redirections {
 
     public static boolean getWithName(Activity activity) {
         return activity.getIntent().getExtras().getBoolean("omnicentre.eworki.withName");
+    }
+
+    public static void setClickListenerToMySpaces(View view, Activity from) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public static void setClickListenerToMyAccount(View view, Activity from) {
+        // TODO Auto-generated method stub
+        
     }
 }

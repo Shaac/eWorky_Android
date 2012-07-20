@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 /**
- * This activity displays the buttons in order to choose which offer we want.
+ * This activity displays the buttons allowing to choose which offer we want.
  *
  */
 public class SearchOfferType extends Activity {
@@ -22,8 +22,10 @@ public class SearchOfferType extends Activity {
         super.onCreate(savedInstanceState);
 
         // We set the view, with the title bar:
-        TitleBar.setContentView(this, R.layout.search_offer_type, R.layout.title_search);
+        TitleBar.setContentView(this, R.layout.search_offer_type,
+                R.layout.title_search);
 
+        // We listen to the validate button:
         Button b = (Button) findViewById(R.id.button);
         Redirections.setClickListenerToSearchResults(b, this);
     }
@@ -52,8 +54,8 @@ public class SearchOfferType extends Activity {
         }
         
         // We construct the new parameter:
-        if (! list.isEmpty())
-            criteria.setOfferType(list);
+        criteria.setOfferType(list);
+        
         return criteria;
     }
 }

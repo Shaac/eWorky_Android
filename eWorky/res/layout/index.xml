@@ -16,10 +16,22 @@
         android:layout_alignParentBottom="true" >
 
         <TextView
+            android:id="@+id/connect"
             style="@style/footer"
-            android:text="@string/my_spaces" />
+            android:text="@string/connect" />
 
         <TextView
+            android:id="@+id/register"
+            style="@style/footer"
+            android:text="@string/register" />
+        
+        <TextView
+            android:id="@+id/my_spaces"
+            style="@style/footer"
+            android:text="@string/my_spaces" />
+        
+        <TextView
+            android:id="@+id/my_account"
             style="@style/footer"
             android:text="@string/my_account" />
     </LinearLayout>

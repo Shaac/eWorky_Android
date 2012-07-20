@@ -7,7 +7,6 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
 import omnicentre.eworky.API.LocalisationJson;
-import omnicentre.eworky.localisations.Localisation;
 import omnicentre.eworky.localisations.LocalisationsLoader;
 import omnicentre.eworky.localisations.MyItimizedOverlay;
 import omnicentre.eworky.tools.Dialogs;
@@ -29,11 +28,6 @@ import android.widget.ListView;
  *
  */
 public class SearchResults extends MapActivity {
-
-    /**
-     * The list of all the found places.
-     */
-    private ArrayList<Localisation> localisationsList = new ArrayList<Localisation>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

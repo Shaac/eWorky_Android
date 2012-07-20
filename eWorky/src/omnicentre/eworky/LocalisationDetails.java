@@ -4,7 +4,6 @@ import omnicentre.eworky.API.LocalisationJson;
 import omnicentre.eworky.API.NoSuccessException;
 import omnicentre.eworky.API.Requests;
 import omnicentre.eworky.localisations.Amenities;
-import omnicentre.eworky.localisations.Localisation;
 import omnicentre.eworky.tools.Http;
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
+// TODO redo entirely
 /**
  * This activity shows everything there is to show about a localisation.
  *
