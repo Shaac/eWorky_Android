@@ -79,7 +79,7 @@ public class Requests {
             connection.disconnect();
             return out;
         } catch (IOException e) {
-            Log.e("EWORKY", e.toString());
+            Log.e("Request call", e.toString());
             return null;
         }
     }
@@ -186,7 +186,7 @@ public class Requests {
 
         // We make it:
         String json = Requests.call("details", postArguments, getArguments);
-        
+
         Gson gson = new Gson();
         Type type = new TypeToken<ObjectResult<LocalisationJson>>() {}.getType();
         ObjectResult<LocalisationJson> o = gson.fromJson(json, type);

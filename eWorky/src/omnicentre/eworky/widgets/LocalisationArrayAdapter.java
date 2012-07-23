@@ -2,6 +2,7 @@ package omnicentre.eworky.widgets;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import omnicentre.eworky.R;
@@ -51,8 +52,9 @@ public class LocalisationArrayAdapter extends ArrayAdapter<LocalisationJson> {
         LocalisationJson l = this.getItem(position);
         ((TextView) view.findViewById(R.id.name)).setText(l.getName());
         ((TextView) view.findViewById(R.id.type)).setText(l.getType());
-        ((TextView) view.findViewById(R.id.distance)).setText(l.getDistance()
-                + " km");
+        DecimalFormat f = new DecimalFormat("0.00");
+        ((TextView) view.findViewById(R.id.distance)).setText(
+                f.format(l.getDistance()) + " km");
         ((TextView) view.findViewById(R.id.address)).setText(
                 " - " + l.getCity() + " (" + l.getPostalCode() + ")");
 
