@@ -56,6 +56,10 @@
             android:name=".MyAccount"
             android:label="@string/my_account" >
         </activity>
+        <activity
+            android:name=".Inscription"
+            android:label="@string/inscription" >
+        </activity>
     </application>
 
 </manifest>

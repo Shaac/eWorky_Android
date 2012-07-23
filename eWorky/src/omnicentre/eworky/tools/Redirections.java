@@ -3,6 +3,7 @@ package omnicentre.eworky.tools;
 import java.util.ArrayList;
 
 import omnicentre.eworky.Index;
+import omnicentre.eworky.Inscription;
 import omnicentre.eworky.LocalisationDetails;
 import omnicentre.eworky.MyAccount;
 import omnicentre.eworky.R;
@@ -142,6 +143,14 @@ public class Redirections {
             from.startActivityForResult(intent, MY_ACCOUNT);
         }
     }
+    
+    public static void inscription(Activity from) {
+        Intent intent = new Intent(from, Inscription.class);
+        from.startActivityForResult(intent, 0);
+    }
+    
+    
+    // Click Listeners:
 
     /**
      * Set an OnClickListener from the view that will redirect to the main
@@ -261,6 +270,17 @@ public class Redirections {
             }
         });
     }
+    
+    public static void setClickListenerToInscription(View view,
+            final Activity from) {
+        
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                inscription(from);
+            }
+        });
+        
+    }
 
     /**
      * Get the localisation given in the extras of the intent.
@@ -296,12 +316,6 @@ public class Redirections {
 
     public static boolean getWithName(Activity activity) {
         return activity.getIntent().getExtras().getBoolean("omnicentre.eworki.withName");
-    }
-
-    public static void setClickListenerToInscription(Button inscription,
-            Connect connect) {
-        // TODO Auto-generated method stub
-        
     }
 
     public static void setClickListenerToFacebook(Button facebook,
