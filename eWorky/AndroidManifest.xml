@@ -48,6 +48,10 @@
             android:name=".SearchOfferType"
             android:label="@string/title_search_criteria" >
         </activity>
+        <activity
+            android:name=".Connect"
+            android:label="@string/connect" >
+        </activity>
     </application>
 
 </manifest>

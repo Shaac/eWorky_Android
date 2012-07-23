@@ -51,7 +51,7 @@ public class TitleBar {
             
             ImageView list = (ImageView) a.findViewById(R.id.title_list_logo);
             if (list != null)
-                Redirections.setClickListenerToPrevious(list, a);
+                Redirections.setClickListenerToFinish(list, a);
             
             ImageView map = (ImageView) a.findViewById(R.id.title_map_logo);
             if (map != null)

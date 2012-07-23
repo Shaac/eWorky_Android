@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import omnicentre.eworky.Index;
 import omnicentre.eworky.LocalisationDetails;
 import omnicentre.eworky.R;
+import omnicentre.eworky.Connect;
 import omnicentre.eworky.Search;
 import omnicentre.eworky.SearchOfferType;
 import omnicentre.eworky.SearchResults;
@@ -15,7 +16,6 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 /**
@@ -25,6 +25,15 @@ import android.widget.ViewSwitcher;
  *
  */
 public class Redirections {
+
+    /**
+     * The constant for when we want an intent to redirect to my spaces.
+     */
+    public static final int MY_SPACES = 1;
+    
+    /*
+     * View changers:
+     */
 
     /**
      * Redirects to the main activity.
@@ -98,18 +107,30 @@ public class Redirections {
         from.startActivity(intent);
     }
 
+    public static void mySpaces(Activity from, Storage storage) {
+        mySpaces(from, storage, true);
+    }
+    public static void mySpaces(Activity from, Storage storage,
+            boolean connect) {
+        if (storage.isConnected()) {
+            // TODO redirect to my spaces
+        } else if (connect) {
+            Intent intent = new Intent(from, Connect.class);
+            from.startActivityForResult(intent, MY_SPACES);
+        }
+    }
+
     /**
      * Set an OnClickListener from the view that will redirect to the main
      * activity.
      * @param view the view which will have the listener.
      * @param from the current activity.
      */
-    public static void setClickListenerToIndex(View view, Activity from) {
+    public static void setClickListenerToIndex(View view, final Activity from){
 
-        final Activity activity = from;
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                index(activity);
+                index(from);
             }
         });
     }
@@ -121,14 +142,12 @@ public class Redirections {
      * @param from the current activity.
      * @param withName whether or not we want a search bar for the name.
      */
-    public static void setClickListenerToSearch(View view, Activity from,
-            boolean withName) {
+    public static void setClickListenerToSearch(View view, final Activity from,
+            final boolean withName) {
 
-        final Activity activity = from;
-        final boolean b = withName;
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                search(activity, b);
+                search(from, withName);
             }
         });
     }
@@ -139,37 +158,32 @@ public class Redirections {
      * @param view the view which will have the listener.
      * @param from the current activity.
      */
-    public static void setClickListenerToMap(View view, Activity from) {
+    public static void setClickListenerToMap(View view, final Activity from) {
 
-        final Activity activity = from;
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                map(activity);
+                map(from);
             }
         });
     }
 
     public static void setClickListenerToSearchOfferType(View view,
-            Activity from, SearchCriteria criteria) {
-
-        final Activity activity = from;
-        final SearchCriteria c = criteria;
+            final Activity from, final SearchCriteria criteria) {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchOfferType(activity, c);
+                searchOfferType(from, criteria);
             }
         });
 
     }
 
     public static void setClickListenerToSearchCriteria(View view,
-            Search from) {
-        final Search activity = from;
+            final Search from) {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchOfferType(activity, activity.getCriteria());
+                searchOfferType(from, from.getCriteria());
             }
         });
     }
@@ -179,16 +193,13 @@ public class Redirections {
      * results activity.
      * @param view the view which will have the listener.
      * @param from the current activity.
-     * @param params the parameters for the search.
      */
     public static void setClickListenerToSearchResults(View view,
-            SearchOfferType from) {
-
-        final SearchOfferType activity = from;
+            final SearchOfferType from) {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                searchResults(activity, activity.getCriteria());
+                searchResults(from, from.getCriteria());
             }
         });
     }
@@ -198,15 +209,31 @@ public class Redirections {
      * @param view the view which will have the listener.
      * @param from the current activity.
      */
-    public static void setClickListenerToPrevious(View view, Activity from) {
-
-        final Activity activity = from;
+    public static void setClickListenerToFinish(View view,
+            final Activity from) {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                activity.finish();
+                from.finish();
             }
         });
+    }
+
+    public static void setClickListenerToMySpaces(View view,
+            final Activity from, final Storage storage) {
+
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mySpaces(from, storage);
+            }
+        });
+
+    }
+
+    public static void setClickListenerToMyAccount(View view, Activity from,
+            Storage storage) {
+        // TODO Auto-generated method stub
+
     }
 
     /**
@@ -243,15 +270,5 @@ public class Redirections {
 
     public static boolean getWithName(Activity activity) {
         return activity.getIntent().getExtras().getBoolean("omnicentre.eworki.withName");
-    }
-
-    public static void setClickListenerToMySpaces(View view, Activity from) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public static void setClickListenerToMyAccount(View view, Activity from) {
-        // TODO Auto-generated method stub
-        
     }
 }
