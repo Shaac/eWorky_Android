@@ -30,22 +30,30 @@ public class Index extends Activity {
 
         // We create the listeners for the navigation bar:
         Storage storage = new Storage(this);
-        
+
         TextView mySpaces = (TextView) findViewById(R.id.my_spaces);
         Redirections.setClickListenerToMySpaces(mySpaces, this, storage);
-        
+
         TextView myAccount = (TextView) findViewById(R.id.my_account);
         Redirections.setClickListenerToMyAccount(myAccount, this, storage);
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
             Intent data) {
+
+        // If we are here we come from an connection / register attempt.
+
+        // We see which action we do next:
         switch (requestCode) {
         case Redirections.MY_SPACES:
-            if (resultCode == RESULT_OK) {
+            if (resultCode == RESULT_OK)
                 Redirections.mySpaces(this, new Storage(this), false);
-            }
+            break;
+        case Redirections.MY_ACCOUNT:
+            if (resultCode == RESULT_OK)
+                Redirections.myAccount(this, new Storage(this), false);
+            break;
         }
     }
 }

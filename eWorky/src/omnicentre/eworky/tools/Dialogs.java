@@ -18,15 +18,28 @@ public class Dialogs {
      * @param activity the current activity.
      */
     public static void newAlertToIndex(String title, String description,
-            Activity activity) {
+            final Activity activity) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title);
         builder.setMessage(description);
-        final Activity a = activity;
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int id) {
-                Redirections.index(a);
+                Redirections.index(activity);
+            }
+        });
+        builder.create().show();
+    }
+    
+    public static void newAlertToFinish(String title, String description,
+            final Activity activity) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(title);
+        builder.setMessage(description);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int id) {
+                activity.finish();
             }
         });
         builder.create().show();

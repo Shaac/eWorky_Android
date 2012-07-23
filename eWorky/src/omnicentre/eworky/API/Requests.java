@@ -107,7 +107,7 @@ public class Requests {
      * @return the token.
      * @throws NoSuccessException in case of an invalid request.
      */
-    public static String connect(String login, String password)
+    public static AuthJson connect(String login, String password)
             throws NoSuccessException {
 
         // We construct the request:
@@ -121,10 +121,10 @@ public class Requests {
 
         // We parse it:
         Gson gson = new Gson();
-        Type type = new TypeToken<ObjectResult<TokenJson>>() {}.getType();
-        ObjectResult<TokenJson> o = gson.fromJson(json, type);
+        Type type = new TypeToken<ObjectResult<AuthJson>>() {}.getType();
+        ObjectResult<AuthJson> o = gson.fromJson(json, type);
 
-        return o.getResponse().getToken();
+        return o.getResponse();
     }
 
     public static String register(String firstName, String lastName, 

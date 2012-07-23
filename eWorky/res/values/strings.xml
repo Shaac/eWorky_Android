@@ -32,6 +32,8 @@
     <string name="criteria">Critères</string>
     <string name="connect">Connexion</string>
     <string name="register">Inscription</string>
+    <string name="errorFile">Une erreur de fichier est apparue.</string>
+    <string name="log_out">Deconnexion</string>
     
 
 </resources>

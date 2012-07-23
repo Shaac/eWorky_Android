@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import omnicentre.eworky.Index;
 import omnicentre.eworky.LocalisationDetails;
+import omnicentre.eworky.MyAccount;
 import omnicentre.eworky.R;
 import omnicentre.eworky.Connect;
 import omnicentre.eworky.Search;
@@ -26,14 +27,21 @@ import android.widget.ViewSwitcher;
  */
 public class Redirections {
 
+    // Constants:
+
     /**
      * The constant for when we want an intent to redirect to my spaces.
      */
     public static final int MY_SPACES = 1;
-    
-    /*
-     * View changers:
+
+    /**
+     * The constant for when we want an intent to redirect to my account.
      */
+    public static final int MY_ACCOUNT = 2;
+
+
+
+    // View changers:
 
     /**
      * Redirects to the main activity.
@@ -66,7 +74,7 @@ public class Redirections {
             switcher.showNext();
     }
 
-    public static void searchOfferType(Activity from, SearchCriteria criteria) {
+    public static void searchOfferType(Activity from, SearchCriteria criteria){
         Intent intent = new Intent(from, SearchOfferType.class);
         intent.putExtra("omnicentre.eworki.criteria", criteria);
         from.startActivity(intent);
@@ -117,6 +125,20 @@ public class Redirections {
         } else if (connect) {
             Intent intent = new Intent(from, Connect.class);
             from.startActivityForResult(intent, MY_SPACES);
+        }
+    }
+
+    public static void myAccount(Activity from, Storage storage) {
+        myAccount(from, storage, true);
+    }
+    public static void myAccount(Activity from, Storage storage,
+            boolean connect) {
+        if (storage.isConnected()) {
+            Intent intent = new Intent(from, MyAccount.class);
+            from.startActivity(intent);
+        } else if (connect) {
+            Intent intent = new Intent(from, Connect.class);
+            from.startActivityForResult(intent, MY_ACCOUNT);
         }
     }
 
@@ -227,13 +249,16 @@ public class Redirections {
                 mySpaces(from, storage);
             }
         });
-
     }
 
-    public static void setClickListenerToMyAccount(View view, Activity from,
-            Storage storage) {
-        // TODO Auto-generated method stub
+    public static void setClickListenerToMyAccount(View view,
+            final Activity from, final Storage storage) {
 
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                myAccount(from, storage);
+            }
+        });
     }
 
     /**

@@ -52,6 +52,10 @@
             android:name=".Connect"
             android:label="@string/connect" >
         </activity>
+        <activity
+            android:name=".MyAccount"
+            android:label="@string/my_account" >
+        </activity>
     </application>
 
 </manifest>

@@ -16,6 +16,12 @@
         android:layout_alignParentBottom="true" >
 
         <TextView
+            android:id="@+id/search"
+            style="@style/footer_selected"
+            android:drawableTop="@drawable/ic_search"
+            android:text="@string/search" />
+
+        <TextView
             android:id="@+id/my_spaces"
             style="@style/footer"
             android:text="@string/my_spaces" />
