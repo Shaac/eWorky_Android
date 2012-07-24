@@ -9,5 +9,30 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/log_out" />
+    
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <TextView
+            android:id="@+id/search"
+            style="@style/footer"
+            android:drawableTop="@drawable/ic_search"
+            android:text="@string/search" />
+
+        <TextView
+            android:id="@+id/my_spaces"
+            style="@style/footer"
+            android:drawableTop="@drawable/ic_spaces"
+            android:text="@string/my_spaces" />
+
+        <TextView
+            android:id="@+id/my_account"
+            style="@style/footer_selected"
+            android:drawableTop="@drawable/ic_account"
+            android:text="@string/my_account" />
+    </LinearLayout>
 
 </RelativeLayout>

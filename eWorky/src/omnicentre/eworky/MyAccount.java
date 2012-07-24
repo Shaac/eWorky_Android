@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MyAccount extends Activity implements OnClickListener {
 
@@ -23,6 +24,13 @@ public class MyAccount extends Activity implements OnClickListener {
         // We listen to the button:
         Button b = (Button) findViewById(R.id.button);
         b.setOnClickListener(this);
+        
+     // We create the listeners for the navigation bar:
+        TextView myAccount = (TextView) findViewById(R.id.search);
+        Redirections.setClickListenerToIndex(myAccount, this);
+        
+        TextView mySpaces = (TextView) findViewById(R.id.my_spaces);
+        Redirections.setClickListenerToMySpaces(mySpaces, this);
     }
 
     public void onClick(View arg0) {

@@ -24,11 +24,13 @@
         <TextView
             android:id="@+id/my_spaces"
             style="@style/footer"
+            android:drawableTop="@drawable/ic_spaces"
             android:text="@string/my_spaces" />
 
         <TextView
             android:id="@+id/my_account"
             style="@style/footer"
+            android:drawableTop="@drawable/ic_account"
             android:text="@string/my_account" />
     </LinearLayout>
 

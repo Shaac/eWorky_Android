@@ -5,7 +5,6 @@ import omnicentre.eworky.tools.TitleBar;
 import omnicentre.eworky.widgets.IndexArrayAdapter;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.app.Activity;
@@ -49,7 +48,6 @@ public class Index extends Activity {
                 Redirections.mySpaces(this, false);
             break;
         case Redirections.MY_ACCOUNT:
-            Log.w("MYACCOUNT", String.valueOf(resultCode));
             if (resultCode == RESULT_OK)
                 Redirections.myAccount(this, false);
             break;
