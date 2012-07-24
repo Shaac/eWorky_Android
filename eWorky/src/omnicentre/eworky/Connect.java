@@ -4,6 +4,7 @@ import omnicentre.eworky.API.AsyncRequests;
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,10 +28,10 @@ public class Connect extends Activity implements OnClickListener {
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
         
-        Button inscription = (Button) findViewById(R.id.inscription);
-        Redirections.setClickListenerToInscription(inscription, this);
+        Button inscription = (Button) findViewById(R.id.register);
+        Redirections.setClickListenerToRegister(inscription, this);
         
-        Button facebook = (Button) findViewById(R.id.inscription_facebook);
+        Button facebook = (Button) findViewById(R.id.register_facebook);
         Redirections.setClickListenerToFacebook(facebook, this);
     }
 
@@ -39,5 +40,11 @@ public class Connect extends Activity implements OnClickListener {
         TextView password = (TextView) findViewById(R.id.password);
         AsyncRequests.connect(this, login.getText().toString(),
                 password.getText().toString()); 
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+            Intent data) {
+        finish();
     }
 }

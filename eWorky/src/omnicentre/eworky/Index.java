@@ -1,11 +1,11 @@
 package omnicentre.eworky;
 
 import omnicentre.eworky.tools.Redirections;
-import omnicentre.eworky.tools.Storage;
 import omnicentre.eworky.tools.TitleBar;
 import omnicentre.eworky.widgets.IndexArrayAdapter;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.app.Activity;
@@ -29,13 +29,11 @@ public class Index extends Activity {
         list.setAdapter(new IndexArrayAdapter(this));
 
         // We create the listeners for the navigation bar:
-        Storage storage = new Storage(this);
-
         TextView mySpaces = (TextView) findViewById(R.id.my_spaces);
-        Redirections.setClickListenerToMySpaces(mySpaces, this, storage);
+        Redirections.setClickListenerToMySpaces(mySpaces, this);
 
         TextView myAccount = (TextView) findViewById(R.id.my_account);
-        Redirections.setClickListenerToMyAccount(myAccount, this, storage);
+        Redirections.setClickListenerToMyAccount(myAccount, this);
     }
 
     @Override
@@ -48,11 +46,12 @@ public class Index extends Activity {
         switch (requestCode) {
         case Redirections.MY_SPACES:
             if (resultCode == RESULT_OK)
-                Redirections.mySpaces(this, new Storage(this), false);
+                Redirections.mySpaces(this, false);
             break;
         case Redirections.MY_ACCOUNT:
+            Log.w("MYACCOUNT", String.valueOf(resultCode));
             if (resultCode == RESULT_OK)
-                Redirections.myAccount(this, new Storage(this), false);
+                Redirections.myAccount(this, false);
             break;
         }
     }

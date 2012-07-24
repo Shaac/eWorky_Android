@@ -34,6 +34,10 @@
     <string name="register">Inscription</string>
     <string name="errorFile">Une erreur de fichier est apparue.</string>
     <string name="log_out">Deconnexion</string>
+    <string name="email">E-mail</string>
+    <string name="first_name">Prénom</string>
+    <string name="last_name">Nom</string>
+    <string name="phone">Téléphone</string>
     
 
 </resources>

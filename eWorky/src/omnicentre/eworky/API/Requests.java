@@ -29,9 +29,9 @@ public class Requests {
      * The API's URL.
      */
     private static final String host =
-            //"http://10.0.2.2:15157/api/localisation/";
+            "http://10.0.2.2:15157/api/localisation/";
             //"http://taff.coworky.com/api/localisation/";
-            "http://www.eworky.com/api/localisation/";
+            //"http://www.eworky.com/api/localisation/";
 
     /**
      * Calls a function of the API.
@@ -127,8 +127,8 @@ public class Requests {
         return o.getResponse();
     }
 
-    public static String register(String firstName, String lastName, 
-            String email, String phone) {
+    public static AuthJson register(String firstName, String lastName, 
+            String email, String phone) throws NoSuccessException {
 
         HashMap<String, String> postArguments = new HashMap<String, String>();
         postArguments.put("FirstName", firstName);
@@ -138,7 +138,13 @@ public class Requests {
 
         HashMap<String, String> getArguments = new HashMap<String, String>();
 
-        return Requests.call("register", postArguments, getArguments);
+        String json = Requests.call("register", postArguments, getArguments);
+        
+        Gson gson = new Gson();
+        Type type = new TypeToken<ObjectResult<AuthJson>>() {}.getType();
+        ObjectResult<AuthJson> o = gson.fromJson(json, type);
+
+        return o.getResponse();
     }
 
     private static String joinArguments(HashMap<String, String> arguments) {

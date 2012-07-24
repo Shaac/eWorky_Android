@@ -47,6 +47,11 @@ public class Storage {
     public boolean isConnected() {
         return getToken().length() > 0;
     }
+    
+    public static boolean isConnected(Activity activity) {
+        Storage s = new Storage(activity);
+        return s.getToken().length() > 0;
+    }
 
     /**
      * Get the stored token.

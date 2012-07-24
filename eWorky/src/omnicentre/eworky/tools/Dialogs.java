@@ -3,6 +3,7 @@ package omnicentre.eworky.tools;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 
 /**
  * This class is used to create Dialogs.
@@ -25,6 +26,7 @@ public class Dialogs {
         builder.setMessage(description);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int id) {
+                activity.setResult(Activity.RESULT_OK, new Intent());
                 Redirections.index(activity);
             }
         });
@@ -39,6 +41,7 @@ public class Dialogs {
         builder.setMessage(description);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int id) {
+                activity.setResult(Activity.RESULT_OK, new Intent());
                 activity.finish();
             }
         });

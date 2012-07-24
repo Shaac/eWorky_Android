@@ -3,7 +3,7 @@ package omnicentre.eworky.tools;
 import java.util.ArrayList;
 
 import omnicentre.eworky.Index;
-import omnicentre.eworky.Inscription;
+import omnicentre.eworky.Register;
 import omnicentre.eworky.LocalisationDetails;
 import omnicentre.eworky.MyAccount;
 import omnicentre.eworky.R;
@@ -117,12 +117,11 @@ public class Redirections {
         from.startActivity(intent);
     }
 
-    public static void mySpaces(Activity from, Storage storage) {
-        mySpaces(from, storage, true);
+    public static void mySpaces(Activity from) {
+        mySpaces(from, true);
     }
-    public static void mySpaces(Activity from, Storage storage,
-            boolean connect) {
-        if (storage.isConnected()) {
+    public static void mySpaces(Activity from, boolean connect) {
+        if (Storage.isConnected(from)) {
             // TODO redirect to my spaces
         } else if (connect) {
             Intent intent = new Intent(from, Connect.class);
@@ -130,12 +129,11 @@ public class Redirections {
         }
     }
 
-    public static void myAccount(Activity from, Storage storage) {
-        myAccount(from, storage, true);
+    public static void myAccount(Activity from) {
+        myAccount(from, true);
     }
-    public static void myAccount(Activity from, Storage storage,
-            boolean connect) {
-        if (storage.isConnected()) {
+    public static void myAccount(Activity from, boolean connect) {
+        if (Storage.isConnected(from)) {
             Intent intent = new Intent(from, MyAccount.class);
             from.startActivity(intent);
         } else if (connect) {
@@ -144,8 +142,8 @@ public class Redirections {
         }
     }
     
-    public static void inscription(Activity from) {
-        Intent intent = new Intent(from, Inscription.class);
+    public static void register(Activity from) {
+        Intent intent = new Intent(from, Register.class);
         from.startActivityForResult(intent, 0);
     }
     
@@ -246,37 +244,38 @@ public class Redirections {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
+                from.setResult(Activity.RESULT_OK, new Intent());
                 from.finish();
             }
         });
     }
 
     public static void setClickListenerToMySpaces(View view,
-            final Activity from, final Storage storage) {
+            final Activity from) {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                mySpaces(from, storage);
+                mySpaces(from);
             }
         });
     }
 
     public static void setClickListenerToMyAccount(View view,
-            final Activity from, final Storage storage) {
+            final Activity from) {
 
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                myAccount(from, storage);
+                myAccount(from);
             }
         });
     }
     
-    public static void setClickListenerToInscription(View view,
+    public static void setClickListenerToRegister(View view,
             final Activity from) {
         
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                inscription(from);
+                register(from);
             }
         });
         
