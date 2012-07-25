@@ -19,16 +19,16 @@ public class MyAccount extends Activity implements OnClickListener {
 
         // We set the view, with the title bar:
         TitleBar.setContentView(this, R.layout.my_account,
-                R.layout.title_search);
+                R.layout.title_my_account);
 
         // We listen to the button:
         Button b = (Button) findViewById(R.id.button);
         b.setOnClickListener(this);
-        
-     // We create the listeners for the navigation bar:
+
+        // We create the listeners for the navigation bar:
         TextView myAccount = (TextView) findViewById(R.id.search);
         Redirections.setClickListenerToIndex(myAccount, this);
-        
+
         TextView mySpaces = (TextView) findViewById(R.id.my_spaces);
         Redirections.setClickListenerToMySpaces(mySpaces, this);
     }
@@ -40,5 +40,4 @@ public class MyAccount extends Activity implements OnClickListener {
         }
         Redirections.index(this);
     }
-
 }

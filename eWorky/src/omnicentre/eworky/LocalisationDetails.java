@@ -35,7 +35,7 @@ public class LocalisationDetails extends Activity {
         }
 
         // We set the view, with the title bar:
-        TitleBar.setContentView(this, R.layout.details, R.layout.title_details);
+        TitleBar.setContentView(this, R.layout.details,R.layout.title_details);
         
         // We fill the fields:
         ((TextView) findViewById(R.id.name)).setText(l.getName());
@@ -43,7 +43,8 @@ public class LocalisationDetails extends Activity {
         ((TextView) findViewById(R.id.type)).setText(l.getType());
         ((TextView) findViewById(R.id.city)).setText(l.getCity());
         ((TextView) findViewById(R.id.content)).setText(l.getDescription());
-        ((TextView)findViewById(R.id.list)).setText((new Amenities(l.getAmenities())).toText());
+        ((TextView)findViewById(R.id.list)).setText((new Amenities(
+                l.getAmenities())).toText());
 
         Drawable image = Http.getImage(l.getImage());
         if (image != null)

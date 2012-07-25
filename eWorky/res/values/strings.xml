@@ -38,7 +38,7 @@
     <string name="first_name">Prénom</string>
     <string name="last_name">Nom</string>
     <string name="phone">Téléphone</string>
-    <string name="register_facebook">S\'inscrire via Facebook</string>
+    <string name="register_facebook">S\'inscrire / Se connecter via Facebook</string>
     <string name="password">Mot de passe</string>
     
 

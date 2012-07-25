@@ -16,7 +16,8 @@ public class Register extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
 
         // We set the view, with the title bar:
-        TitleBar.setContentView(this, R.layout.register, R.layout.title_search);
+        TitleBar.setContentView(this, R.layout.register,
+                R.layout.title_register);
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);

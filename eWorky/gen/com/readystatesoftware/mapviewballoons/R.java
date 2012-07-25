@@ -134,8 +134,10 @@ public final class R {
         public static final int title_details=0x7f03000e;
         public static final int title_index=0x7f03000f;
         public static final int title_map=0x7f030010;
-        public static final int title_results=0x7f030011;
-        public static final int title_search=0x7f030012;
+        public static final int title_my_account=0x7f030011;
+        public static final int title_register=0x7f030012;
+        public static final int title_results=0x7f030013;
+        public static final int title_search=0x7f030014;
     }
     public static final class menu {
         public static final int activity_index=0x7f090000;

@@ -34,7 +34,8 @@ public class SearchResults extends MapActivity {
         super.onCreate(savedInstanceState);
 
 
-        TitleBar.setContentView(this, R.layout.search_results, R.layout.title_results);
+        TitleBar.setContentView(this, R.layout.search_results,
+                R.layout.title_results);
 
         // We create a loading dialog:
         ProgressDialog dialog = ProgressDialog.show(this, "", 
@@ -46,11 +47,16 @@ public class SearchResults extends MapActivity {
         (new LocalisationsLoader(this, dialog)).execute();
     }
 
+    /**
+     * This listener redirects to the details of the clicked localisation.
+     */
     private OnItemClickListener listener = new OnItemClickListener () {
 
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                 long arg3) {
-            LocalisationJson l = (LocalisationJson) arg0.getItemAtPosition(position);
+            
+            LocalisationJson l = (LocalisationJson)
+                    arg0.getItemAtPosition(position);
             Redirections.localisationDetails(SearchResults.this, l.getId());
             
 
@@ -70,8 +76,8 @@ public class SearchResults extends MapActivity {
 
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setOnItemClickListener(listener);
-        listView.setAdapter(new LocalisationArrayAdapter(getApplicationContext(),
-                localisationsList));
+        listView.setAdapter(new LocalisationArrayAdapter(
+                getApplicationContext(), localisationsList));
         listView.setTextFilterEnabled(true);
 
         // Map settings:
