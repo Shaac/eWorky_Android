@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/title_layout" >
+
+    <ImageView
+        android:id="@+id/title_logo"
+        style="@style/logo"
+        android:contentDescription="@string/app_name" />
+    
+    <TextView
+        android:id="@+id/title_text"
+        style="@style/title_text"
+        android:layout_toRightOf="@+id/title_logo"
+        android:text="@string/connect" />
+
+</RelativeLayout>

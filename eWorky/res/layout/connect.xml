@@ -3,18 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <TextView
+        android:id="@+id/login_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email" />
+    
     <EditText
         android:id="@+id/login"
         style="@style/input"
-        android:inputType="text" >
+        android:layout_toRightOf="@id/login_label"
+        android:inputType="textEmailAddress" >
 
         <requestFocus />
     </EditText>
+    
+    <TextView
+        android:id="@+id/password_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login"
+        android:text="@string/password" />
 
     <EditText
         android:id="@+id/password"
         style="@style/input"
         android:layout_below="@id/login"
+        android:layout_toRightOf="@id/password_label"
         android:inputType="textPassword" >
     </EditText>
 
@@ -38,6 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/register"
         android:layout_centerHorizontal="true"
-        android:text="@string/connect" />
+        android:text="@string/register_facebook" />
 
 </RelativeLayout>

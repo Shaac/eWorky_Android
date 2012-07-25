@@ -1,11 +1,22 @@
 package omnicentre.eworky;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import omnicentre.eworky.API.AsyncRequests;
+
+import omnicentre.eworky.tools.Dialogs;
+import omnicentre.eworky.tools.Facebook;
+import omnicentre.eworky.tools.FacebookJson;
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,7 +33,7 @@ public class Connect extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
 
         // We set the view, with the title bar:
-        TitleBar.setContentView(this, R.layout.connect, R.layout.title_search);
+        TitleBar.setContentView(this, R.layout.connect, R.layout.title_connect);
 
         // We listen to the buttons:
         Button button = (Button) findViewById(R.id.button);
@@ -45,6 +56,23 @@ public class Connect extends Activity implements OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
             Intent data) {
-        finish();
+        
+        if (requestCode == Redirections.FACEBOOK) {
+            if (resultCode == RESULT_OK) {
+                Facebook.authorizeCallback(requestCode, resultCode, data);
+                try {
+                    FacebookJson json = Facebook.me();
+                    AsyncRequests.register(this, json.email, json.first_name,
+                            json.last_name, json.id, json.link);
+                } catch (Exception e) {
+                    Dialogs.newAlertToFinish("Error", e.getMessage(), this);
+                }
+            } else
+                finish();
+        } else {
+            setResult(RESULT_OK, new Intent());
+            finish();
+        }
+            
     }
 }

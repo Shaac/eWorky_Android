@@ -18,7 +18,6 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ViewSwitcher;
 
 /**
@@ -40,6 +39,11 @@ public class Redirections {
      * The constant for when we want an intent to redirect to my account.
      */
     public static final int MY_ACCOUNT = 2;
+    
+    /**
+     * The constant for when the action is from Facebook.
+     */
+    public static final int FACEBOOK = 32665;
 
 
 
@@ -141,13 +145,13 @@ public class Redirections {
             from.startActivityForResult(intent, MY_ACCOUNT);
         }
     }
-    
+
     public static void register(Activity from) {
         Intent intent = new Intent(from, Register.class);
         from.startActivityForResult(intent, 0);
     }
-    
-    
+
+
     // Click Listeners:
 
     /**
@@ -269,16 +273,16 @@ public class Redirections {
             }
         });
     }
-    
+
     public static void setClickListenerToRegister(View view,
             final Activity from) {
-        
+
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 register(from);
             }
         });
-        
+
     }
 
     /**
@@ -317,9 +321,13 @@ public class Redirections {
         return activity.getIntent().getExtras().getBoolean("omnicentre.eworki.withName");
     }
 
-    public static void setClickListenerToFacebook(Button facebook,
-            Connect connect) {
-        // TODO Auto-generated method stub
-        
+    public static void setClickListenerToFacebook(View view,
+            final Activity activity) {
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                Facebook.authorize(activity);
+            }
+        });
+
     }
 }

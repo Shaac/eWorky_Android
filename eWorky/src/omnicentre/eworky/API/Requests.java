@@ -29,9 +29,9 @@ public class Requests {
      * The API's URL.
      */
     private static final String host =
-            "http://10.0.2.2:15157/api/localisation/";
+            //"http://10.0.2.2:15157/api/localisation/";
             //"http://taff.coworky.com/api/localisation/";
-            //"http://www.eworky.com/api/localisation/";
+            "http://www.eworky.com/api/localisation/";
 
     /**
      * Calls a function of the API.
@@ -146,6 +146,27 @@ public class Requests {
 
         return o.getResponse();
     }
+    
+    public static AuthJson register(String firstName, String lastName, 
+            String email, String id, String link) throws NoSuccessException {
+
+        HashMap<String, String> postArguments = new HashMap<String, String>();
+        postArguments.put("FirstName", firstName);
+        postArguments.put("LastName", lastName);
+        postArguments.put("Email", email);
+        postArguments.put("FacebookId", id);
+        postArguments.put("FacebookLink", link);
+
+        HashMap<String, String> getArguments = new HashMap<String, String>();
+
+        String json = Requests.call("register", postArguments, getArguments);
+        
+        Gson gson = new Gson();
+        Type type = new TypeToken<ObjectResult<AuthJson>>() {}.getType();
+        ObjectResult<AuthJson> o = gson.fromJson(json, type);
+
+        return o.getResponse();
+    }
 
     private static String joinArguments(HashMap<String, String> arguments) {
         StringBuilder s = new StringBuilder();
@@ -154,7 +175,7 @@ public class Requests {
                 s.append(e.getKey());
                 s.append("=");
                 try {
-                    s.append(URLEncoder.encode(e.getValue(), "UTF-8"));
+                    s.append(URLEncoder.encode("" + e.getValue(), "UTF-8"));
                 } catch (UnsupportedEncodingException e1) {}
                 s.append("&");
             }
