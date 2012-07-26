@@ -70,4 +70,79 @@ public class Dialogs {
         builder.create().show();
     }
 
+    public static void newBoundaryAlert(final SearchResults activity,
+            final SearchCriteria criteria) {
+        final CharSequence[] items = {"1", "5", "10", "15", "20", "25", "30",
+                "35", "40", "45", "50"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(activity.getResources().getString(R.string.distance));
+        builder.setSingleChoiceItems(items, -1,
+                new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                dialog.dismiss();
+                criteria.setBoundary(item == 0 ? 1 : item * 5);
+                (new AsyncSearch(activity, criteria)).execute();
+            }
+        });
+        builder.create().show();
+    }
+    
+    public static void newCriteriaAlert(final SearchResults activity,
+            final SearchCriteria criteria) {
+        final CharSequence[] items = {
+                activity.getResources().getString(R.string.type_0),
+                activity.getResources().getString(R.string.type_1),
+                activity.getResources().getString(R.string.type_2),
+                activity.getResources().getString(R.string.type_3),
+                activity.getResources().getString(R.string.type_4),
+                activity.getResources().getString(R.string.type_5),
+                activity.getResources().getString(R.string.type_6),
+                activity.getResources().getString(R.string.type_7),
+                activity.getResources().getString(R.string.type_8),
+                activity.getResources().getString(R.string.type_9),
+                activity.getResources().getString(R.string.type_10),
+                activity.getResources().getString(R.string.feature_0),
+                activity.getResources().getString(R.string.feature_0),
+                activity.getResources().getString(R.string.feature_1),
+                activity.getResources().getString(R.string.feature_2),
+                activity.getResources().getString(R.string.feature_3),
+                activity.getResources().getString(R.string.feature_4)};
+
+        boolean[] b = new boolean[16];
+        for (int i : criteria.getTypes())
+            b[i] = true;
+        for (int i : criteria.getFeatures())
+            b[i + 11] = true;
+        
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(activity.getResources().getString(R.string.distance));
+        builder.setMultiChoiceItems(items, b,
+                new DialogInterface.OnMultiChoiceClickListener() {
+
+            public void onClick(DialogInterface dialog, int which,
+                    boolean isChecked) {
+                if (which > 10) {
+                    if (isChecked)
+                        criteria.addType(which);
+                    else
+                        criteria.removeType(which);
+                } else {
+                    if (isChecked)
+                        criteria.addFeature(which);
+                    else
+                        criteria.removeFeature(which);
+                }
+                
+            }
+        });
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                dialog.dismiss();
+                (new AsyncSearch(activity, criteria)).execute();
+            }
+        });
+        builder.create().show();
+    }
 }

@@ -41,11 +41,6 @@ public class Redirections {
     public static final int MY_ACCOUNT = 2;
     
     /**
-     * The constant for when we want an intent to redirect to sort settings.
-     */
-    public static final int SORT = 3;
-    
-    /**
      * The constant for when the action is from Facebook.
      */
     public static final int FACEBOOK = 32665;
@@ -104,6 +99,14 @@ public class Redirections {
     
     public static void sort(SearchResults from, SearchCriteria criteria) {
         Dialogs.newSortAlert(from, criteria);
+    }
+    
+    public static void boundary(SearchResults from, SearchCriteria criteria) {
+        Dialogs.newBoundaryAlert(from, criteria);
+    }
+    
+    public static void criteria(SearchResults from, SearchCriteria criteria) {
+        Dialogs.newCriteriaAlert(from, criteria);
     }
 
     /**
@@ -346,6 +349,27 @@ public class Redirections {
         view.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 sort(from, criteria);
+            }
+        });
+        
+    }
+
+    public static void setClickListenerToBoundary(View view,
+            final SearchResults from, final SearchCriteria criteria) {
+
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                boundary(from, criteria);
+            }
+        });  
+    }
+
+    public static void setClickListenerToCriteria(View view,
+            final SearchResults from, final SearchCriteria criteria) {
+        
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                criteria(from, criteria);
             }
         });
         

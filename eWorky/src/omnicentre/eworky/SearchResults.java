@@ -39,17 +39,17 @@ public class SearchResults extends MapActivity {
         TitleBar.setContentView(this, R.layout.search_results,
                 R.layout.title_results);
 
-        // set the listeners:
+        // We set the listeners:
         SearchCriteria criteria = Redirections.getCriteria(this);
 
         TextView sort = (TextView) findViewById(R.id.sort);
         Redirections.setClickListenerToSort(sort, this, criteria);
 
         TextView crit = (TextView) findViewById(R.id.criteria);
-        Redirections.setClickListenerToSort(crit, this, criteria);
+        Redirections.setClickListenerToCriteria(crit, this, criteria);
 
         TextView kilometers = (TextView) findViewById(R.id.kilometers);
-        Redirections.setClickListenerToSort(kilometers, this, criteria);
+        Redirections.setClickListenerToBoundary(kilometers, this, criteria);
         kilometers.setText((int) criteria.getBoundary() + " km");
 
         ListView listView = (ListView) findViewById(R.id.list);
