@@ -127,7 +127,10 @@ public class SearchCriteria implements Parcelable {
     }
 
     public double getBoundary() {
-        return boundary;
+        if (boundary <= 0)
+            return 50;
+        else
+            return boundary;
     }
 
     public void setBoundary(double boundary) {
@@ -143,7 +146,10 @@ public class SearchCriteria implements Parcelable {
     }
 
     public int getOrderBy() {
-        return orderBy;
+        if (orderBy == -1)
+            return 1;
+        else
+            return orderBy;
     }
 
     public void setOrderBy(int orderBy) {
@@ -167,7 +173,10 @@ public class SearchCriteria implements Parcelable {
     }
 
     public int getMaxCount() {
-        return maxCount;
+        if (maxCount == -1)
+            return 30;
+        else
+            return maxCount;
     }
 
     public void setMaxCount(int maxCount) {

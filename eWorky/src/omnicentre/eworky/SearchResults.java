@@ -1,27 +1,29 @@
 package omnicentre.eworky;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
 import omnicentre.eworky.API.LocalisationJson;
-import omnicentre.eworky.localisations.LocalisationsLoader;
 import omnicentre.eworky.localisations.MyItimizedOverlay;
 import omnicentre.eworky.tools.Dialogs;
+import omnicentre.eworky.tools.GPS;
 import omnicentre.eworky.tools.MyOverlayItem;
 import omnicentre.eworky.tools.Redirections;
+import omnicentre.eworky.tools.SearchCriteria;
 import omnicentre.eworky.tools.TitleBar;
 import omnicentre.eworky.widgets.LocalisationArrayAdapter;
 
-import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * Makes the search and displays the results of the search in a list.
@@ -33,18 +35,29 @@ public class SearchResults extends MapActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        // We set the title bar:
         TitleBar.setContentView(this, R.layout.search_results,
                 R.layout.title_results);
 
-        // We create a loading dialog:
-        ProgressDialog dialog = ProgressDialog.show(this, "", 
-                "Loading. Please wait...", true);
+        // set the listeners:
+        SearchCriteria criteria = Redirections.getCriteria(this);
 
+        TextView sort = (TextView) findViewById(R.id.sort);
+        Redirections.setClickListenerToSort(sort, this, criteria);
 
+        TextView crit = (TextView) findViewById(R.id.criteria);
+        Redirections.setClickListenerToSort(crit, this, criteria);
+
+        TextView kilometers = (TextView) findViewById(R.id.kilometers);
+        Redirections.setClickListenerToSort(kilometers, this, criteria);
+        kilometers.setText((int) criteria.getBoundary() + " km");
+
+        ListView listView = (ListView) findViewById(R.id.list);
+        listView.setOnItemClickListener(listener);
+        listView.setTextFilterEnabled(true);
 
         // We charge the data in an asynchronous task:
-        (new LocalisationsLoader(this, dialog)).execute();
+        (new GPS(this, criteria)).execute();
     }
 
     /**
@@ -53,15 +66,11 @@ public class SearchResults extends MapActivity {
     private OnItemClickListener listener = new OnItemClickListener () {
 
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                long arg3) {
-            
+                long arg3) {    
             LocalisationJson l = (LocalisationJson)
                     arg0.getItemAtPosition(position);
             Redirections.localisationDetails(SearchResults.this, l.getId());
-            
-
         }
-
     };
 
     /**
@@ -73,12 +82,6 @@ public class SearchResults extends MapActivity {
      */
     public void show(ArrayList<LocalisationJson> localisationsList,
             String error) {
-
-        ListView listView = (ListView) findViewById(R.id.list);
-        listView.setOnItemClickListener(listener);
-        listView.setAdapter(new LocalisationArrayAdapter(
-                getApplicationContext(), localisationsList));
-        listView.setTextFilterEnabled(true);
 
         // Map settings:
         MapView mapView = (MapView) this.findViewById(R.id.mapView);
@@ -101,6 +104,12 @@ public class SearchResults extends MapActivity {
         controller.setCenter(itemizedOverlay.getCenter());
         controller.zoomToSpan(itemizedOverlay.getLatSpanE6(),
                 itemizedOverlay.getLonSpanE6());
+    }
+
+    public void refresh(List<LocalisationJson> localisationsList) {
+        ListView list = (ListView) findViewById(R.id.list);
+        list.setAdapter(new LocalisationArrayAdapter(getApplicationContext(),
+                (ArrayList<LocalisationJson>) localisationsList));
     }
 
     @Override

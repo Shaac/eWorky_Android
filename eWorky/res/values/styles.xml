@@ -59,7 +59,7 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:adjustViewBounds">true</item>
     </style>
-    
+
     <style name="footer">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -68,7 +68,7 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:background">#000000</item>
     </style>
-    
+
     <style name="footer_selected">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -77,7 +77,7 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:background">#222222</item>
     </style>
-    
+
     <style name="input">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

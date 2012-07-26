@@ -41,6 +41,11 @@ public class Redirections {
     public static final int MY_ACCOUNT = 2;
     
     /**
+     * The constant for when we want an intent to redirect to sort settings.
+     */
+    public static final int SORT = 3;
+    
+    /**
      * The constant for when the action is from Facebook.
      */
     public static final int FACEBOOK = 32665;
@@ -95,6 +100,10 @@ public class Redirections {
         Intent intent = new Intent(from, SearchResults.class);
         intent.putExtra("omnicentre.eworki.criteria", criteria);
         from.startActivity(intent);
+    }
+    
+    public static void sort(SearchResults from, SearchCriteria criteria) {
+        Dialogs.newSortAlert(from, criteria);
     }
 
     /**
@@ -329,5 +338,16 @@ public class Redirections {
             }
         });
 
+    }
+
+    public static void setClickListenerToSort(View view,
+            final SearchResults from, final SearchCriteria criteria) {
+        
+        view.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                sort(from, criteria);
+            }
+        });
+        
     }
 }
