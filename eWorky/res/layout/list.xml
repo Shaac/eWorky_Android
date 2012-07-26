@@ -52,6 +52,18 @@
         android:textSize="10dp" >
     </TextView>
 
+    <TextView
+        android:id="@+id/desktop"
+        style="@style/price"
+        android:layout_below="@id/type"
+        android:layout_toRightOf="@+id/picture" />
+
+    <TextView
+        android:id="@+id/meeting"
+        style="@style/price"
+        android:layout_below="@id/desktop"
+        android:layout_toRightOf="@+id/picture" />
+
     <ImageView
         android:id="@+id/wifi"
         android:layout_width="20dp"

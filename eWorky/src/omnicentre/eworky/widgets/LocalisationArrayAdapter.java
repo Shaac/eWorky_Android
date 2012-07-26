@@ -10,6 +10,7 @@ import omnicentre.eworky.R;
 import omnicentre.eworky.API.FeatureJson;
 import omnicentre.eworky.API.ImageJson;
 import omnicentre.eworky.API.LocalisationJson;
+import omnicentre.eworky.API.PricesJson;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -61,7 +62,7 @@ public class LocalisationArrayAdapter extends ArrayAdapter<LocalisationJson> {
                 " - " + l.getCity() + " (" + l.getPostalCode() + ")");
 
         // We choose whether we show the prices or the amenities:
-        boolean b = l.getOffers().isEmpty();
+        boolean b = l.isFree();
         List<FeatureJson> a = l.getFeatures();
 
         if (!b || !FeatureJson.hasFreeWifi(a))
@@ -87,6 +88,18 @@ public class LocalisationArrayAdapter extends ArrayAdapter<LocalisationJson> {
         if (!b || !FeatureJson.hasHandicap(a))
             ((ImageView) view.findViewById(R.id.access)).setVisibility(
                     View.GONE);
+
+        if (!b) {
+            String desktop = PricesJson.getOfficePrice(l.getPrices());
+            if (desktop.length() > 0)
+                ((TextView) view.findViewById(R.id.desktop)).setText(
+                        "Bureau dès " + desktop);
+            String meeting = PricesJson.getMeetingPrice(l.getPrices());
+            if (meeting.length() > 0)
+                ((TextView) view.findViewById(R.id.meeting)).setText(
+                        "Salle de réunion dès " + meeting);
+            // TODO String resources.
+        }
 
         ImageView imageView = (ImageView) view.findViewById(R.id.picture);
         Drawable d = null;

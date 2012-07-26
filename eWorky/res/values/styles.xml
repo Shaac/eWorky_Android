@@ -84,5 +84,13 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:ems">10</item>
     </style>
+    
+    <style name="price">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#BB0000</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

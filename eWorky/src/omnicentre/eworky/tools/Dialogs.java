@@ -163,8 +163,6 @@ public class Dialogs {
                     else
                         criteria.removeFeature(which - 12);
                 }
-                
-                
             }
         });
         builder.setPositiveButton("OK",
