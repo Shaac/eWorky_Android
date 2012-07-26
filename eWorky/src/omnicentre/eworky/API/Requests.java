@@ -29,9 +29,9 @@ public class Requests {
      * The API's URL.
      */
     private static final String host =
-            //"http://10.0.2.2:15157/api/localisation/";
+            "http://10.0.2.2:15157/api/localisation/";
             //"http://taff.coworky.com/api/localisation/";
-            "http://www.eworky.com/api/localisation/";
+            //"http://www.eworky.com/api/localisation/";
 
     /**
      * Calls a function of the API.

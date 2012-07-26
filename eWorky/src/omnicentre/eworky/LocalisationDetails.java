@@ -3,10 +3,11 @@ package omnicentre.eworky;
 import java.io.InputStream;
 import java.net.URL;
 
+import omnicentre.eworky.API.FeatureJson;
+import omnicentre.eworky.API.ImageJson;
 import omnicentre.eworky.API.LocalisationJson;
 import omnicentre.eworky.API.NoSuccessException;
 import omnicentre.eworky.API.Requests;
-import omnicentre.eworky.localisations.Amenities;
 
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
@@ -46,12 +47,12 @@ public class LocalisationDetails extends Activity {
         ((TextView) findViewById(R.id.type)).setText(l.getType());
         ((TextView) findViewById(R.id.city)).setText(l.getCity());
         ((TextView) findViewById(R.id.content)).setText(l.getDescription());
-        ((TextView)findViewById(R.id.list)).setText((new Amenities(
-                l.getAmenities())).toText());
+        ((TextView)findViewById(R.id.list)).setText(FeatureJson.toText(
+                l.getFeatures()));
 
         Drawable d = null;
         try {
-            URL url = new URL(l.getImageThumb());
+            URL url = new URL(ImageJson.getThumbURL(l.getImages()));
             InputStream content = (InputStream)url.getContent();
             d = Drawable.createFromStream(content , "src"); 
         } catch (Exception e) {

@@ -81,7 +81,7 @@ public class SearchResults extends MapActivity {
         ListView list = (ListView) findViewById(R.id.list);
         list.setAdapter(new LocalisationArrayAdapter(getApplicationContext(),
                 (ArrayList<LocalisationJson>) localisationsList));
-
+        
         // Map settings:
         MapView mapView = (MapView) this.findViewById(R.id.mapView);
         Drawable pin = this.getResources().getDrawable(R.drawable.ic_launcher);

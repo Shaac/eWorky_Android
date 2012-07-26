@@ -13,8 +13,6 @@ public class LocalisationJson {
     private double latitude;
     private double longitude;
     private String description;
-    private String image;
-    private String imageThumb;
     private String address;
     private String postalCode;
     private String city;
@@ -23,10 +21,12 @@ public class LocalisationJson {
     private boolean isFree;
     private String url;
     private double rating;
-    private List<String> amenities;
-    private PricesJson prices;
-    private List<OfferJson> offers;
     private OpeningTimesJson openingTimes;
+    private List<PricesJson> prices;
+    private AccessJson access;
+    private List<ImageJson> images;
+    private List<FeatureJson> features;
+    private List<OfferJson> offers;
     private List<CommentJson> comments;
     private List<MemberJson> fans;
 
@@ -53,14 +53,6 @@ public class LocalisationJson {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getImageThumb() {
-        return imageThumb;
     }
 
     public String getAddress() {
@@ -95,12 +87,7 @@ public class LocalisationJson {
         return rating;
     }
 
-    public List<String> getAmenities() {
-        return amenities;
-    }
-
-
-    public PricesJson getPrices() {
+    public List<PricesJson> getPrices() {
         return prices;
     }
 
@@ -119,5 +106,17 @@ public class LocalisationJson {
 
     public List<MemberJson> getFans() {
         return fans;
+    }
+
+    public AccessJson getAccess() {
+        return access;
+    }
+
+    public List<ImageJson> getImages() {
+        return images;
+    }
+
+    public List<FeatureJson> getFeatures() {
+        return features;
     }
 }

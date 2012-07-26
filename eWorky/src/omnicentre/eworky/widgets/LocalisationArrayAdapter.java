@@ -4,10 +4,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import omnicentre.eworky.R;
+import omnicentre.eworky.API.FeatureJson;
+import omnicentre.eworky.API.ImageJson;
 import omnicentre.eworky.API.LocalisationJson;
-import omnicentre.eworky.localisations.Amenities;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -60,36 +62,36 @@ public class LocalisationArrayAdapter extends ArrayAdapter<LocalisationJson> {
 
         // We choose whether we show the prices or the amenities:
         boolean b = l.getOffers().isEmpty();
-        Amenities a = new Amenities((ArrayList<String>) l.getAmenities());
+        List<FeatureJson> a = l.getFeatures();
 
-        if (!b || !a.hasFreeWifi())
+        if (!b || !FeatureJson.hasFreeWifi(a))
             ((ImageView) view.findViewById(R.id.wifi)).setVisibility(
                     View.GONE);
 
-        if (!b || !a.hasWifi())
+        if (!b || !FeatureJson.hasWifi(a))
             ((ImageView) view.findViewById(R.id.wifi_euros)).setVisibility(
                     View.GONE);
 
-        if (!b || !a.hasFood())
+        if (!b || !FeatureJson.hasResto(a))
             ((ImageView) view.findViewById(R.id.food)).setVisibility(
                     View.GONE);
 
-        if (!b || !a.hasCoffee())
+        if (!b || !FeatureJson.hasCoffee(a))
             ((ImageView) view.findViewById(R.id.coffee)).setVisibility(
                     View.GONE);
 
-        if (!b || !a.hasParking())
+        if (!b || !FeatureJson.hasParking(a))
             ((ImageView) view.findViewById(R.id.parking)).setVisibility(
                     View.GONE);
 
-        if (!b || !a.hasAccess())
+        if (!b || !FeatureJson.hasHandicap(a))
             ((ImageView) view.findViewById(R.id.access)).setVisibility(
                     View.GONE);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.picture);
         Drawable d = null;
         try {
-            URL url = new URL(l.getImageThumb());
+            URL url = new URL(ImageJson.getThumbURL(l.getImages()));
             InputStream content = (InputStream)url.getContent();
             d = Drawable.createFromStream(content , "src"); 
         } catch (Exception e) {

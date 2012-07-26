@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.widget.TextView;
 
 /**
  * This class is used to create Dialogs.
@@ -102,6 +103,9 @@ public class Dialogs {
             public void onClick(DialogInterface dialog, int item) {
                 dialog.dismiss();
                 criteria.setBoundary(item == 0 ? 1 : item * 5);
+                TextView kilometers = (TextView)
+                        activity.findViewById(R.id.kilometers);
+                kilometers.setText((int) criteria.getBoundary() + " km");
                 (new AsyncSearch(activity, criteria)).execute();
             }
         });
@@ -128,18 +132,18 @@ public class Dialogs {
                 activity.getResources().getString(R.string.type_8),
                 activity.getResources().getString(R.string.type_9),
                 activity.getResources().getString(R.string.type_10),
-                activity.getResources().getString(R.string.feature_0),
+                "------------",
                 activity.getResources().getString(R.string.feature_0),
                 activity.getResources().getString(R.string.feature_1),
                 activity.getResources().getString(R.string.feature_2),
                 activity.getResources().getString(R.string.feature_3),
                 activity.getResources().getString(R.string.feature_4)};
 
-        boolean[] b = new boolean[16];
+        boolean[] b = new boolean[17];
         for (int i : criteria.getTypes())
             b[i] = true;
         for (int i : criteria.getFeatures())
-            b[i + 11] = true;
+            b[i + 12] = true;
         
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getResources().getString(R.string.distance));
@@ -148,17 +152,18 @@ public class Dialogs {
 
             public void onClick(DialogInterface dialog, int which,
                     boolean isChecked) {
-                if (which > 10) {
+                if (which < 11) {
                     if (isChecked)
                         criteria.addType(which);
                     else
                         criteria.removeType(which);
-                } else {
+                } else if (which > 11) {
                     if (isChecked)
-                        criteria.addFeature(which);
+                        criteria.addFeature(which - 12);
                     else
-                        criteria.removeFeature(which);
+                        criteria.removeFeature(which - 12);
                 }
+                
                 
             }
         });
@@ -169,6 +174,7 @@ public class Dialogs {
                 (new AsyncSearch(activity, criteria)).execute();
             }
         });
-        builder.create().show();
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

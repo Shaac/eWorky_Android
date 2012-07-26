@@ -157,22 +157,25 @@ public class SearchCriteria implements Parcelable {
     }
 
     public List<Integer> getTypes() {
-        if (types == null)
-            return new ArrayList<Integer>();
-        else
+        if (types == null || types.size() == 0) {
+            ArrayList<Integer> l = new ArrayList<Integer>();
+            for (int i = 0 ; i < 11 ; i++)
+                l.add(i);
+            return l;
+        } else
             return types;
     }
 
     public void setTypes(List<Integer> types) {
         this.types = types;
     }
-    
+
     public void addType(int type) {
         types = getTypes();
         if (!types.contains(type))
             types.add(type);
     }
-    
+
     public void removeType(int type) {
         types = getTypes();
         if (types.contains(type))
@@ -195,13 +198,13 @@ public class SearchCriteria implements Parcelable {
         if (!features.contains(feature))
             features.add(feature);
     }
-    
+
     public void removeFeature(int feature) {
         features = getFeatures();
         if (features.contains(feature))
             features.remove((Integer) feature);
     }
-    
+
     public int getMaxCount() {
         if (maxCount == -1)
             return 30;
