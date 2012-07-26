@@ -36,6 +36,13 @@ public class Dialogs {
         builder.create().show();
     }
 
+    /**
+     * Creates a dialog that displays an alert and finish the activity when
+     * closed.
+     * @param title the alert's title.
+     * @param description the alert's description.
+     * @param activity the current activity.
+     */
     public static void newAlertToFinish(String title, String description,
             final Activity activity) {
 
@@ -51,6 +58,12 @@ public class Dialogs {
         builder.create().show();
     }
 
+    /**
+     * Creates a dialog box where the user can choose how to sort the results.
+     * Then it starts the search.
+     * @param activity the current activity.
+     * @param criteria the current criteria for the search.
+     */
     public static void newSortAlert(final SearchResults activity,
             final SearchCriteria criteria) {
         final CharSequence[] items = {
@@ -70,6 +83,13 @@ public class Dialogs {
         builder.create().show();
     }
 
+    /**
+     * Creates a dialog box where the user can choose the boundary for the
+     * search.
+     * Then it starts the search.
+     * @param activity the current activity.
+     * @param criteria the current criteria for the search.
+     */
     public static void newBoundaryAlert(final SearchResults activity,
             final SearchCriteria criteria) {
         final CharSequence[] items = {"1", "5", "10", "15", "20", "25", "30",
@@ -88,6 +108,12 @@ public class Dialogs {
         builder.create().show();
     }
     
+    /**
+     * Creates a dialog box where the user can choose criteria for his search.
+     * Then it starts the search.
+     * @param activity the current activity.
+     * @param criteria the current criteria for the search.
+     */
     public static void newCriteriaAlert(final SearchResults activity,
             final SearchCriteria criteria) {
         final CharSequence[] items = {

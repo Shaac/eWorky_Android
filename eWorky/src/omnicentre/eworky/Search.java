@@ -1,14 +1,11 @@
 package omnicentre.eworky;
 
-import com.pixate.pxcomponentkit.view.PXTheme;
-
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.SearchCriteria;
 import omnicentre.eworky.tools.TitleBar;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.graphics.Color;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -32,9 +29,6 @@ public class Search extends Activity {
         // We listen to the search button:
         Button b = (Button) findViewById(R.id.search_button);
         Redirections.setClickListenerToSearchCriteria(b, this);
-
-        // We decorate the button:
-        PXTheme.themeButton(b, Color.parseColor("#5DAFDE"));
     }
 
     /**

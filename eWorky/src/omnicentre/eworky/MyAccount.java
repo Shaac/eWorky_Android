@@ -12,8 +12,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * This activity allow the user to deal with his account. He can log out here.
+ *
+ */
 public class MyAccount extends Activity implements OnClickListener {
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

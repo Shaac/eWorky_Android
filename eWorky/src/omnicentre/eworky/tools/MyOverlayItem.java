@@ -11,25 +11,25 @@ import com.google.android.maps.OverlayItem;
  */
 public class MyOverlayItem extends OverlayItem {
     
-    private LocalisationJson place;
+    private LocalisationJson localisation;
 
     /**
      * Create a new OverlyItem.
-     * @param place the {@link LocalisationJson} object corresponding.
+     * @param localisation the {@link LocalisationJson} object corresponding.
      */
-    public MyOverlayItem(LocalisationJson place) {
-        super(new GeoPoint((int)(place.getLatitude() * 1e6),
-                (int) (place.getLongitude() * 1e6)), place.getName(),
-                place.getAddress());
-        this.place = place;
+    public MyOverlayItem(LocalisationJson localisation) {
+        super(new GeoPoint((int)(localisation.getLatitude() * 1e6),
+                (int) (localisation.getLongitude() * 1e6)), localisation.getName(),
+                localisation.getAddress());
+        this.localisation = localisation;
     }
 
     /**
      * Get the {@link LocalisationJson} object.
      * @return the {@link LocalisationJson} object
      */
-    public LocalisationJson getPlace() {
-        return place;
+    public LocalisationJson getLocalisation() {
+        return localisation;
     }
 
 }

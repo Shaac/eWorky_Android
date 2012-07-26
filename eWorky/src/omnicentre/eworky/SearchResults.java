@@ -35,7 +35,7 @@ public class SearchResults extends MapActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // We set the title bar:
+        // We set the view, with the title bar:
         TitleBar.setContentView(this, R.layout.search_results,
                 R.layout.title_results);
 
@@ -74,14 +74,13 @@ public class SearchResults extends MapActivity {
     };
 
     /**
-     * This method displays the view. It has to be called once the data is
-     * charged.
-     * @param localisationsList the localisations list.
-     * @param isOk tells if something bad happened.
-     * @param error an eventual error message.
+     * Refresh the activity with a new set of data.
+     * @param localisationsList the list of localisations to show.
      */
-    public void show(ArrayList<LocalisationJson> localisationsList,
-            String error) {
+    public void refresh(List<LocalisationJson> localisationsList) {
+        ListView list = (ListView) findViewById(R.id.list);
+        list.setAdapter(new LocalisationArrayAdapter(getApplicationContext(),
+                (ArrayList<LocalisationJson>) localisationsList));
 
         // Map settings:
         MapView mapView = (MapView) this.findViewById(R.id.mapView);
@@ -92,12 +91,8 @@ public class SearchResults extends MapActivity {
 
         for (LocalisationJson l : localisationsList)
             itemizedOverlay.addOverlayItem(new MyOverlayItem(l));
+        mapView.getOverlays().clear();
         mapView.getOverlays().add(itemizedOverlay);
-
-
-        // If something went wrong we redirect to the main view:
-        if(error.length() > 0)
-            Dialogs.newAlertToIndex("Error", error, this);
 
         // We go to the right part of the map:
         MapController controller = mapView.getController();
@@ -106,17 +101,15 @@ public class SearchResults extends MapActivity {
                 itemizedOverlay.getLonSpanE6());
     }
 
-    public void refresh(List<LocalisationJson> localisationsList) {
-        ListView list = (ListView) findViewById(R.id.list);
-        list.setAdapter(new LocalisationArrayAdapter(getApplicationContext(),
-                (ArrayList<LocalisationJson>) localisationsList));
-    }
-
     @Override
     protected boolean isRouteDisplayed() {
         return false;
     }
 
+    /**
+     * Display an error.
+     * @param error the error to show.
+     */
     public void error(String error) {
         Dialogs.newAlertToIndex(getResources().getString(R.string.error),
                 error, this);

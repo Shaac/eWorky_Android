@@ -1,10 +1,13 @@
 package omnicentre.eworky;
 
+import java.io.InputStream;
+import java.net.URL;
+
 import omnicentre.eworky.API.LocalisationJson;
 import omnicentre.eworky.API.NoSuccessException;
 import omnicentre.eworky.API.Requests;
 import omnicentre.eworky.localisations.Amenities;
-import omnicentre.eworky.tools.Http;
+
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.TitleBar;
 import omnicentre.eworky.widgets.AspectRatioImageView;
@@ -46,10 +49,17 @@ public class LocalisationDetails extends Activity {
         ((TextView)findViewById(R.id.list)).setText((new Amenities(
                 l.getAmenities())).toText());
 
-        Drawable image = Http.getImage(l.getImage());
-        if (image != null)
+        Drawable d = null;
+        try {
+            URL url = new URL(l.getImageThumb());
+            InputStream content = (InputStream)url.getContent();
+            d = Drawable.createFromStream(content , "src"); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (d != null)
             ((AspectRatioImageView)
-                    findViewById(R.id.picture)).setImageDrawable(image);
+                    findViewById(R.id.picture)).setImageDrawable(d);
 
     }
 }

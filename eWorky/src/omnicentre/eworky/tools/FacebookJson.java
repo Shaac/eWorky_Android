@@ -1,5 +1,9 @@
 package omnicentre.eworky.tools;
 
+/**
+ * This class is used as a structure to parse the Facebook output.
+ *
+ */
 public class FacebookJson {
     
     public String id;

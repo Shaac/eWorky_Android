@@ -13,7 +13,7 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 
 /**
- * Run on background the request to the API and the parsing.
+ * This class gets the GPS data if it has to and then launches the search.
  *
  */
 public class GPS extends AsyncTask<Void, Void, SearchCriteria> {

@@ -79,7 +79,7 @@ public class MyItimizedOverlay extends BalloonItemizedOverlay<MyOverlayItem> {
 	@Override
 	protected boolean onBalloonTap(int index, MyOverlayItem item) {
 		Intent intent = new Intent(a, LocalisationDetails.class);
-		intent.putExtra("id", item.getPlace().getId());
+		intent.putExtra("id", item.getLocalisation().getId());
 		a.startActivity(intent);
 		return true;
 	}

@@ -1,7 +1,5 @@
 package omnicentre.eworky.tools;
 
-import java.util.ArrayList;
-
 import omnicentre.eworky.Index;
 import omnicentre.eworky.Register;
 import omnicentre.eworky.LocalisationDetails;
@@ -11,7 +9,6 @@ import omnicentre.eworky.Connect;
 import omnicentre.eworky.Search;
 import omnicentre.eworky.SearchOfferType;
 import omnicentre.eworky.SearchResults;
-import omnicentre.eworky.localisations.Localisation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -117,19 +114,6 @@ public class Redirections {
     public static void localisationDetails(Activity from, int id) {
         Intent intent = new Intent(from, LocalisationDetails.class);
         intent.putExtra("omnicentre.eworki.id",  id);
-        from.startActivity(intent);
-    }
-
-    /**
-     * Redirects to the search results activity.
-     * @param from the current activity.
-     * @param localisationsList the localisations list to display on the list.
-     */
-    public static void searchResults(Activity from,
-            ArrayList<Localisation> localisationsList){
-        Intent intent = new Intent(from, SearchResults.class);
-        intent.putParcelableArrayListExtra("omnicentre.eworki.localisationsList",
-                localisationsList);
         from.startActivity(intent);
     }
 
@@ -304,18 +288,6 @@ public class Redirections {
      */
     public static int getLocalisationId(Activity activity) {
         return activity.getIntent().getExtras().getInt("omnicentre.eworki.id");
-    }
-
-    public static ArrayList<Localisation> getLocalisationsList (Activity
-            activity) {
-        ArrayList<Parcelable> l = (ArrayList<Parcelable>) activity.getIntent().
-                getParcelableArrayListExtra("omnicentre.eworki.localisationsList");
-        ArrayList<Localisation> ret = new ArrayList<Localisation>();
-        if (l != null) {
-            for (Parcelable p : l)
-                ret.add((Localisation) p);
-        }
-        return ret;
     }
 
     public static SearchCriteria getCriteria(Activity activity) {

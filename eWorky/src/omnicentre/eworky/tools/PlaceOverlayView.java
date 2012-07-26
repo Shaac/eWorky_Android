@@ -59,7 +59,7 @@ public class PlaceOverlayView<Item extends OverlayItem>
                     picture.setImageBitmap(result);
                 }
             }
-        }.execute(item.getPlace().getImage());
+        }.execute(item.getLocalisation().getImage());
         
     }
     
