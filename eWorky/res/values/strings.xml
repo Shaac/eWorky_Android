@@ -5,41 +5,54 @@
     <string name="title_index">eWorky</string>
     <string name="title_search_results">Résultats</string>
     <string name="title_search_map">Résultats</string>
-    <string name="search">Recherche</string>
     <string name="search_map">Map</string>
-    <string name="error">Error</string>
     <string name="mapKey">09QlTgh9V4ecyLhJyozhroH9moKwBOXN1INRKHw</string>
     <string name="back">back</string>
     <string name="forward">forward</string>
     <string name="title_place_details">Détails</string>
     <string name="research">Recherche</string>
-    <string name="errorEmptyQuery">Vous devez entrer une recherche.</string>
-    <string name="errorBadJson">La réponse de notre serveur est invalide.</string>
-    <string name="errorIo">Il semblerait que vous n\'ayez pas de connexion internet.</string>
-    <string name="errorClientProtocol">Une erreur de protocole est apparue.</string>
-    <string name="errorGPS">Le GPS n\'est pas activé.</string><string name="picture">photo</string>
+    <string name="picture">photo</string>
     <string name="description">Description</string>
     <string name="amenities">Equipements</string>
     <string name="search_results">Résultats</string>
     <string name="map">Carte</string>
-    <string name="details">Détails</string>
     <string name="ic_info">information</string>
     <string name="title_search">Recherche</string>
-    <string name="title_search_criteria">Critères</string>
     <string name="my_spaces">Mes espaces</string>
     <string name="my_account">Mon compte</string>
-    <string name="sort">Trier</string>
-    <string name="criteria">Critères</string>
+
+    <!-- Actions -->
+
+    <string name="search">Recherche</string>
+    <string name="details">Détails</string>
     <string name="connect">Connexion</string>
     <string name="register">Inscription</string>
-    <string name="errorFile">Une erreur de fichier est apparue.</string>
     <string name="log_out">Deconnexion</string>
+    <string name="register_facebook">S\'inscrire / Se connecter via Facebook</string>
+
+    <!-- Criteria -->
+
+    <string name="sort">Trier</string>
+    <string name="criteria">Critères</string>
+    <string name="rating">Notes</string>
+    <string name="distance">Distance</string>
+
+    <!-- Fields -->
+
     <string name="email">E-mail</string>
     <string name="first_name">Prénom</string>
     <string name="last_name">Nom</string>
     <string name="phone">Téléphone</string>
-    <string name="register_facebook">S\'inscrire / Se connecter via Facebook</string>
     <string name="password">Mot de passe</string>
-    
+
+    <!-- Errors -->
+
+    <string name="error">Erreur</string>
+    <string name="errorEmptyQuery">Vous devez entrer une recherche.</string>
+    <string name="errorBadJson">La réponse de notre serveur est invalide.</string>
+    <string name="errorIo">Il semblerait que vous n\'ayez pas de connexion internet.</string>
+    <string name="errorClientProtocol">Une erreur de protocole est apparue.</string>
+    <string name="errorGPS">Le GPS n\'est pas activé.</string>
+    <string name="errorFile">Une erreur de fichier est apparue.</string>
 
 </resources>

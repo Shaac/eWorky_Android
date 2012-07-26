@@ -11,7 +11,6 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.util.Log;
 
 /**
  * Run on background the request to the API and the parsing.
@@ -53,9 +52,9 @@ public class GPS extends AsyncTask<Void, Void, SearchCriteria> {
 
     public void onPostExecute(SearchCriteria criteria) {
         progress.dismiss();
-        Log.w("lat", "" + criteria.getLatitude());
-        Log.w("error", "" + error);
         if (error.length() == 0)
             (new AsyncSearch(activity, criteria)).execute();
+        else
+            activity.error(error);
     }
 }

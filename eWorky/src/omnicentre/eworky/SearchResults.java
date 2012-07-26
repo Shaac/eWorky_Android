@@ -116,4 +116,9 @@ public class SearchResults extends MapActivity {
     protected boolean isRouteDisplayed() {
         return false;
     }
+
+    public void error(String error) {
+        Dialogs.newAlertToIndex(getResources().getString(R.string.error),
+                error, this);
+    }
 }

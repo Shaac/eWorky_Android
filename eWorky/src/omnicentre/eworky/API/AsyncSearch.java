@@ -47,9 +47,10 @@ extends AsyncTask<Void, Void, List<LocalisationJson>> {
     }
 
     public void onPostExecute(List<LocalisationJson> placeList) {
+        progress.dismiss();
         if (error.length() == 0)
             activity.refresh(placeList);
-        
-        progress.dismiss();
+        else
+            activity.error(error);
     }
 }

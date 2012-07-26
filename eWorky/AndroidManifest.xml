@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".SearchOfferType"
-            android:label="@string/title_search_criteria" >
+            android:label="@string/criteria" >
         </activity>
         <activity
             android:name=".Connect"

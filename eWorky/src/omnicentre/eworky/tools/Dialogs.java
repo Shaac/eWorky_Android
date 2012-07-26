@@ -1,5 +1,6 @@
 package omnicentre.eworky.tools;
 
+import omnicentre.eworky.R;
 import omnicentre.eworky.SearchResults;
 import omnicentre.eworky.API.AsyncSearch;
 import android.app.Activity;
@@ -52,10 +53,12 @@ public class Dialogs {
 
     public static void newSortAlert(final SearchResults activity,
             final SearchCriteria criteria) {
-        final CharSequence[] items = {"Rating", "Distance"};
+        final CharSequence[] items = {
+                activity.getResources().getString(R.string.rating),
+                activity.getResources().getString(R.string.distance)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Sort");
+        builder.setTitle(activity.getResources().getString(R.string.sort));
         builder.setSingleChoiceItems(items, criteria.getOrderBy(),
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {

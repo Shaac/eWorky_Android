@@ -143,45 +143,54 @@ public final class R {
         public static final int activity_index=0x7f090000;
     }
     public static final class string {
-        public static final int amenities=0x7f070014;
+        public static final int amenities=0x7f07000d;
         public static final int app_name=0x7f070000;
-        public static final int back=0x7f070009;
-        public static final int connect=0x7f07001f;
-        public static final int criteria=0x7f07001e;
-        public static final int description=0x7f070013;
-        public static final int details=0x7f070017;
-        public static final int email=0x7f070023;
-        public static final int error=0x7f070007;
-        public static final int errorBadJson=0x7f07000e;
-        public static final int errorClientProtocol=0x7f070010;
-        public static final int errorEmptyQuery=0x7f07000d;
-        public static final int errorFile=0x7f070021;
-        public static final int errorGPS=0x7f070011;
-        public static final int errorIo=0x7f07000f;
-        public static final int first_name=0x7f070024;
-        public static final int forward=0x7f07000a;
-        public static final int ic_info=0x7f070018;
-        public static final int last_name=0x7f070025;
-        public static final int log_out=0x7f070022;
-        public static final int map=0x7f070016;
-        public static final int mapKey=0x7f070008;
+        public static final int back=0x7f070007;
+        public static final int connect=0x7f070016;
+        public static final int criteria=0x7f07001b;
+        public static final int description=0x7f07000c;
+        public static final int details=0x7f070015;
+        public static final int distance=0x7f07001d;
+        /**  Fields 
+         */
+        public static final int email=0x7f07001e;
+        /**  Errors 
+         */
+        public static final int error=0x7f070023;
+        public static final int errorBadJson=0x7f070025;
+        public static final int errorClientProtocol=0x7f070027;
+        public static final int errorEmptyQuery=0x7f070024;
+        public static final int errorFile=0x7f070029;
+        public static final int errorGPS=0x7f070028;
+        public static final int errorIo=0x7f070026;
+        public static final int first_name=0x7f07001f;
+        public static final int forward=0x7f070008;
+        public static final int ic_info=0x7f070010;
+        public static final int last_name=0x7f070020;
+        public static final int log_out=0x7f070018;
+        public static final int map=0x7f07000f;
+        public static final int mapKey=0x7f070006;
         public static final int menu_settings=0x7f070001;
-        public static final int my_account=0x7f07001c;
-        public static final int my_spaces=0x7f07001b;
-        public static final int password=0x7f070028;
-        public static final int phone=0x7f070026;
-        public static final int picture=0x7f070012;
-        public static final int register=0x7f070020;
-        public static final int register_facebook=0x7f070027;
-        public static final int research=0x7f07000c;
-        public static final int search=0x7f070005;
-        public static final int search_map=0x7f070006;
-        public static final int search_results=0x7f070015;
-        public static final int sort=0x7f07001d;
+        public static final int my_account=0x7f070013;
+        public static final int my_spaces=0x7f070012;
+        public static final int password=0x7f070022;
+        public static final int phone=0x7f070021;
+        public static final int picture=0x7f07000b;
+        public static final int rating=0x7f07001c;
+        public static final int register=0x7f070017;
+        public static final int register_facebook=0x7f070019;
+        public static final int research=0x7f07000a;
+        /**  Actions 
+         */
+        public static final int search=0x7f070014;
+        public static final int search_map=0x7f070005;
+        public static final int search_results=0x7f07000e;
+        /**  Criteria 
+         */
+        public static final int sort=0x7f07001a;
         public static final int title_index=0x7f070002;
-        public static final int title_place_details=0x7f07000b;
-        public static final int title_search=0x7f070019;
-        public static final int title_search_criteria=0x7f07001a;
+        public static final int title_place_details=0x7f070009;
+        public static final int title_search=0x7f070011;
         public static final int title_search_map=0x7f070004;
         public static final int title_search_results=0x7f070003;
     }
