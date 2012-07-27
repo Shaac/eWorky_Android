@@ -53,8 +53,12 @@ public class GPS extends AsyncTask<Void, Void, SearchCriteria> {
     public void onPostExecute(SearchCriteria criteria) {
         progress.dismiss();
         if (error.length() == 0)
-            (new AsyncSearch(activity, criteria)).execute();
+            AsyncSearch.start(activity, criteria);
         else
             activity.error(error);
+    }
+    
+    public static void start(SearchResults a, SearchCriteria criteria) {
+        (new GPS(a, criteria)).execute();
     }
 }

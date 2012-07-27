@@ -2,55 +2,62 @@ package omnicentre.eworky.API;
 
 import java.util.List;
 
-import omnicentre.eworky.SearchResults;
+import omnicentre.eworky.R;
 import omnicentre.eworky.API.LocalisationJson;
 import omnicentre.eworky.API.NoSuccessException;
 import omnicentre.eworky.API.Requests;
 import omnicentre.eworky.tools.SearchCriteria;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 /**
  * Run on background the request to the API and the parsing.
  *
  */
 public class AsyncSearch
-extends AsyncTask<Void, Void, List<LocalisationJson>> {
+extends AsyncTask<SearchCriteria, Void, List<LocalisationJson>> {
 
     private ProgressDialog progress;
-    private SearchResults activity;
-    private SearchCriteria criteria;
-    private List<LocalisationJson> localisationsList;
     private String error = "";
+    private ArrayAdapter<LocalisationJson> a;
 
-    public AsyncSearch(SearchResults activity, SearchCriteria criteria){
-        this.activity = activity;
-        this.criteria = criteria;
+    public AsyncSearch(ProgressDialog dialog, ArrayAdapter<LocalisationJson>a){
+        progress = dialog;
+        this.a = a;
     }
 
     public void onPreExecute() {
-        // We display a progress dialog:
-        progress = ProgressDialog.show(activity, "", 
-                "Loading. Please wait...", true);
+        progress.show();
     }
 
-    public List<LocalisationJson> doInBackground(Void... unused) {
+    public List<LocalisationJson> doInBackground(SearchCriteria... criteria) {
 
         try {
-            localisationsList = Requests.search(criteria);
+            return Requests.search(criteria[0]);
         } catch (NoSuccessException e) {
             error = e.getError();
+            return null;
         }
-
-        return localisationsList;
     }
 
     public void onPostExecute(List<LocalisationJson> placeList) {
+        if (error.length() == 0) {
+            a.clear();
+            for (LocalisationJson l : placeList)
+                a.add(l);
+            a.notifyDataSetChanged();
+        }
         progress.dismiss();
-        if (error.length() == 0)
-            activity.refresh(placeList);
-        else
-            activity.error(error);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static void start(Activity activity, SearchCriteria criteria) {
+        ListView list = (ListView) activity.findViewById(R.id.list);
+        ArrayAdapter<LocalisationJson> a = (ArrayAdapter<LocalisationJson>) list.getAdapter();
+        (new AsyncSearch(ProgressDialog.show(activity ,"title","message"), a)).execute(criteria);
     }
 }

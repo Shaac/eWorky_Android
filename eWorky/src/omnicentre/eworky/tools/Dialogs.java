@@ -78,7 +78,7 @@ public class Dialogs {
             public void onClick(DialogInterface dialog, int item) {
                 dialog.dismiss();
                 criteria.setOrderBy(item);
-                (new AsyncSearch(activity, criteria)).execute();
+                AsyncSearch.start(activity, criteria);
             }
         });
         builder.create().show();
@@ -106,7 +106,7 @@ public class Dialogs {
                 TextView kilometers = (TextView)
                         activity.findViewById(R.id.kilometers);
                 kilometers.setText((int) criteria.getBoundary() + " km");
-                (new AsyncSearch(activity, criteria)).execute();
+                AsyncSearch.start(activity, criteria);
             }
         });
         builder.create().show();
@@ -169,7 +169,7 @@ public class Dialogs {
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 dialog.dismiss();
-                (new AsyncSearch(activity, criteria)).execute();
+                AsyncSearch.start(activity, criteria);
             }
         });
         AlertDialog dialog = builder.create();

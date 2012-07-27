@@ -52,12 +52,15 @@ public class SearchResults extends MapActivity {
         Redirections.setClickListenerToBoundary(kilometers, this, criteria);
         kilometers.setText((int) criteria.getBoundary() + " km");
 
+        // We set the list view:
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setOnItemClickListener(listener);
         listView.setTextFilterEnabled(true);
+        listView.setAdapter(new LocalisationArrayAdapter(
+                getApplicationContext(), new ArrayList<LocalisationJson>()));
 
         // We charge the data in an asynchronous task:
-        (new GPS(this, criteria)).execute();
+        GPS.start(this, criteria);
     }
 
     /**
@@ -78,9 +81,7 @@ public class SearchResults extends MapActivity {
      * @param localisationsList the list of localisations to show.
      */
     public void refresh(List<LocalisationJson> localisationsList) {
-        ListView list = (ListView) findViewById(R.id.list);
-        list.setAdapter(new LocalisationArrayAdapter(getApplicationContext(),
-                (ArrayList<LocalisationJson>) localisationsList));
+        
         
         // Map settings:
         MapView mapView = (MapView) this.findViewById(R.id.mapView);
