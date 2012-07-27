@@ -1,11 +1,13 @@
 package omnicentre.eworky.API;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import omnicentre.eworky.R;
 import omnicentre.eworky.API.LocalisationJson;
 import omnicentre.eworky.API.NoSuccessException;
 import omnicentre.eworky.API.Requests;
+import omnicentre.eworky.tools.Dialogs;
 import omnicentre.eworky.tools.SearchCriteria;
 
 import android.app.Activity;
@@ -23,15 +25,17 @@ extends AsyncTask<SearchCriteria, Void, List<LocalisationJson>> {
 
     private ProgressDialog progress;
     private String error = "";
-    private ArrayAdapter<LocalisationJson> a;
+    private ArrayAdapter<LocalisationJson> adapter;
+    private WeakReference<Activity> activity;
 
-    public AsyncSearch(ProgressDialog dialog, ArrayAdapter<LocalisationJson>a){
-        progress = dialog;
-        this.a = a;
+    public AsyncSearch(ArrayAdapter<LocalisationJson> adapter,
+            Activity activity) {
+        this.adapter = adapter;
+        this.activity = new WeakReference<Activity>(activity);
     }
 
     public void onPreExecute() {
-        progress.show();
+        progress = ProgressDialog.show(activity.get() ,"title","message");
     }
 
     public List<LocalisationJson> doInBackground(SearchCriteria... criteria) {
@@ -46,18 +50,21 @@ extends AsyncTask<SearchCriteria, Void, List<LocalisationJson>> {
 
     public void onPostExecute(List<LocalisationJson> placeList) {
         if (error.length() == 0) {
-            a.clear();
+            adapter.clear();
             for (LocalisationJson l : placeList)
-                a.add(l);
-            a.notifyDataSetChanged();
-        }
+                adapter.add(l);
+            adapter.notifyDataSetChanged();
+        } else
+            Dialogs.newAlertToIndex(activity.get().getResources().getString(
+                    R.string.error), error, activity.get());
         progress.dismiss();
     }
     
     @SuppressWarnings("unchecked")
     public static void start(Activity activity, SearchCriteria criteria) {
         ListView list = (ListView) activity.findViewById(R.id.list);
-        ArrayAdapter<LocalisationJson> a = (ArrayAdapter<LocalisationJson>) list.getAdapter();
-        (new AsyncSearch(ProgressDialog.show(activity ,"title","message"), a)).execute(criteria);
+        ArrayAdapter<LocalisationJson> a =
+                (ArrayAdapter<LocalisationJson>) list.getAdapter();
+        (new AsyncSearch(a, activity)).execute(criteria);
     }
 }
