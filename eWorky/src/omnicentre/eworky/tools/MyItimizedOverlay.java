@@ -1,9 +1,8 @@
-package omnicentre.eworky.localisations;
+package omnicentre.eworky.tools;
 
 import java.util.ArrayList;
 
 import omnicentre.eworky.LocalisationDetails;
-import omnicentre.eworky.tools.MyOverlayItem;
 
 import android.app.Activity;
 import android.content.Intent;

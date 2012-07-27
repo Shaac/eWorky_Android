@@ -8,9 +8,9 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
 import omnicentre.eworky.API.LocalisationJson;
-import omnicentre.eworky.localisations.MyItimizedOverlay;
 import omnicentre.eworky.tools.Dialogs;
 import omnicentre.eworky.tools.GPS;
+import omnicentre.eworky.tools.MyItimizedOverlay;
 import omnicentre.eworky.tools.MyOverlayItem;
 import omnicentre.eworky.tools.Redirections;
 import omnicentre.eworky.tools.SearchCriteria;
