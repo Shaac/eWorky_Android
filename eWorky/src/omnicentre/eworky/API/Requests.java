@@ -67,17 +67,17 @@ public class Requests {
             BufferedReader rd = new BufferedReader(new InputStreamReader(
                     connection.getInputStream())); 
             String line;
-            String out = "";
+            StringBuilder out = new StringBuilder();
             while ((line = rd.readLine()) != null) { 
-                out += line;
+                out.append(line);
             }
             wr.close();
             rd.close();
             Log.w("request", request);
-            Log.w("out", out);
+            Log.w("out", out.toString());
 
             connection.disconnect();
-            return out;
+            return out.toString();
         } catch (IOException e) {
             Log.e("Request call", e.toString());
             return null;
