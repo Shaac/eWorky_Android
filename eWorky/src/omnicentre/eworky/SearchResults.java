@@ -8,7 +8,6 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
 import omnicentre.eworky.API.LocalisationJson;
-import omnicentre.eworky.tools.Dialogs;
 import omnicentre.eworky.tools.GPS;
 import omnicentre.eworky.tools.MyItimizedOverlay;
 import omnicentre.eworky.tools.MyOverlayItem;
@@ -82,6 +81,8 @@ public class SearchResults extends MapActivity {
      */
     public void refresh(List<LocalisationJson> localisationsList) {
         
+        // This method is no longer used but its content is useful because it
+        // shows how to set the localisations in the list.
         
         // Map settings:
         MapView mapView = (MapView) this.findViewById(R.id.mapView);
@@ -105,14 +106,5 @@ public class SearchResults extends MapActivity {
     @Override
     protected boolean isRouteDisplayed() {
         return false;
-    }
-
-    /**
-     * Display an error.
-     * @param error the error to show.
-     */
-    public void error(String error) {
-        Dialogs.newAlertToIndex(getResources().getString(R.string.error),
-                error, this);
     }
 }

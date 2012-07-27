@@ -73,7 +73,8 @@ public class Connect extends Activity implements OnClickListener {
                 finish();
 
         } else { // back from another activity, like classic register
-            setResult(RESULT_OK, new Intent());
+            if (resultCode == RESULT_OK)
+                setResult(RESULT_OK, new Intent());
             finish();
         }
     }

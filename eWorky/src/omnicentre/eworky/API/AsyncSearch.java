@@ -35,7 +35,7 @@ extends AsyncTask<SearchCriteria, Void, List<LocalisationJson>> {
     }
 
     public void onPreExecute() {
-        progress = ProgressDialog.show(activity.get() ,"title","message");
+        progress = ProgressDialog.show(activity.get() ,"","message");
     }
 
     public List<LocalisationJson> doInBackground(SearchCriteria... criteria) {

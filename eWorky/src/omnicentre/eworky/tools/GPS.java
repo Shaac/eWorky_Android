@@ -55,9 +55,10 @@ public class GPS extends AsyncTask<Void, Void, SearchCriteria> {
         if (error.length() == 0)
             AsyncSearch.start(activity, criteria);
         else
-            activity.error(error);
+            Dialogs.newAlertToIndex(activity.getResources().getString(
+                    R.string.error), error, activity);
     }
-    
+
     public static void start(SearchResults a, SearchCriteria criteria) {
         (new GPS(a, criteria)).execute();
     }

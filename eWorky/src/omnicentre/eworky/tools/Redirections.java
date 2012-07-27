@@ -344,6 +344,17 @@ public class Redirections {
                 criteria(from, criteria);
             }
         });
-        
+    }
+    
+    public static void share(Activity activity, String message, String subject) {
+        Intent i = null;
+
+        i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+
+        i.putExtra(Intent.EXTRA_TEXT, message);
+        i.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+        activity.startActivity(Intent.createChooser(i, "share"));
     }
 }
